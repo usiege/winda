@@ -1,6 +1,8 @@
 # winda
 Do not add entities unless necessary.
 
+> use docsify
+> https://docsify.js.org/#/zh-cn/quickstart
 
 ## 组织结构
 
