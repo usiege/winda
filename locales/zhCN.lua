@@ -1,3 +1,8 @@
 -- zhCN localization
-local L = LibStub("AceLocale-3.0"):NewLocale("Winda", "zhCN")
-if not L then return end
+local _, wd = ...
+local _, _, L = unpack(wd)
+
+if GetLocale() ~= "zhCN" then return end
+
+
+L["Winda Console"] = "WINDA"

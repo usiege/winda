@@ -1,6 +1,6 @@
 ## Interface: 20504
-## Title: |cffffedbawinda|r |cFF888888wlk|r
-## Notes: tingfeng ui 
+## Title: |cffffedbawinda|r # -|cFF888888wlk|r
+## Notes: tingfeng ui
 ## Notes-zhCN: Entities should not be multiplied unnecessarily.
 ## OptionalDeps:  # MoveAnything, Questie, TitanClassic, Clique, _DebugLog, BugSack, !Stragglers, ACU
 ## Version: 0.0.1 # @project-version@
@@ -13,10 +13,21 @@
 ## SavedVariablesPerCharacter: # GW2UI_SETTINGS_DB_03, GW2UI_QUEST_WATCH_DB
 ## SavedVariables: # GW2UI_STORAGE, GW2UI_SETTINGS_PROFILES, GW2UI_STORAGE2
 
+
 winda.lua
+core/Init.lua
 
 # libs
 libs/libs.xml
 
+# locales
+locales/locales.xml
 
-#
+# core
+core/core.xml
+
+# gui
+entities/gui.lua
+
+# entities
+entities/entities.xml
