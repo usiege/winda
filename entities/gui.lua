@@ -36,8 +36,8 @@ local function openGUI (args)
 
     GuiFrame = init()
     GuiFrame:Show()
-    ShowUIPanel(GuiFrame)
-    UIFrameFadeIn(GuiFrame, 0.2, 0, 1)
+    -- ShowUIPanel(GuiFrame)
+    -- UIFrameFadeIn(GuiFrame, 0.2, 0, 1)
 end
 
 local function menuWinda ()
