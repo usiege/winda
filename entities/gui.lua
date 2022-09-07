@@ -2,9 +2,11 @@
 local _, wd = ...
 local unpack, strfind, gsub = unpack, strfind, gsub
 local tonumber, pairs, ipairs, next, type, tinsert = tonumber, pairs, ipairs, next, type, table.insert
-local DEBUG = DEBUG
 local Winda, Deploy , L = unpack(wd)
 
+-- winda constant
+local DEBUG = DEBUG
+local wdConstants = wdConstants
 
 -- winda settings gui
 local function init (args)
@@ -14,10 +16,22 @@ local function init (args)
     -- main frame
     f = CreateFrame("Frame", "WindaGUI", UIParent)
     tinsert(UISpecialFrames, "WindaGUI")
-    f:SetSize(800, 600)
+    local width = wdConstants.gui_window_width
+    local height = wdConstants.gui_window_height
+    print(width, height)
+    f:SetSize(width, height)
+    f:SetFrameLevel(wdConstants.gui_window_level)
     f:SetPoint("CENTER")
     f:SetFrameStrata("HIGH")
-    f:SetFrameLevel(10)
+
+    -- adding a texture
+    local texture = f:CreateTexture(nil, "BACKGROUND")
+    if DEBUG then
+        --body...
+        print(L["GUI_BACK_IMAGE"])
+    end
+    texture:SetTexture(L["GUI_BACK_IMAGE"])
+    texture:SetAllPoints()
 
 
     return f
@@ -27,20 +41,23 @@ local GuiFrame = nil -- gui frame entity
 local function openGUI (args)
     -- body...
     if DEBUG then
-        print("open gui")
+        print("open or close gui")
     end
-    if GuiFrame then
+    if GuiFrame == nil then
+        GuiFrame = init()
         GuiFrame:Show()
         return
     end
-
-    GuiFrame = init()
-    GuiFrame:Show()
+    if GuiFrame:IsVisible() then
+        GuiFrame:Hide()
+    else
+        GuiFrame:Show()
+    end
     -- ShowUIPanel(GuiFrame)
     -- UIFrameFadeIn(GuiFrame, 0.2, 0, 1)
 end
 
-local function menuWinda ()
+local function menuWinda () -- esc menu
     if DEBUG then
         print("winda menu on load")
     end

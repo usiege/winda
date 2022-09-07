@@ -1,3 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="core/Debug.lua"/>
+	<Script file="core/debug.lua"/>
+	<Script file="core/blizz.lua"/>	<!-- blizz api	 -->
+	<Script file="core/constant.lua"/> <!-- winda constant -->
+	<Script file="core/slash.lua"/>
 </Ui>

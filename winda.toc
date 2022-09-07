@@ -9,7 +9,7 @@
 ## X-Curse-Project-ID: 94310
 ## DefaultState: Enabled
 
-## Author: tingfeng # deadend06, Nils89, nezroy
+## Author: usiege # deadend06, Nils89, nezroy
 
 ## SavedVariablesPerCharacter: winda_db
 ## SavedVariables: WINDA_DB
@@ -19,16 +19,17 @@
 
 # entry
 winda.lua
-core/Init.lua
 
 # libs
 libs/libs.xml
+libs/tool.lua
 
 # locales
 locales/locales.xml
 
 # core
 core/core.xml
+core/init.lua
 
 # gui
 entities/gui.lua
