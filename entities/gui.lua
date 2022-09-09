@@ -14,7 +14,7 @@ local function init (args)
     if f then return f end
 
     -- main frame
-    f = CreateFrame("Frame", "WindaGUI", UIParent)
+    f = CreateFrame("Frame", "WindaGUI", UIParent, "BackdropTemplate")
     tinsert(UISpecialFrames, "WindaGUI")
     local width = wdConstants.gui_window_width
     local height = wdConstants.gui_window_height
@@ -24,14 +24,25 @@ local function init (args)
     f:SetPoint("CENTER")
     f:SetFrameStrata("HIGH")
 
-    -- adding a texture
-    local texture = f:CreateTexture(nil, "BACKGROUND")
-    if DEBUG then
-        --body...
-        print(L["GUI_BACK_IMAGE"])
-    end
-    texture:SetTexture(L["GUI_BACK_IMAGE"])
-    texture:SetAllPoints()
+    -- bg image blizz api move to
+    f:SetBackdrop({
+        bgFile = L["GUI_BG_FILE"],
+    	edgeFile = L["GUI_EDGE_FILE"],
+    	tile = false,
+    	tileEdge = false,
+    	tileSize = 0,
+    	edgeSize = 3,
+    	insets = { left = 0, right = 0, top = 0, bottom = 0 }
+    })
+
+    -- -- adding a texture
+    -- local texture = f:CreateTexture(nil, "BACKGROUND")
+    -- if DEBUG then
+    --     --body...
+    --     print(L["GUI_BACK_IMAGE"])
+    -- end
+    -- texture:SetTexture(L["GUI_BACK_IMAGE"])
+    -- texture:SetAllPoints()
 
 
     return f
@@ -96,7 +107,7 @@ SlashCmdList["RELOADUI"] = ReloadUI
 
 
 -- winda frame on global
-local WF = Winda.WindaFrame
+local WEF = Winda.entity
 
 
 

@@ -11,8 +11,9 @@
 
 ## Author: usiege # deadend06, Nils89, nezroy
 
-## SavedVariablesPerCharacter: winda_db
 ## SavedVariables: WINDA_DB
+## SavedVariablesPerCharacter: winda_db
+
 
 # prepare
 # core/TaintLess.xml

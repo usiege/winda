@@ -3,9 +3,9 @@
 
 |Path|Name|Note|
 |:-:|:-:|:-:|
+|Bars|动作条||
 |Bags|背包||
-|Bars|栏||
-|Buffs|B & DeB||
+|Buffs|Buff & DeBuff||
 |Chat|聊天||
 |Maps|地图||
 |Nameplate|姓名板||

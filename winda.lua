@@ -11,11 +11,14 @@ local Deploy = {}   -- configs for winda
 local L = {}        -- Locales
 local DB = {}       -- Databases
 
+
+------------------------------------------------------------------------
+
 -- Core winda
 -- Entities private value for entities info
-local events = {} -- event trace
+-- these entities are module entity
+-- module entity is frame which create by Blizz API
 local entities, entityQueue = {}, {}
-
 function Winda:RegisterEntity(name)
 	if entities[name] then print("Module <"..name.."> has been registered.") return end
 	local module = {}
@@ -25,14 +28,14 @@ function Winda:RegisterEntity(name)
 	tinsert(entityQueue, module)
 	return module
 end
-
 function Winda:GetEntity(name)
 	if not entities[name] then print("Module <"..name.."> does not exist.") return end
 
 	return entities[name]
 end
 
-
+-- winda event register 
+local events = {} -- event trace
 function Winda:LoginEvent (args) -- player login
 	-- body...
 	print("player login...")
@@ -46,12 +49,15 @@ function Winda:LoginEvent (args) -- player login
     end
 end
 
+------------------------------------------------------------------------
 -- Deploy
 Winda.VERSION_STRING = "@project-version@ Classic"
 
+------------------------------------------------------------------------
 -- DB
 
 
+------------------------------------------------------------------------
 -- frame handle
 do
 	local handle = CreateFrame("Frame")
@@ -64,10 +70,11 @@ do
 		end
 	end)
 	-- setup frame handle
-	Winda.WindaFrame = handle
+	Winda.entity = handle
 end
 
 
+------------------------------------------------------------------------
 -- wd settings
 wd[1] = Winda
 wd[2] = Deploy

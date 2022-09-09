@@ -4,9 +4,10 @@
 -- new file must has same name to source
 function wdGetThemeResRootPath(themename)
     -- body...
-    if themename == nil then
+    if themename == nil or themename == "" then
         --body...
         return "Interface/Addons/winda/theme/base"
     end
     return "Interface/Addons/winda/theme/"..themename
 end
+
