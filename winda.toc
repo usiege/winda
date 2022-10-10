@@ -34,8 +34,12 @@ core/init.lua
 
 # gui 
 entities/gui.lua
+
 # entities
 entities/entities.xml
+
+# settings
+settings/settings.xml
 
 # extend
 entend/extend.xml
