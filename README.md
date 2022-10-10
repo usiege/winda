@@ -5,7 +5,7 @@ Do not add entities unless necessary.
 
 - [winda](#winda)
     - [Introduce](#introduce)
-    - [Documents](#documents)
+    - [Document](#document)
 
 <!-- /TOC -->
 
