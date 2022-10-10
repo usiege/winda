@@ -10,7 +10,12 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
 
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar-folder.min.css" />
+
 <body>
+    <nav>
+        <a href="#/">Home</a>
+    </nav>
     <div id="app"></div>
     <script src="//cdn.jsdelivr.net/npm/docsify-plugin-carbon@1/index.js"></script>
     <script>
@@ -18,7 +23,12 @@
             name: 'winda',
             repo: 'https://github.com/usiege/winda',
             alias: {
-                '/.*/_sidebar.md': '/_sidebar.md'
+                '/.*/_navbar.md': '/_navbar.md',
+                '/.*/_sidebar.md': '/_sidebar.md',
+                // '.*?/awesome': 'https://github.com/usiege/winda/README.md',
+                // '.*?/changelog': 'https://github.com/usiege/winda/tree/main/docs',
+                // '/es/(.*)': 'https://raw.githubusercontent.com/docsifyjs/docs-es/master/$1',
+                // '/zh-cn/(.*)': 'https://cdn.jsdelivr.net/gh/docsifyjs/docs-zh@master/$1',
             },
             auto2top: true,
             coverpage: true,
@@ -31,10 +41,7 @@
             sidebarDisplayLevel: 3, // set sidebar display level
         }
     </script>
-    <!-- Docsify v4 -->
-    <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-    <!--  -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.min.js"></script>
@@ -44,18 +51,18 @@
     <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
 
-
 </body>
 
 </html>
 
 <style type="text/css">
-    /* .content {
-      overflow: auto !important;
-  } */
+    .content {
+        overflow: auto !important;
+    }
     
     nav.app-nav li ul {
         min-width: 100px;
+        max-height: 60px;
     }
     
     #carbonads {
