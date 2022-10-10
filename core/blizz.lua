@@ -11,3 +11,4 @@ DEFAULT_CHAT_FRAME = DEFAULT_CHAT_FRAME -- user chat frame default
 -- function
 ShowUIPanel = ShowUIPanel
 UIFrameFadeIn = UIFrameFadeIn
+ReloadUI = ReloadUI

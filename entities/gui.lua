@@ -8,6 +8,11 @@ local Winda, Deploy , L = unpack(wd)
 local DEBUG = DEBUG
 local wdConstants = wdConstants
 
+
+
+
+
+
 -- winda settings gui
 local function init (args)
     -- body...
@@ -93,27 +98,20 @@ local function menuWinda () -- esc menu
 end
 
 
--- slash
-_G.SLASH_WINDA1 = "/wd"
-_G.SLASH_WINDA2 = "/winda"
-_G.SLASH_WINDA3 = "/WD"
-SlashCmdList["WINDA"] = function(msg)
-    if msg == nil or msg == "" then openGUI() end
-
-end
-
-_G.SLASH_RELOADUI1 = "/rl"
-SlashCmdList["RELOADUI"] = ReloadUI
-
-
 -- winda frame on global
 local WEF = Winda.entity
 
 
-
 -- global GUI
-GUI = Winda:RegisterEntity("GUI")
+local GUI = Winda:RegisterEntity("GUI")
 GUI.openGUI = openGUI
+
+local function GUI: createEntityButton(entityName)
+    
+end
+
+
+
 
 function GUI:OnLogin()
     if DEBUG then

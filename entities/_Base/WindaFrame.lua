@@ -9,3 +9,6 @@ function WindaFrame: print()
     print(self.name)
 end
 
+function WindaFrame: createButton(args)
+    
+end

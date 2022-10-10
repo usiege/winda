@@ -2,4 +2,5 @@
     <Script file="_Base/WindaFrame.lua"/>
     <Include file="Bars/Bars.xml"/>
 
+    <Script file="slash.lua"/>
 </Ui>

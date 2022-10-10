@@ -13,11 +13,10 @@ local DB = {}       -- Databases
 
 
 ------------------------------------------------------------------------
-
 -- Core winda
 -- Entities private value for entities info
--- these entities are module entity
--- module entity is frame which create by Blizz API
+-- these entities are module entity (just like Bags, Bars, etc.)
+-- module has own entity which is frame 
 local entities, entityQueue = {}, {}
 function Winda:RegisterEntity(name)
 	if entities[name] then print("Module <"..name.."> has been registered.") return end

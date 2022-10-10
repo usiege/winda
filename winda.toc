@@ -32,8 +32,10 @@ locales/locales.xml
 core/core.xml
 core/init.lua
 
-# gui
+# gui 
 entities/gui.lua
-
 # entities
 entities/entities.xml
+
+# extend
+entend/extend.xml
