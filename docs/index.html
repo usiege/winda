@@ -17,12 +17,18 @@
         window.$docsify = {
             name: 'winda',
             repo: 'https://github.com/usiege/winda',
-            loadSidebar: true,
-            auto2top: true,
-            executeScript: true,
             alias: {
                 '/.*/_sidebar.md': '/_sidebar.md'
-            }
+            },
+            auto2top: true,
+            coverpage: true,
+            executeScript: true,
+            loadSidebar: true,
+            loadNavbar: true,
+            mergeNavbar: true,
+            maxLevel: 4,
+            subMaxLevel: 3,
+            sidebarDisplayLevel: 3, // set sidebar display level
         }
     </script>
     <!-- Docsify v4 -->
