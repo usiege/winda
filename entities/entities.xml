@@ -1,6 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-    <Script file="_Base/WindaFrame.lua"/>
-    <Include file="Bars/Bars.xml"/>
+    <Script file="entities/_Base/WindaFrame.lua"/>
+    <Include file="entities/Bars/Bars.xml"/>
 
-    <Script file="slash.lua"/>
 </Ui>

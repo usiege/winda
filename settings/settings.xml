@@ -1,4 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-    <Script file="_Base.lua"/>
-    <Script file="ActionBar.lua"/>
+    <Script file="settings/_Base.lua"/>
+    <Script file="settings/_Config.lua"/>
+    <Script file="settings/_Settings.lua"/>
+
+    <Script file="settings/Deploy.lua"/>
 </Ui>

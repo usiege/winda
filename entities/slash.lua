@@ -2,7 +2,7 @@ if DEBUG then
     print("slash")
 end
 
-local openGUI = GUI.openGUI
+local openGUI = wdGUI.openGUI
 
 
 -- slash

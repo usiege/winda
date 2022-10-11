@@ -32,14 +32,15 @@ locales/locales.xml
 core/core.xml
 core/init.lua
 
+# settings
+settings/settings.xml
+
 # gui 
 entities/gui.lua
+entities/slash.lua
 
 # entities
 entities/entities.xml
 
-# settings
-settings/settings.xml
-
 # extend
-entend/extend.xml
+extend/extend.xml

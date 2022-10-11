@@ -106,8 +106,8 @@ local WEF = Winda.entity
 local GUI = Winda:RegisterEntity("GUI")
 GUI.openGUI = openGUI
 
-local function GUI: createEntityButton(entityName)
-    
+function GUI: CreateEntityButton(entityName)
+    print(entityName)
 end
 
 
@@ -126,12 +126,13 @@ function GUI:OnLogin()
 end
 
 
--- rename from file
-if _REQUIREDNAME == nil then
-    GUI = GUI
-else
-    _G[_REQUIREDNAME] = GUI
-end
+-- -- rename from file
+-- if _REQUIREDNAME == nil then
+--     wdGUI = GUI
+-- else
+--     _G[_REQUIREDNAME] = GUI
+-- end
+wdGUI = GUI
 
 -- package name
-return GUI
+return wdGUI
