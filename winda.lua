@@ -1,6 +1,7 @@
 -- addon init
 local addonName, wd = ... -- addon name and winda table
-print("welcome to "..addonName.."!")
+-- print(...)
+print("Welcome to "..addonName.."!")
 
 local tinsert, next = table.insert, next
 
@@ -37,8 +38,8 @@ end
 local events = {} -- event trace
 function Winda:LoginEvent (args) -- player login
 	-- body...
-	print("player login...")
-    --
+    
+	-- entities
     for _, entity in next, entityQueue do
         if entity.OnLogin then
             entity:OnLogin()

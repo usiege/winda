@@ -9,51 +9,107 @@ local DEBUG = DEBUG
 local wdConstants = wdConstants
 
 
-
-
-
+local GuiFrame      = nil -- gui frame entity
+local GuiListFrame  = nil -- gui list frame 
 
 -- winda settings gui
 local function init (args)
     -- body...
-    if f then return f end
+    if GuiFrame then return GuiFrame end
 
     -- main frame
-    f = CreateFrame("Frame", "WindaGUI", UIParent, "BackdropTemplate")
-    tinsert(UISpecialFrames, "WindaGUI")
-    local width = wdConstants.gui_window_width
-    local height = wdConstants.gui_window_height
-    print(width, height)
-    f:SetSize(width, height)
-    f:SetFrameLevel(wdConstants.gui_window_level)
-    f:SetPoint("CENTER")
-    f:SetFrameStrata("HIGH")
+    local function initGui() 
+        local f = CreateFrame("Frame", "WindaGUI", UIParent, "BackdropTemplate")
+        -- tinsert(UISpecialFrames, "WindaGUI")
+        local width = wdConstants.gui_window_width
+        local height = wdConstants.gui_window_height
+        wdPrint(width, height)
+        f:SetSize(width, height)
+        f:SetFrameLevel(wdConstants.gui_window_level)
+        f:SetPoint("CENTER")
+        f:SetFrameStrata("HIGH")
 
-    -- bg image blizz api move to
-    f:SetBackdrop({
-        bgFile = L["GUI_BG_FILE"],
-    	edgeFile = L["GUI_EDGE_FILE"],
-    	tile = false,
-    	tileEdge = false,
-    	tileSize = 0,
-    	edgeSize = 3,
-    	insets = { left = 0, right = 0, top = 0, bottom = 0 }
-    })
+        -- bg image blizz api move to
+        f:SetBackdrop({
+            bgFile = L["GUI_BG_FILE"],
+            edgeFile = L["GUI_EDGE_FILE"],
+            tile = false,
+            tileEdge = false,
+            tileSize = 0,
+            edgeSize = 3,
+            insets = { left = 0, right = 0, top = 0, bottom = 0 }
+        })
+        -- frame events
+        f:SetClampedToScreen(true) -- Prevents a Frame from moving off-screen.
+        f:SetMovable(true)
+        f:EnableMouse(true)
+        f:RegisterForDrag("LeftButton")
+        f:SetScript("OnDragStart", function (self)
+            self:StartMoving()
+        end)
+        f:SetScript("OnDragStop", function (self)
+            self:StopMovingOrSizing()
+        end)
 
-    -- -- adding a texture
-    -- local texture = f:CreateTexture(nil, "BACKGROUND")
-    -- if DEBUG then
-    --     --body...
-    --     print(L["GUI_BACK_IMAGE"])
-    -- end
-    -- texture:SetTexture(L["GUI_BACK_IMAGE"])
-    -- texture:SetAllPoints()
+        return f
+    end
+    GuiFrame = initGui()
 
+    local function initItems(parent)
+        -- body
+        local itembg = CreateFrame("Frame", "GUIItem", parent, "BackdropTemplate")
+        local width = wdConstants.gui_list_width
+        local height = wdConstants.gui_list_height
+        wdPrint(width, height)
+        itembg:SetPoint("LEFT", parent, "LEFT", 0, 0)
+        itembg:SetSize(width, height)
+        itembg:SetFrameLevel(wdConstants.gui_window_level)
+        itembg:SetFrameStrata("HIGH")
+        itembg:SetBackdrop({
+            bgFile = L["GUI_BG_ITEM"]
+        })
 
-    return f
+        return itembg
+    end
+    -- item list frame
+    GuiListFrame = initItems(GuiFrame)
+    
+    local function initLogo(parent)
+        local frame = CreateFrame("Frame", "GUIItem", parent)
+        frame:SetFrameLevel(wdConstants.gui_window_level+1)
+        local width = wdConstants.gui_logo_width
+        local height = wdConstants.gui_logo_height
+        wdPrint(width, height)
+        frame:SetPoint("TOP", parent, "TOP", 0, -20)
+        frame:SetSize(width, height)
+        frame:SetFrameStrata("HIGH")
+        -- -- adding a texture
+        local texture = frame:CreateTexture(nil, "BACKGROUND")
+        texture:SetTexture(L["WINDA_LOGO"])
+        texture:SetAllPoints()
+        -- mouse event
+        frame:SetMouseClickEnabled(true)
+        frame:SetScript("OnEnter", function(self, motion) 
+            wdPrint("OnEnter", motion) 
+        end)
+        frame:SetScript("OnLeave", function(self, motion) 
+            wdPrint("OnLeave", motion) 
+        end)
+        frame:SetScript("OnMouseDown", function(self, button) 
+            wdPrint("OnMouseDown", button) 
+        end)
+        frame:SetScript("OnMouseUp", function(self, button) 
+            wdPrint("OnMouseUp", button) 
+        end)
+
+        return frame
+    end
+    initLogo(GuiListFrame)
+
+    return GuiFrame
 end
 
-local GuiFrame = nil -- gui frame entity
+
 local function openGUI (args)
     -- body...
     if DEBUG then
@@ -99,7 +155,7 @@ end
 
 
 -- winda frame on global
-local WEF = Winda.entity
+-- local WEF = Winda.entity
 
 
 -- global GUI
@@ -112,16 +168,14 @@ end
 
 
 
-
 function GUI:OnLogin()
-    if DEBUG then
-        print("GUI on load")
-    end
+    wdPrint("GUI on load")
     if self.entity == nil then
-        GUI.entity = init()
+        self.entity = init()
     else
-        GUI.entity = GuiFrame
+        self.entity = GuiFrame
     end
+    self.entity:Hide()
     menuWinda()
 end
 

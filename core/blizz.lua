@@ -3,7 +3,6 @@ if DEBUG then
     print("blizz")
 end
 
-
 -- frame
 DEFAULT_CHAT_FRAME = DEFAULT_CHAT_FRAME -- user chat frame default
 
@@ -15,8 +14,13 @@ ReloadUI            = ReloadUI
 
 
 -- ui
+UISpecialFrames     = UISpecialFrames
+
 InterfaceOptionsActionBarsPanelBottomLeft   = InterfaceOptionsActionBarsPanelBottomLeft
 InterfaceOptionsActionBarsPanelBottomRight  = InterfaceOptionsActionBarsPanelBottomRight
 InterfaceOptionsActionBarsPanelRight        = InterfaceOptionsActionBarsPanelRight
 InterfaceOptionsActionBarsPanelRightTwo     = InterfaceOptionsActionBarsPanelRightTwo
 
+
+
+-- event 

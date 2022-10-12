@@ -15,4 +15,6 @@ SlashCmdList["WINDA"] = function(msg)
 end
 
 _G.SLASH_RELOADUI1 = "/rl"
-SlashCmdList["RELOADUI"] = ReloadUI
+SlashCmdList["RELOADUI"] = function (msg)
+    ReloadUI()
+end
