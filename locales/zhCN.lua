@@ -9,7 +9,34 @@ local wdGetThemeResRootPath = wdGetThemeResRootPath
 L["Winda Console"] = "winda"
 
 -- prompt
-L["WELCOME"] = "Welcome to winda ui, please enjoy it."
+L["WELCOME"]            = "Welcome to winda ui, please enjoy it."
+L["MODULE_ENABLE_DESC"] = "开启或关闭模块功能"
+
+
+-- module
+L["MODULE_BAGS"]        = "背包"
+L["MODULE_BARS"]        = "动作条"
+L["MODULE_BUFF"]        = "增/减益"
+L["MODULE_CHAT"]        = "聊天框"
+L["MODULE_COMBAT"]      = "战斗"
+L["MODULE_MAPS"]        = "地图"
+L["MODULE_NAMEPLATE"]   = "姓名版"
+L["MODULE_TASK"]        = "任务"
+L["MODULE_TOOLTIP"]     = "提示"
+L["MODULE_UNITFRAME"]   = "头像"
+
+L["MODULE_SKIN"]        = "皮肤"
+L["MODULE_DEPLOY"]      = "配置"
+
+-- system
+L["MODULE_ROLE"]        = "角色"    -- 声望，PvP，头衔，技能
+L["MODULE_EQUIP"]       = "装备"    -- 一键换装，自动切换
+L["MODULE_SPELL"]       = "法术"
+L["MODULE_TALENT"]      = "天赋"
+L["MODULE_GLYPH"]       = "雕文"
+L["MODULE_MOUNT"]       = "座骑"
+L["MODULE_PET"]         = "宠物"
+L["MODULE_COIN"]        = "货币"
 
 -- textures
 L["THEME_NAME"]         = "base"
@@ -20,3 +47,16 @@ L["GUI_BG_FILE"]        = L["RES_ROOT_PATH"].."/textures/UI-Gui-BgFile"
 L["GUI_BG_ITEM"]        = L["RES_ROOT_PATH"].."/textures/Gui-item-bg"
 L["GUI_EDGE_FILE"]      = L["RES_ROOT_PATH"].."/textures/UI-Gui-EdgeFile"
 L["WINDA_LOGO"]         = L["RES_ROOT_PATH"].."/textures/winda"
+
+L["MODULE_BAGS_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-bag"
+L["MODULE_BARS_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-bar"
+L["MODULE_BUFF_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-buff"
+L["MODULE_CHAT_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-chat"
+L["MODULE_COMBAT_ICON"]      = L["RES_ROOT_PATH"].."/icons/Module-combat"
+L["MODULE_MAPS_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-map"
+L["MODULE_NAMEPLATE_ICON"]   = L["RES_ROOT_PATH"].."/icons/Module-nameplate"
+L["MODULE_TASK_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-task"
+L["MODULE_TOOLTIP_ICON"]     = L["RES_ROOT_PATH"].."/icons/Module-tooltip"
+L["MODULE_UNITFRAME_ICON"]   = L["RES_ROOT_PATH"].."/icons/Module-unitframe"
+L["MODULE_SKIN_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-skin"
+L["MODULE_DEPLOY_ICON"]      = L["RES_ROOT_PATH"].."/icons/Module-deploy"

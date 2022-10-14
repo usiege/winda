@@ -9,10 +9,41 @@ local DEBUG = DEBUG
 local wdConstants = wdConstants
 
 
-local GuiFrame      = nil -- gui frame entity
-local GuiListFrame  = nil -- gui list frame 
+-- Gui refer 
+local GuiItemNames = {
+    L["MODULE_BAGS"],       --        = "背包"
+    L["MODULE_BARS"],       --        = "动作条"
+    L["MODULE_BUFF"],       --        = "增/减益"
+    L["MODULE_CHAT"],       --        = "聊天框"
+    L["MODULE_COMBAT"],     --          = "战斗"
+    L["MODULE_MAPS"],       --          = "地图"
+    L["MODULE_NAMEPLATE"],  --          = "姓名版"
+    L["MODULE_TASK"],       --      = "任务"
+    L["MODULE_TOOLTIP"],    --      = "提示"
+    L["MODULE_UNITFRAME"],  --      = "头像"
+    L["MODULE_SKIN"],       --      = "皮肤"
+    L["MODULE_DEPLOY"],     --      = "配置"    
+}
+local GuiItemIcons = {
+    L["MODULE_BAGS_ICON"],
+    L["MODULE_BARS_ICON"],
+    L["MODULE_BUFF_ICON"], 
+    L["MODULE_CHAT_ICON"],
+    L["MODULE_COMBAT_ICON"],
+    L["MODULE_MAPS_ICON"],
+    L["MODULE_NAMEPLATE_ICON"],
+    L["MODULE_TASK_ICON"],
+    L["MODULE_TOOLTIP_ICON"],
+    L["MODULE_UNITFRAME_ICON"],
+    L["MODULE_SKIN_ICON"],
+    L["MODULE_DEPLOY_ICON"],
+}
+
+
 
 -- winda settings gui
+local GuiFrame      = nil -- gui frame entity
+local GuiListFrame  = nil -- gui list frame 
 local function init (args)
     -- body...
     if GuiFrame then return GuiFrame end
