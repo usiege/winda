@@ -40,7 +40,6 @@ local GuiItemIcons = {
 }
 
 
-
 -- winda settings gui
 local GuiFrame      = nil -- gui frame entity
 local GuiListFrame  = nil -- gui list frame 
@@ -50,11 +49,12 @@ local function init (args)
 
     -- main frame
     local function initGui() 
-        local f = CreateFrame("Frame", "WindaGUI", UIParent, "BackdropTemplate")
-        -- tinsert(UISpecialFrames, "WindaGUI")
         local width = wdConstants.gui_window_width
         local height = wdConstants.gui_window_height
         wdPrint(width, height)
+
+        local f = CreateFrame("Frame", "WindaGUI", UIParent, "BackdropTemplate")
+        -- tinsert(UISpecialFrames, "WindaGUI")
         f:SetSize(width, height)
         f:SetFrameLevel(wdConstants.gui_window_level)
         f:SetPoint("CENTER")
@@ -62,7 +62,7 @@ local function init (args)
 
         -- bg image blizz api move to
         f:SetBackdrop({
-            bgFile = L["GUI_BG_FILE"],
+            bgFile = L["GUI_BG_FILE"], -- L["BG_FILE_NORMAL"],
             edgeFile = L["GUI_EDGE_FILE"],
             tile = false,
             tileEdge = false,
@@ -99,6 +99,8 @@ local function init (args)
         itembg:SetBackdrop({
             bgFile = L["GUI_BG_ITEM"]
         })
+        -- items 
+
 
         return itembg
     end
@@ -136,6 +138,8 @@ local function init (args)
         return frame
     end
     initLogo(GuiListFrame)
+
+
 
     return GuiFrame
 end
@@ -191,10 +195,16 @@ end
 
 -- global GUI
 local GUI = Winda:RegisterEntity("GUI")
-GUI.openGUI = openGUI
+do 
+    GUI.openGUI = openGUI
+    GUI.compenents = {}
 
-function GUI: CreateEntityButton(entityName)
-    print(entityName)
+end
+
+function GUI: CreateCompnent(index, name)
+    print(index, name)
+
+
 end
 
 

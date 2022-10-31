@@ -1,4 +1,6 @@
 -- winda base frame
+-- create winda entity frame 
+
 WindaFrame = {
     name = "WindaFrame"
 }

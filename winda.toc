@@ -35,12 +35,12 @@ core/init.lua
 # settings
 settings/settings.xml
 
+# entities
+entities/entities.xml
+
 # gui 
 entities/gui.lua
 entities/slash.lua
-
-# entities
-entities/entities.xml
 
 # extend
 extend/extend.xml

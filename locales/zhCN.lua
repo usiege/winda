@@ -42,6 +42,7 @@ L["MODULE_COIN"]        = "货币"
 L["THEME_NAME"]         = "base"
 L["RES_ROOT_PATH"]      = wdGetThemeResRootPath(L["THEME_NAME"])
 L["FONT_CHINESE"]       = L["RES_ROOT_PATH"].."/fonts/chinese-font.ttf"
+L["BG_FILE_NORMAL"]     = L["RES_ROOT_PATH"].."/textures/bg-black-normal"
 L["GUI_BACK_IMAGE"]     = L["RES_ROOT_PATH"].."/textures/UI-Tooltip-Background"
 L["GUI_BG_FILE"]        = L["RES_ROOT_PATH"].."/textures/UI-Gui-BgFile"
 L["GUI_BG_ITEM"]        = L["RES_ROOT_PATH"].."/textures/Gui-item-bg"
