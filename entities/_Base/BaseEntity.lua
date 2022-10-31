@@ -12,6 +12,7 @@ BaseEntity = {
     index_frame = nil,  -- gui button frame 
     setting_frame = nil, -- gui settings frame
 
+    index_text = "",
     index_referto_point     = {10, -88},
     index_padding_height    = 8,
     index_button_width      = 180,
@@ -37,16 +38,28 @@ function BaseEntity: new(o, name)
 end
 
 function BaseEntity: createGuiIndex(index, parent)
-    local index_frame = CreateFrame("Button", nil, parent)
-    index_frame:SetPoint("TOPLEFT", self.index_referto_point[1], self.index_referto_point[2])
-    index_frame:SetSize(self.index_button_width, self.index_button_height)
-    index_frame:SetFrameStrata("HIGH")
-    local texture = index_frame:CreateTexture(nil, "BACKGROUND")
+    local frame = CreateFrame("Button", nil, parent)
+    frame:SetPoint("TOPLEFT",  self.index_referto_point[1], 
+    self.index_referto_point[2] - (self.index_button_height + self.index_padding_height) * (index - 1))
+    frame:SetSize(self.index_button_width, self.index_button_height)
+    frame:SetFrameStrata("HIGH")
+
+    local fs = frame:CreateFontString(nil, 'OVERLAY')
+	fs:FontTemplate()
+	fs:SetPoint('CENTER')
+	fs:SetText(self.index_text)
+	fs:SetJustifyH('CENTER')
+	fs:SetTextColor(1, 1, 1, 1)
+	frame:SetFontString(fs)
+
+    -- 
+    wdPrint(self.index_text)
+    local texture = frame: CreateTexture(nil, "BACKGROUND")
     texture:SetTexture(L["GUI_BUTTON_BG"])
     texture:SetAllPoints()
-    print(self.index_referto_point)
-    self.index_frame = index_frame
+    -- print(self.index_referto_point)
 
+    self.index_frame = frame
 end
 
 function BaseEntity: createGuiSettingItem(index)

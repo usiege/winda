@@ -10,19 +10,19 @@ local wdConstants = wdConstants
 
 
 -- Gui refer 
-local GuiItemNames = {
-    L["MODULE_BAGS"],       --        = "背包"
-    L["MODULE_BARS"],       --        = "动作条"
-    L["MODULE_BUFF"],       --        = "增/减益"
-    L["MODULE_CHAT"],       --        = "聊天框"
-    L["MODULE_COMBAT"],     --          = "战斗"
-    L["MODULE_MAPS"],       --          = "地图"
-    L["MODULE_NAMEPLATE"],  --          = "姓名版"
-    L["MODULE_TASK"],       --      = "任务"
-    L["MODULE_TOOLTIP"],    --      = "提示"
-    L["MODULE_UNITFRAME"],  --      = "头像"
-    L["MODULE_SKIN"],       --      = "皮肤"
-    L["MODULE_DEPLOY"],     --      = "配置"    
+local GuiItemDatas = {
+    { L["MODULE_BAGS"],  "Bag"},                --        = "背包"
+    { L["MODULE_BARS"],  "Bar"},                --        = "动作条"
+    { L["MODULE_BUFF"],  "Buff"},               --        = "增/减益"
+    { L["MODULE_CHAT"],  "Chat"},               --        = "聊天框"
+    { L["MODULE_COMBAT"], "Combat"},            --          = "战斗"
+    { L["MODULE_MAPS"], "Map"},                 --          = "地图"
+    { L["MODULE_NAMEPLATE"], "Nameplate"},      --          = "姓名版"
+    { L["MODULE_TASK"], "Task"},                --      = "任务"
+    { L["MODULE_TOOLTIP"], "Tooltip"},          --      = "提示"
+    { L["MODULE_UNITFRAME"], "Unitframe"},      --      = "头像"
+    { L["MODULE_SKIN"], "Skin"},                --      = "皮肤"
+    { L["MODULE_DEPLOY"], "Deploy"}             --      = "配置"    
 }
 local GuiItemIcons = {
     L["MODULE_BAGS_ICON"],
@@ -51,10 +51,12 @@ do
     GUI.compenents = {}
 
 end
-function GUI: CreateCompnent(index, name, parent)
-    print(index, name)
-    local moduleEntity = BaseEntity: new({}, name) 
+function GUI: CreateCompnent(index, parent, data)
+    print(index, data)
+    local moduleEntity = BaseEntity: new({}, data[2])
+    moduleEntity.index_text = data[1] 
     moduleEntity: createGuiIndex(index, parent)
+
     self.compenents[index] = moduleEntity
 end
 -- main frame
@@ -108,7 +110,12 @@ function GUI: initItems(parent)
     itembg:SetBackdrop({
         bgFile = L["BG_GRAY_NORMAL"], --L["GUI_BG_ITEM"]
     })
-    -- items 
+    -- items index
+    for i,v in ipairs(GuiItemDatas) do
+        GUI: CreateCompnent(i, itembg, v)
+    end
+    
+    
 
     return itembg
 end
@@ -152,9 +159,8 @@ local function init (args)
 
     -- item list frame
     GuiListFrame = GUI: initItems(GuiFrame)
-    
     GUI: CreateLogo(GuiListFrame)
-    GUI: CreateCompnent(1, "Modules", GuiListFrame)
+
 
 
     return GuiFrame

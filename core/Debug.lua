@@ -1,5 +1,5 @@
 -- global debug
-DEBUG = false
+DEBUG = true
 wdebug = {}
 
 -- debug testing
