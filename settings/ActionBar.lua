@@ -6,7 +6,7 @@ local function loadPanel(name)
     -- body
     if DEBUG then print(name) end
     
-    
+
 end
 
 

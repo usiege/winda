@@ -2,7 +2,7 @@ if DEBUG then
     print("action bar")
 end
 
-WDActionBar = BaseEntity: new({})
+WDActionBar = GuiEntity: new({})
 
 
 

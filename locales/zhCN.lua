@@ -14,6 +14,7 @@ L["MODULE_ENABLE_DESC"] = "开启或关闭模块功能"
 
 
 -- module
+L["MODULE_ENABLE"]      = "模块开关"
 L["MODULE_BAGS"]        = "背包"
 L["MODULE_BARS"]        = "动作条"
 L["MODULE_BUFF"]        = "增/减益"
@@ -38,19 +39,30 @@ L["MODULE_MOUNT"]       = "座骑"
 L["MODULE_PET"]         = "宠物"
 L["MODULE_COIN"]        = "货币"
 
--- textures
+-- base (user custom setting)
 L["THEME_NAME"]         = "base"
 L["RES_ROOT_PATH"]      = wdGetThemeResRootPath(L["THEME_NAME"])
+
+-- fonts 
+L["FONT_LANTY"]         = L["RES_ROOT_PATH"].."/fonts/lanty.ttf"
 L["FONT_CHINESE"]       = L["RES_ROOT_PATH"].."/fonts/chinese-font.ttf"
+
+
+-- textures
+L["CANCEL_CLEAR"]       = L["RES_ROOT_PATH"].."/textures/cancel-clear"
+L["CANCEL_NORMAL"]      = L["RES_ROOT_PATH"].."/textures/cancel-normal"
 L["BG_FILE_NORMAL"]     = L["RES_ROOT_PATH"].."/textures/bg-black-normal"
 L["BG_GRAY_NORMAL"]     = L["RES_ROOT_PATH"].."/textures/bg-gray-normal"
+L["BG_GRAY_SQUARE"]     = L["RES_ROOT_PATH"].."/textures/bg-gray-square"
 L["GUI_BACK_IMAGE"]     = L["RES_ROOT_PATH"].."/textures/UI-Tooltip-Background"
 L["GUI_BG_FILE"]        = L["RES_ROOT_PATH"].."/textures/UI-Gui-BgFile"
-L["GUI_BG_ITEM"]        = L["RES_ROOT_PATH"].."/textures/Gui-item-bg"
+L["GUI_BG_ITEM"]        = L["RES_ROOT_PATH"].."/textures/gui-item-bg"
 L["GUI_EDGE_FILE"]      = L["RES_ROOT_PATH"].."/textures/UI-Gui-EdgeFile"
 L["GUI_BUTTON_BG"]      = L["RES_ROOT_PATH"].."/textures/gui-button-bg"
+L["GUI_SETTING_BG"]     = L["RES_ROOT_PATH"].."/textures/gui-setting-bg"
 L["WINDA_LOGO"]         = L["RES_ROOT_PATH"].."/textures/winda"
 
+-- icons
 L["MODULE_BAGS_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-bag"
 L["MODULE_BARS_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-bar"
 L["MODULE_BUFF_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-buff"

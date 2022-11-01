@@ -11,6 +11,7 @@ local wdConstants = wdConstants
 
 -- Gui refer 
 local GuiItemDatas = {
+    { L["MODULE_ENABLE"], "Switch"},            --          模块开关
     { L["MODULE_BAGS"],  "Bag"},                --        = "背包"
     { L["MODULE_BARS"],  "Bar"},                --        = "动作条"
     { L["MODULE_BUFF"],  "Buff"},               --        = "增/减益"
@@ -43,20 +44,42 @@ local GuiItemIcons = {
 -- winda settings gui
 local GUI = Winda:RegisterEntity("GUI")
 local GuiFrame      = nil -- gui frame entity
-local GuiListFrame  = nil -- gui list frame 
+-- local GuiListFrame  = nil -- gui list frame 
 
 -- global GUI
 do
     -- body
-    GUI.compenents = {}
+    GUI.compenents = {}             -- gui entitys  
+    GUI.interaction = {             -- gui interaction refer to 
+        last_index       = 1,
+        current_index    = 1,
 
+    }
 end
 function GUI: CreateCompnent(index, parent, data)
     print(index, data)
-    local moduleEntity = BaseEntity: new({}, data[2])
+    local moduleEntity = GuiEntity: new({}, data[2])
     moduleEntity.index_text = data[1] 
     moduleEntity: createGuiIndex(index, parent)
+    moduleEntity: createGuiSettingItem(index, parent:GetParent())
 
+    -- event
+    moduleEntity.index_frame: RegisterForClicks("AnyUp", "AnyDown")
+    moduleEntity.index_frame: SetScript("OnClick", function (self, button, down)
+        if down then
+            GUI.interaction.current_index = index
+            if(GUI.interaction.last_index == index) then 
+                return
+            else
+                GUI.compenents[GUI.interaction.last_index].setting_frame:Hide()
+                moduleEntity.setting_frame: Show()
+                GUI.interaction.last_index = index
+            end
+        else
+            print(index) 
+        end
+        
+    end)
     self.compenents[index] = moduleEntity
 end
 -- main frame
@@ -72,16 +95,19 @@ function GUI: initGui()
     f:SetPoint("CENTER")
     f:SetFrameStrata("HIGH")
 
+    local pad = wdConstants.gui_border_pad
     -- bg image blizz api move to
     f:SetBackdrop({
         bgFile = L["BG_FILE_NORMAL"], -- L["GUI_BG_FILE"], -- 
-        edgeFile = L["GUI_EDGE_FILE"],
+        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
         tile = false,
         tileEdge = false,
         tileSize = 0,
-        edgeSize = 3,
-        insets = { left = 0, right = 0, top = 0, bottom = 0 }
+        edgeSize = pad,
+        insets = { left = pad, right = pad, top = pad, bottom = pad }
     })
+    f:SetBackdropBorderColor(0, 0, 0, 1)
+
     -- frame events
     f:SetClampedToScreen(true) -- Prevents a Frame from moving off-screen.
     f:SetMovable(true)
@@ -94,39 +120,63 @@ function GUI: initGui()
         self:StopMovingOrSizing()
     end)
 
+    -- cancel
+    local cf = CreateFrame("Button", nil, f)
+    cf:SetPoint("TOPRIGHT",  -5, -5)
+    cf:SetSize(20, 20)
+    cf:SetFrameStrata("HIGH")
+    cf:SetFrameLevel(wdConstants.gui_window_level + 5)
+    local texture = cf: CreateTexture(nil, "BACKGROUND")
+    texture:SetTexture(L["CANCEL_CLEAR"])
+    texture:SetAllPoints()
+    cf:RegisterForClicks("AnyUp", "AnyDown")
+    cf:SetScript("OnClick", function (self, button, down) 
+        if down then
+            f:Hide()
+        end
+    end)
+    f.cancel = cf -- outside useful
+    f:SetScript("OnKeyDown", function (self, key)
+        if key == "ESCAPE" then
+            self:Hide()
+        end
+    end)
+
     return f
 end
 
 function GUI: initItems(parent)
     -- body
-    local itembg = CreateFrame("Frame", "GUIItem", parent, "BackdropTemplate")
+    local itembg = CreateFrame("Frame", "GUIItemBg", parent, "BackdropTemplate")
     local width = wdConstants.gui_list_width
-    local height = wdConstants.gui_list_height
+    local pad = wdConstants.gui_border_pad
+    local height = wdConstants.gui_list_height - 2 * pad
     wdPrint(width, height)
-    itembg:SetPoint("LEFT", parent, "LEFT", 0, 0)
+    
+    itembg:SetPoint("LEFT", parent, "LEFT", pad, 0)
     itembg:SetSize(width, height)
     itembg:SetFrameLevel(wdConstants.gui_window_level)
     itembg:SetFrameStrata("HIGH")
     itembg:SetBackdrop({
-        bgFile = L["BG_GRAY_NORMAL"], --L["GUI_BG_ITEM"]
+        bgFile = L["BG_GRAY_SQUARE"], --L["GUI_BG_ITEM"]
     })
+
     -- items index
     for i,v in ipairs(GuiItemDatas) do
         GUI: CreateCompnent(i, itembg, v)
     end
-    
-    
+    GUI.compenents[1].setting_frame:Show()
 
-    return itembg
+    
 end
 
 function GUI: CreateLogo(parent)
-    local frame = CreateFrame("Frame", "GUIItem", parent)
+    local frame = CreateFrame("Frame", "GUILogo", parent)
     frame:SetFrameLevel(wdConstants.gui_window_level+1)
-    local width = wdConstants.gui_logo_width
-    local height = wdConstants.gui_logo_height
+    local width, height = wdConstants.gui_logo_width, wdConstants.gui_logo_height
+    local x, y = wdConstants.gui_logo_point[1], wdConstants.gui_logo_point[2]
     wdPrint(width, height)
-    frame:SetPoint("TOP", parent, "TOP", 0, -20)
+    frame:SetPoint("TOPLEFT", parent, "TOPLEFT", x, -y)
     frame:SetSize(width, height)
     frame:SetFrameStrata("HIGH")
     -- -- adding a texture
@@ -158,9 +208,8 @@ local function init (args)
     GuiFrame = GUI: initGui()
 
     -- item list frame
-    GuiListFrame = GUI: initItems(GuiFrame)
-    GUI: CreateLogo(GuiListFrame)
-
+    GUI: initItems(GuiFrame)
+    GUI: CreateLogo(GuiFrame)
 
 
     return GuiFrame
