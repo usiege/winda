@@ -3,11 +3,16 @@ local _, wd = ...
 local unpack, strfind, gsub = unpack, strfind, gsub
 local tonumber, pairs, ipairs, next, type, tinsert = tonumber, pairs, ipairs, next, type, table.insert
 local Winda, Deploy , L = unpack(wd)
+-- 
+local GameMenuFrame         = GameMenuFrame
+local GameMenuButtonAddons  = GameMenuButtonAddons
+local GameMenuButtonLogout  = GameMenuButtonLogout
+local InCombatLockdown      = InCombatLockdown
+local HideUIPanel           = HideUIPanel
 
 -- winda constant
 local DEBUG = DEBUG
 local wdConstants = wdConstants
-
 
 -- Gui refer 
 local GuiItemDatas = {
@@ -41,6 +46,7 @@ local GuiItemIcons = {
 }
 
 
+-- load
 -- winda settings gui
 local GUI = Winda:RegisterEntity("GUI")
 local GuiFrame      = nil -- gui frame entity
@@ -153,12 +159,12 @@ function GUI: initItems(parent)
     local height = wdConstants.gui_list_height - 2 * pad
     wdPrint(width, height)
     
-    itembg:SetPoint("LEFT", parent, "LEFT", pad, 0)
+    itembg:SetPoint("TOPLEFT", parent, "TOPLEFT", pad, -pad)
     itembg:SetSize(width, height)
     itembg:SetFrameLevel(wdConstants.gui_window_level)
     itembg:SetFrameStrata("HIGH")
     itembg:SetBackdrop({
-        bgFile = L["BG_GRAY_SQUARE"], --L["GUI_BG_ITEM"]
+        bgFile = L["BG_GRAY_NORMAL"], --L["GUI_BG_ITEM"]
     })
 
     -- items index

@@ -30,7 +30,7 @@ GuiEntity = {
     index_button_height     = 32,
 
     setting_item_width      = 800,
-    setting_item_height     = 800,
+    setting_item_height     = 750,
     setting_topright_point  = {0, 0},
 }
 setmetatable(GuiEntity, {__index = BaseEntity})
