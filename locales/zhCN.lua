@@ -61,6 +61,7 @@ L["GUI_EDGE_FILE"]      = L["RES_ROOT_PATH"].."/textures/UI-Gui-EdgeFile"
 L["GUI_BUTTON_BG"]      = L["RES_ROOT_PATH"].."/textures/gui-button-bg"
 L["GUI_SETTING_BG"]     = L["RES_ROOT_PATH"].."/textures/gui-setting-bg"
 L["WINDA_LOGO"]         = L["RES_ROOT_PATH"].."/textures/winda"
+L["WINDA_LOGO_SMALL"]   = L["RES_ROOT_PATH"].."/textures/winda-small"
 
 -- icons
 L["MODULE_BAGS_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-bag"

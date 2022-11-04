@@ -44,7 +44,7 @@ function Winda:LoginEvent (args) -- player login
         if entity.OnLogin then
             entity:OnLogin()
         else
-            print("Module <"..module..name.."> does not loaded.")
+            print("Module <"..entity.name.."> does not loaded.")
         end
     end
 end
