@@ -29,6 +29,8 @@ L["MODULE_UNITFRAME"]   = "头像"
 L["MODULE_SKIN"]        = "皮肤"
 L["MODULE_DEPLOY"]      = "配置"
 
+L["MODULE_EXTEND"]      = "扩展"
+
 -- system
 L["MODULE_ROLE"]        = "角色"    -- 声望，PvP，头衔，技能
 L["MODULE_EQUIP"]       = "装备"    -- 一键换装，自动切换
@@ -76,3 +78,4 @@ L["MODULE_TOOLTIP_ICON"]     = L["RES_ROOT_PATH"].."/icons/Module-tooltip"
 L["MODULE_UNITFRAME_ICON"]   = L["RES_ROOT_PATH"].."/icons/Module-unitframe"
 L["MODULE_SKIN_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-skin"
 L["MODULE_DEPLOY_ICON"]      = L["RES_ROOT_PATH"].."/icons/Module-deploy"
+L["MODULE_DXTEND_ICON"]      = L["RES_ROOT_PATH"].."/icons/Module-extend"

@@ -1,6 +1,6 @@
 ## Interface: 30400
 ## Title: |TInterface/Addons/winda/theme/base/textures/winda-small:32:64|t 
-#|cffffedbawinda|r # -|cFF888888wlk|r
+#|cffffedbawinda|r - |cFF888888wlk|r
 ## Notes: tingfeng ui
 ## Notes-zhCN: Entities should not be multiplied unnecessarily.
 ## OptionalDeps:  # MoveAnything, Questie, TitanClassic, Clique, _DebugLog, BugSack, !Stragglers, ACU

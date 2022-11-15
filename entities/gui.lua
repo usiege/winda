@@ -2,7 +2,8 @@
 local _, wd = ...
 local unpack, strfind, gsub = unpack, strfind, gsub
 local tonumber, pairs, ipairs, next, type, tinsert = tonumber, pairs, ipairs, next, type, table.insert
-local Winda, Deploy , L = unpack(wd)
+local Winda, Deploy , L, DB = unpack(wd)
+local addonName = DB.addonName
 -- 
 local GameMenuFrame         = GameMenuFrame
 local GameMenuButtonAddons  = GameMenuButtonAddons
@@ -28,8 +29,10 @@ local GuiItemDatas = {
     { L["MODULE_TOOLTIP"], "Tooltip"},          --      = "提示"
     { L["MODULE_UNITFRAME"], "Unitframe"},      --      = "头像"
     { L["MODULE_SKIN"], "Skin"},                --      = "皮肤"
-    { L["MODULE_DEPLOY"], "Deploy"}             --      = "配置"    
+    { L["MODULE_DEPLOY"], "Deploy"},             --      = "配置"  
+    { L["MODULE_EXTEND"], "Extend"},             --      = "扩展"  
 }
+
 local GuiItemIcons = {
     L["MODULE_BAGS_ICON"],
     L["MODULE_BARS_ICON"],
@@ -43,6 +46,7 @@ local GuiItemIcons = {
     L["MODULE_UNITFRAME_ICON"],
     L["MODULE_SKIN_ICON"],
     L["MODULE_DEPLOY_ICON"],
+    L["MODULE_DXTEND_ICON"]
 }
 
 
@@ -246,14 +250,14 @@ local function menuWinda () -- esc menu
         print("winda menu on load")
     end
     -- body...
-    local gui = CreateFrame("Button", "GameMenuFrameWinda", GameMenuFrame, "GameMenuButtonTemplate, BackdropTemplate")
+    local gui = CreateFrame("Button", "GameMenuFrameWinda", GameMenuFrame, "GameMenuButtonTemplate")
 	gui:SetText(L["Winda Console"])
-	gui:SetPoint("TOP", GameMenuButtonAddons, "BOTTOM", 0, -21)
+	-- gui:SetPoint("TOP", GameMenuButtonAddons, "BOTTOM", 0, -21)
 	GameMenuFrame:HookScript("OnShow", function(self)
 		GameMenuButtonLogout:SetPoint("TOP", gui, "BOTTOM", 0, -21)
 		self:SetHeight(self:GetHeight() + gui:GetHeight() + 22)
 	end)
-
+    GameMenuFrame[addonName] = gui
 	gui:SetScript("OnClick", function()
 		if InCombatLockdown() then
             -- UIErrorsFrame:AddMessage(DB.InfoColor..ERR_NOT_IN_COMBAT)
@@ -263,6 +267,24 @@ local function menuWinda () -- esc menu
 		HideUIPanel(GameMenuFrame)
 		-- PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
 	end)
+
+    local function PositionGameMenuButton()
+        print(addonName)
+        GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonLogout:GetHeight() - 4)
+        local _, relTo, _, _, offY = GameMenuButtonKeybindings:GetPoint()
+        if relTo ~= GameMenuFrame[addonName] then
+            GameMenuFrame[addonName]:ClearAllPoints()
+            GameMenuFrame[addonName]:SetPoint("TOPLEFT", relTo, "BOTTOMLEFT", 0, -1)
+            GameMenuButtonKeybindings:ClearAllPoints()
+            GameMenuButtonKeybindings:SetPoint("TOPLEFT", GameMenuFrame[addonName], "BOTTOMLEFT", 0, offY)
+        end
+    end
+
+    if not IsAddOnLoaded("ConsolePortUI_Menu") then
+        gui:SetSize(GameMenuButtonMacros:GetWidth(), GameMenuButtonMacros:GetHeight())
+        gui:SetPoint("TOPLEFT", GameMenuButtonUIOptions, "BOTTOMLEFT", 0, -1)
+        hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", PositionGameMenuButton)
+    end
 end
 
 
