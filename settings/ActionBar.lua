@@ -1,5 +1,6 @@
 local _, wd = ...
 local Winda, Deploy , L = unpack(wd)
+local GuiEntity = GuiEntity
 
 
 local function loadPanel(name)

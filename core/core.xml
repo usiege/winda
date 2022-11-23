@@ -2,4 +2,6 @@
 	<Script file="core/debug.lua"/>
 	<Script file="core/blizz.lua"/>	<!-- blizz api	 -->
 	<Script file="core/constant.lua"/> <!-- winda constant -->
+	<Script file="core/entity.lua"/>
 </Ui>
+ 

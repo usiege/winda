@@ -1,6 +1,6 @@
 echo "删除文件并复制！"
-SOURCE_PATH="/Volumes/Elements/winda"
-DEST_PATH="/Applications/World_of_Warcraft/_classic_/Interface/AddOns/winda"
+SOURCE_PATH="/Applications/World_of_Warcraft/_classic_/Interface/AddOns/winda"
+DEST_PATH="/Volumes/Elements/winda"
 
 echo "source -> $SOURCE_PATH"
 echo "dest -> $DEST_PATH"

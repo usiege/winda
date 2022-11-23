@@ -1,21 +1,7 @@
 local _, wd = ...
 local Winda, Deploy , L = unpack(wd)
 
--- module base entity 
--- entity is winda global module 
--- module's entity is frame which create by Blizz API
-BaseEntity = {
-    name = "BaseEntity",
-    entity = nil,  -- a frame create by blizz api
-
-}
-setmetatable(BaseEntity, {__index = BaseEntity})
-BaseEntity.__index = BaseEntity
-
--- BaseEntity: createButton
-
-
-
+-- gui entity
 -- gui base entity
 GuiEntity = {
     index = 0, -- gui index
@@ -92,7 +78,7 @@ function GuiEntity: createGuiSettingItem(index, parent)
 
     -- title
     local tf = CreateFrame("Button", nil, frame)
-    tf:SetPoint("TOP",  0, -18)
+    tf:SetPoint("TOP",  0, -12)
     tf:SetSize(200, 64)
     tf:SetFrameStrata("HIGH")
     local fs = tf:CreateFontString(nil, 'OVERLAY')

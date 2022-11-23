@@ -283,7 +283,7 @@ local function menuWinda () -- esc menu
     if not IsAddOnLoaded("ConsolePortUI_Menu") then
         gui:SetSize(GameMenuButtonMacros:GetWidth(), GameMenuButtonMacros:GetHeight())
         gui:SetPoint("TOPLEFT", GameMenuButtonUIOptions, "BOTTOMLEFT", 0, -1)
-        hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", PositionGameMenuButton)
+        -- hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", PositionGameMenuButton)
     end
 end
 
