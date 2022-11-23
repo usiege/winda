@@ -250,9 +250,9 @@ local function menuWinda () -- esc menu
         print("winda menu on load")
     end
     -- body...
-    local gui = CreateFrame("Button", "GameMenuFrameWinda", GameMenuFrame, "GameMenuButtonTemplate")
+    local gui = CreateFrame("Button", "GameMenuFrameWinda", GameMenuFrame, "GameMenuButtonTemplate,BackdropTemplate")
 	gui:SetText(L["Winda Console"])
-	-- gui:SetPoint("TOP", GameMenuButtonAddons, "BOTTOM", 0, -21)
+	gui:SetPoint("TOP", GameMenuButtonAddons, "BOTTOM", 0, -21)
 	GameMenuFrame:HookScript("OnShow", function(self)
 		GameMenuButtonLogout:SetPoint("TOP", gui, "BOTTOM", 0, -21)
 		self:SetHeight(self:GetHeight() + gui:GetHeight() + 22)
@@ -265,26 +265,8 @@ local function menuWinda () -- esc menu
         end
 		openGUI() -- open gui for winda
 		HideUIPanel(GameMenuFrame)
-		-- PlaySound(SOUNDKIT.IG_MAINMENU_OPTION)
 	end)
 
-    local function PositionGameMenuButton()
-        print(addonName)
-        GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonLogout:GetHeight() - 4)
-        local _, relTo, _, _, offY = GameMenuButtonKeybindings:GetPoint()
-        if relTo ~= GameMenuFrame[addonName] then
-            GameMenuFrame[addonName]:ClearAllPoints()
-            GameMenuFrame[addonName]:SetPoint("TOPLEFT", relTo, "BOTTOMLEFT", 0, -1)
-            GameMenuButtonKeybindings:ClearAllPoints()
-            GameMenuButtonKeybindings:SetPoint("TOPLEFT", GameMenuFrame[addonName], "BOTTOMLEFT", 0, offY)
-        end
-    end
-
-    if not IsAddOnLoaded("ConsolePortUI_Menu") then
-        gui:SetSize(GameMenuButtonMacros:GetWidth(), GameMenuButtonMacros:GetHeight())
-        gui:SetPoint("TOPLEFT", GameMenuButtonUIOptions, "BOTTOMLEFT", 0, -1)
-        -- hooksecurefunc("GameMenuFrame_UpdateVisibleButtons", PositionGameMenuButton)
-    end
 end
 
 
