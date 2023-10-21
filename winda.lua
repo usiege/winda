@@ -1,6 +1,7 @@
 -- addon init
-local addonName, wd = ... -- addon name and winda table
+-- local addonName, wd = ... -- addon name and winda table
 -- print(...)
+local addonName = "winda"
 print("Welcome to "..addonName.."!")
 
 local tinsert, next = table.insert, next
@@ -76,9 +77,11 @@ end
 
 ------------------------------------------------------------------------
 -- wd settings
+local wd = {}
 wd[1] = Winda
 wd[2] = Deploy
 wd[3] = L
 wd[4] = DB
 -- global wd
 _G[addonName] = wd
+print("winda end!")

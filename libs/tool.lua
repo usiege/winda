@@ -2,6 +2,7 @@
 -- if changes, user can replace a new root Path
 -- which contain all resources (font, sound, texture)
 -- new file must has same name to source
+print("winda tool.")
 function wdGetThemeResRootPath(themename)
     -- body...
     if themename == nil or themename == "" then
@@ -10,4 +11,4 @@ function wdGetThemeResRootPath(themename)
     end
     return "Interface/Addons/winda/theme/"..themename
 end
-
+print("tool end.")

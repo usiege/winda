@@ -1,3 +1,4 @@
+print("winda debug!")
 -- global debug
 DEBUG = true
 wdebug = {}
@@ -10,7 +11,7 @@ end
 -- function 
 function wdPrint(...)
     if DEBUG then
-        print(...)
+        print("winda print.")
     end
     do end
 end

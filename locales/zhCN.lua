@@ -1,3 +1,4 @@
+print("winda zhCN.")
 -- zhCN localization
 local _, wd = ...
 local _, _, L = unpack(wd)

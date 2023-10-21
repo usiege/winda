@@ -1,5 +1,5 @@
 -- gui package for slash settings
-local _, wd = ...
+local wd = _G["winda"]
 local unpack, strfind, gsub = unpack, strfind, gsub
 local tonumber, pairs, ipairs, next, type, tinsert = tonumber, pairs, ipairs, next, type, table.insert
 local Winda, Deploy , L, DB = unpack(wd)
@@ -98,7 +98,7 @@ function GUI: initGui()
     local height = wdConstants.gui_window_height
     wdPrint(width, height)
 
-    local f = CreateFrame("Frame", "WindaGUI", UIParent, "BackdropTemplate")
+    local f = CreateFrame("Frame", "WindaGUI", UIParent)
     -- tinsert(UISpecialFrames, "WindaGUI")
     f:SetSize(width, height)
     f:SetFrameLevel(wdConstants.gui_window_level)

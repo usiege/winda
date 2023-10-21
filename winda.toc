@@ -1,10 +1,12 @@
-## Interface: 30400
-## Title: |TInterface/Addons/winda/theme/base/textures/winda-small:32:64|t 
-#|cffffedbawinda|r - |cFF888888wlk|r
+## Interface: 11200
+# Title: |TInterface/Addons/winda/theme/base/textures/winda-small:32:64|t 
+## Title: winda
+# |cffffedbawinda|r - |cFF888888wlk|r
 ## Notes: tingfeng ui
 ## Notes-zhCN: Entities should not be multiplied unnecessarily.
-## OptionalDeps:  # MoveAnything, Questie, TitanClassic, Clique, _DebugLog, BugSack, !Stragglers, ACU
-## Version: 0.0.1.21037 # @project-version@
+# OptionalDeps: MoveAnything, Questie, TitanClassic, Clique, _DebugLog, BugSack, !Stragglers, ACU
+## Version: 0.1.231021
+# @project-version@
 ## X-Website: https://www.curseforge.com/wow/addons/winda
 ## X-Documents: https://usiege.github.io/winda
 ## X-Curse-Project-ID: 94310
@@ -23,25 +25,25 @@
 winda.lua
 
 # libs
-libs/libs.xml
-libs/tool.lua
+libs\libs.xml
+libs\tool.lua
 
 # locales
-locales/locales.xml
+locales\locales.xml
 
 # core
-core/core.xml
-core/init.lua
+core\core.xml
+core\init.lua
 
 # settings
-settings/settings.xml
+settings\settings.xml
 
 # entities
-entities/entities.xml
+entities\entities.xml
 
 # gui 
-entities/gui.lua
-entities/slash.lua
+entities\gui.lua
+entities\slash.lua
 
 # extend
-extend/extend.xml
+extend\extend.xml
