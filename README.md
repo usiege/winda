@@ -1,9 +1,10 @@
-# winda
+# WINDA
+
 Do not add entities unless necessary.
 
 <!-- TOC -->
 
-- [winda](#winda)
+- [WINDA](#winda)
     - [Introduce](#introduce)
     - [Document](#document)
 
