@@ -2,7 +2,7 @@
 
 ![logo](_media/winda.png)
 
-# WINDA <small>ui</small>
+# 温达 <small>ui</small>
 
 > WINDA UI创建实录
 
@@ -20,7 +20,7 @@
 
 <!-- 背景图片 -->
 
-![](_media/wind.png)
+<!-- ![](_media/wind.png) -->
 
 <!-- 背景色 -->
 
