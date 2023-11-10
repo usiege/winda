@@ -38,7 +38,8 @@
             },
             auto2top: true,
             coverpage: true,
-            executeScript: true,
+            onlyCover: false,  //只在访问主页时加载封面
+            executeScript: true, 
             loadSidebar: true,
             loadNavbar: true,
             mergeNavbar: true,
@@ -47,7 +48,9 @@
             sidebarDisplayLevel: 3, // set sidebar display level
         }
     </script>
-    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+    <!-- 封面 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script> 
+
     <!-- <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-markdown.min.js"></script>
