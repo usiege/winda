@@ -31,4 +31,4 @@ This section describes the usage of each component of the plugin. The documentat
 
 |QQ资料群|VX公众号|
 |-|-|
-|![qqg.png](https://s2.loli.net/2021/12/28/c4D9Aaime2Hkwnt.png)|![wowcube.png](https://s2.loli.net/2023/11/11/8xWdQVRCZ3arXbS.png)|
+|![qqg.png](https://s2.loli.net/2021/12/28/c4D9Aaime2Hkwnt.png)|![wowcube.png](https://s2.loli.net/2023/11/11/mVtzeMnwlUKy8di.jpg)|
