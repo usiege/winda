@@ -1,34 +1,75 @@
-# WINDA
-
-Do not add entities unless necessary.
+# WINDA UI
 
 <!-- TOC -->
 
-- [WINDA](#winda)
-    - [Introduce](#introduce)
-    - [Document](#document)
+- [winda documents](#winda-documents)
+    - [组织结构](#%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84)
+    - [配置说明](#%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E)
 
 <!-- /TOC -->
 
-## Introduce
+## 组织结构
 
-Winda is a minimalist World of Warcraft integration plugin, eliminating complex plugin settings in favor of providing players with a convenient interface for configuration. 
+> 每一部分内容会有专门的`readme`解释
 
-Remember: simplicity is the key when it comes to using this plugin!
+插件主目录均以小写命名，本文档只提供中文说明；
+
+- 基本组织结构：
+
+|Path|Name|Note|
+|:-:|:-:|:-:|
+|libs|库|第三方依赖库|
+|locales|本地化|插件本地化|
+|theme|主题扩展资源|插件本地资源|
+|extend|第三方扩展|其他插件扩展接口|
 
 
+- 核心内容列表`core`:
+
+> winda/core
+
+|Path|Name|Note|
+|:-:|:-:|:-:|
+|blizz|暴雪||
+|constant|常量||
+|database|数据||
+|debug|调拭||
+|default|设置||
+|init|初始化||
+||||
 
 
+- 可视化功能列表`entities`:
 
-## Document
+> 该部分为插件可视化内容，子目录均以首字母大写命名，各个部分提供的功能是相互独立的，可按需求进行拆分；
 
-This section describes the usage of each component of the plugin. The documentation will include updates on the plugin. The documentation should describe the details of the plugin in sufficient detail so that users can clearly understand each aspect.
+|Path|Name|Note|
+|:-:|:-:|:-:|
+|_Base|基类||
+|Bags|背包||
+|Bars|动作栏||
+|Buffs|增/减益||
+|Chat|聊天||
+|Maps|地图||
+|Nameplate|姓名版||
+|Raid|团队||
+|Tooltip|提示||
+|UnitFrame|头像||
+
+- 可视化设置列表`settings`:
+
+> 该部分为可视化内容的设置子页面，与可视化内容相对应，独立于可视化功能列表，为其补充用户设置项；
+
+|Path|Name|Note|
+|:-:|:-:|:-:|
+|_Base|基类||
+||||
 
 
-## Donate
+## 配置说明
 
-[爱发电](https://afdian.net/@windwhispered) | [Patreon](https://www.patreon.com/hearwinds) | [知识星球](https://wx.zsxq.com/dweb2/index/group/28855118214111)
+> theme/base
 
-|QQ资料群|VX公众号|
-|-|-|
-|![qqg.png](https://s2.loli.net/2021/12/28/c4D9Aaime2Hkwnt.png)|![wowcube.png](https://s2.loli.net/2023/11/11/LygmBo95dTMQl2X.jpg)|
+本插件支持主题更换，可以参照以上路径中的材质，收集安装自己的主题，具体实施方法如下：
+
+
