@@ -27,7 +27,7 @@ This section describes the usage of each component of the plugin. The documentat
 
 ## Donate
 
-[爱发电](https://afdian.net/@windwhispered) | [Patreon](https://www.patreon.com/hearwinds) 
+[爱发电](https://afdian.net/@windwhispered) | [Patreon](https://www.patreon.com/hearwinds) | [知识星球](https://wx.zsxq.com/dweb2/index/group/28855118214111)
 
 |QQ资料群|VX公众号|
 |-|-|
