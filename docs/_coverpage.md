@@ -4,9 +4,8 @@
 
 # 温达 <small>ui</small>
 
-> WINDA UI创建实录
+> 欢迎来到温达
 
-- 欢迎来到温达
 - 更多内容加入“WC游戏社区”
 
 [『GitHub』](https://github.com/usiege/winda)

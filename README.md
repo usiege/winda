@@ -18,8 +18,6 @@ Remember: simplicity is the key when it comes to using this plugin!
 
 
 
-
-
 ## Document
 
 This section describes the usage of each component of the plugin. The documentation will include updates on the plugin. The documentation should describe the details of the plugin in sufficient detail so that users can clearly understand each aspect.
