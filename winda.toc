@@ -1,10 +1,11 @@
-## Interface: 30400
+## Interface: 100000
 ## Title: |TInterface/Addons/winda/theme/base/textures/winda-small:32:64|t 
 #|cffffedbawinda|r - |cFF888888wlk|r
 ## Notes: tingfeng ui
 ## Notes-zhCN: Entities should not be multiplied unnecessarily.
 ## OptionalDeps:  # MoveAnything, Questie, TitanClassic, Clique, _DebugLog, BugSack, !Stragglers, ACU
-## Version: 0.0.1.21037 # @project-version@
+# @project-version@
+## Version: 0.0.1.21037 
 ## X-Website: https://www.curseforge.com/wow/addons/winda
 ## X-Documents: https://usiege.github.io/winda
 ## X-Curse-Project-ID: 94310

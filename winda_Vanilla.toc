@@ -1,0 +1,48 @@
+## Interface: 11402
+## Title: |TInterface/Addons/winda/theme/base/textures/winda-small:32:64|t 
+#|cffffedbawinda|r - |cFF888888wlk|r
+## Notes: tingfeng ui
+## Notes-zhCN: Entities should not be multiplied unnecessarily.
+## OptionalDeps:  # MoveAnything, Questie, TitanClassic, Clique, _DebugLog, BugSack, !Stragglers, ACU
+## Version: 0.1.0 
+# @project-version@
+## X-Website: https://www.curseforge.com/wow/addons/winda
+## X-Documents: https://usiege.github.io/winda
+## X-Curse-Project-ID: 94310
+## DefaultState: Enabled
+
+## Author: usiege # deadend06, Nils89, nezroy
+
+## SavedVariables: WINDA_DB
+## SavedVariablesPerCharacter: winda_db
+
+
+# prepare
+# core/taintLess.xml
+
+# entry
+winda.lua
+
+# libs
+libs/libs.xml
+libs/tool.lua
+
+# locales
+locales/locales.xml
+
+# core
+core/core.xml
+core/init.lua
+
+# settings
+settings/settings.xml
+
+# entities
+entities/entities.xml
+
+# gui 
+entities/gui.lua
+entities/slash.lua
+
+# extend
+extend/extend.xml
