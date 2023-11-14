@@ -1,0 +1,3 @@
+local _, wd = ...
+local Winda, Deploy , L = unpack(wd)
+

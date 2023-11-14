@@ -1,0 +1,12 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+    <!-- <FontFamily name="WD_StandardButton_Font" virtual="true">
+        <Member alphabet="lanty">
+            <Font font="Interface/AddOns/winda/theme/base/fonts/lanty.ttf" height="14"/>
+        </Member>
+    </FontFamily> -->
+    <Script file="entities/_Base/BaseEntity.lua"/>
+    <Script file="entities/_Base/WindaEntity.lua"/>
+    
+</Ui>

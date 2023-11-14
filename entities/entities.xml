@@ -1,0 +1,5 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Include file="entities/_Base/Base.xml"/>
+    <Include file="entities/Bars/Bars.xml"/>
+    
+</Ui>
