@@ -9,3 +9,4 @@
 
 * 问题反馈
     * [FAQ](user/faq.md)
+    * [问题收集](uer/ask.md)
