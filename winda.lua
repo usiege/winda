@@ -4,14 +4,17 @@ local addonName, WD = ... -- addon name and winda table
 -- wdPrint(...)
 wdPrint("Welcome to "..addonName.." !")
 
-local tinsert, next = table.insert, next
-
+local tinsert, next  = table.insert, next
+local tonumber, tostring = tonumber, tostring
+local GetAddOnMetadata = GetAddOnMetadata
 
 -- prepare
 local Winda = {}    -- winda handle
 local Deploy = {}   -- configs for winda
 local L = {}        -- Locales
 local DB = {}       -- Databases
+-- sub prepare
+local version = {}
 
 
 ------------------------------------------------------------------------
@@ -40,6 +43,16 @@ local events = {} -- event trace
 function Winda:LoginEvent (args) -- player login
 	-- body...
     
+	-- version
+	local an = addonName
+	local vstr = tostring(GetAddOnMetadata(an, "Version"))
+	local major, minor, fix = wdStrsplit(".", vstr)
+	version.major = tonumber(major)
+	version.minor = tonumber(minor)
+	version.fix = tonumber(fix)
+	version.string = vstr
+	WD.version = version
+
 	-- entities
     for _, entity in next, entityQueue do
         if entity.OnLogin then

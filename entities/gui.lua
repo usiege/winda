@@ -17,7 +17,8 @@ local wdConstants = wdConstants
 
 -- Gui refer 
 local GuiItemDatas = {
-    { L["MODULE_ENABLE"], "Switch"},            --          模块开关
+    { L["MODULE_ABOUT"], "About"},    -- 简介
+    
     { L["MODULE_BAGS"],  "Bag"},                --        = "背包"
     { L["MODULE_BARS"],  "Bar"},                --        = "动作条"
     { L["MODULE_BUFF"],  "Buff"},               --        = "增/减益"
@@ -29,8 +30,13 @@ local GuiItemDatas = {
     { L["MODULE_TOOLTIP"], "Tooltip"},          --      = "提示"
     { L["MODULE_UNITFRAME"], "Unitframe"},      --      = "头像"
     { L["MODULE_SKIN"], "Skin"},                --      = "皮肤"
+
+    { L["MODULE_ENABLE"], "Switch"},            --          模块开关
+
     { L["MODULE_DEPLOY"], "Deploy"},             --      = "配置"  
     { L["MODULE_EXTEND"], "Extend"},             --      = "扩展"  
+
+    { L["MODULE_SEARCH_ING"], "Search"},        -- 搜索
 }
 
 local GuiItemIcons = {
@@ -140,6 +146,7 @@ function GUI: initGui()
     texture:SetTexture(L["CANCEL_CLEAR"])
     texture:SetAllPoints()
     cf:RegisterForClicks("AnyUp", "AnyDown")
+
     cf:SetScript("OnClick", function (self, button, down) 
         if down then
             f:Hide()
@@ -147,7 +154,7 @@ function GUI: initGui()
     end)
     f.cancel = cf -- outside useful
     f:SetScript("OnKeyDown", function (self, key)
-        if key == "ESCAPE" then
+        if key == "ESCAPE" and self:IsVisible() then
             self:Hide()
         end
     end)
@@ -177,7 +184,7 @@ function GUI: initItems(parent)
     end
     GUI.compenents[1].setting_frame:Show()
 
-    
+    return itembg
 end
 
 function GUI: CreateLogo(parent)
@@ -186,7 +193,7 @@ function GUI: CreateLogo(parent)
     local width, height = wdConstants.gui_logo_width, wdConstants.gui_logo_height
     local x, y = wdConstants.gui_logo_point[1], wdConstants.gui_logo_point[2]
     wdPrint(width, height)
-    frame:SetPoint("TOPLEFT", parent, "TOPLEFT", x, -y)
+    frame:SetPoint("TOP", parent, "TOP", 0, -y)
     frame:SetSize(width, height)
     frame:SetFrameStrata("HIGH")
     -- -- adding a texture
@@ -211,41 +218,56 @@ function GUI: CreateLogo(parent)
     return frame
 end
 
-local function init (args)
+function GUI: CreateVersionText(parent, size, point)
+    local frame = CreateFrame("Frame", "GUIVersion", parent)
+    frame:SetFrameLevel(wdConstants.gui_window_level+1)
+    frame:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 0, 0)
+    frame:SetSize(size.width, size.height)
+    frame:SetFrameStrata("HIGH")
+
+    local text = frame:CreateFontString("Version", "OVERLAY", "GameFontWhite")
+    text:SetFont(L["FONT_CHINESE"], wdConstants.gui_version_text_size)
+    text:SetPoint("BOTTOMRIGHT", 0, 0)
+    text:SetWidth(size.width)
+    text:SetJustifyH("RIGHT")
+
+    return frame, text
+end
+
+local function init(args)
     -- body...
     if GuiFrame then return GuiFrame end
 
-    GuiFrame = GUI: initGui()
+    GuiFrame = GUI:initGui()
 
     -- item list frame
-    GUI: initItems(GuiFrame)
-    GUI: CreateLogo(GuiFrame)
-
+    local lframe = GUI:initItems(GuiFrame)
+    -- logo
+    local logo = GUI:CreateLogo(lframe)
+    -- version
+    local size = { ["width"] = wdConstants.gui_version_width, ["height"] = wdConstants.gui_version_height}
+    local point = { ["x"] = wdConstants.gui_version_point[1], ["y"] = wdConstants.gui_version_point[2]}
+    local _, version = GUI:CreateVersionText(logo, size, point)
+    version:SetText("v" .. wd.version.string)
 
     return GuiFrame
 end
 
 
-local function openGUI (args)
+local function openGUI(args)
     -- body...
-    if DEBUG then
-        wdPrint("open or close gui")
-    end
+    wdPrint("open or close gui")
     if GuiFrame == nil then
         GuiFrame = init()
         GuiFrame:Show()
         return
     end
-    if GuiFrame:IsVisible() then
-        GuiFrame:Hide()
-    else
-        GuiFrame:Show()
-    end
+    GuiFrame:Show()
     -- ShowUIPanel(GuiFrame)
     -- UIFrameFadeIn(GuiFrame, 0.2, 0, 1)
 end
 
-local function menuWinda () -- esc menu
+local function menuWinda() -- esc menu
     if DEBUG then
         wdPrint("winda menu on load")
     end
@@ -259,12 +281,19 @@ local function menuWinda () -- esc menu
 	end)
     GameMenuFrame[addonName] = gui
 	gui:SetScript("OnClick", function()
-		if InCombatLockdown() then
-            -- UIErrorsFrame:AddMessage(DB.InfoColor..ERR_NOT_IN_COMBAT)
-            return
+		-- if InCombatLockdown() then
+        --     -- UIErrorsFrame:AddMessage(DB.InfoColor..ERR_NOT_IN_COMBAT)
+        --     return
+        -- end
+        if not GuiFrame:IsVisible() then
+            openGUI() -- open gui for winda
+            HideUIPanel(GameMenuFrame)
+        else
+            gui.Hide()
         end
-		openGUI() -- open gui for winda
-		HideUIPanel(GameMenuFrame)
+        
+		
+		
 	end)
 
 end
@@ -272,16 +301,6 @@ end
 
 -- winda frame on global
 -- local WEF = Winda.entity
-
-
-
-do 
-    GUI.openGUI = openGUI
-
-end
-
-
-
 function GUI:OnLogin()
     wdPrint("GUI on load")
     if self.entity == nil then
@@ -290,7 +309,7 @@ function GUI:OnLogin()
         self.entity = GuiFrame
     end
     self.entity:Hide()
-    menuWinda()
+    -- menuWinda()
 end
 
 
@@ -300,7 +319,9 @@ end
 -- else
 --     _G[_REQUIREDNAME] = GUI
 -- end
-wdGUI = GUI
-
+do 
+    GUI.openGUI = openGUI
+    wdGUI = GUI
+end
 -- package name
 return wdGUI

@@ -1,12 +1,13 @@
 -- winda base frame
 -- create winda entity frame 
+local BaseEntity = BaseEntity
 
 WindaEntity = {
     name = "WindaFrame",
     entity = nil,
 
 }
-setmetatable(WindaEntity, {__index = WindaEntity})
+setmetatable(WindaEntity, {__index = BaseEntity})
 WindaEntity.__index = WindaEntity
 
 

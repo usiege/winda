@@ -6,14 +6,15 @@ if GetLocale() ~= "zhCN" then return end
 
 local wdGetThemeResRootPath = wdGetThemeResRootPath
 
+-- prompt
 L["Winda Console"] = "winda"
 
--- prompt
 L["WELCOME"]            = "Welcome to winda ui, please enjoy it."
 L["MODULE_ENABLE_DESC"] = "开启或关闭模块功能"
 
 
 -- module
+L["MODULE_ABOUT"]       = "关于"
 L["MODULE_ENABLE"]      = "模块开关"
 L["MODULE_BAGS"]        = "背包"
 L["MODULE_BARS"]        = "动作条"
@@ -30,6 +31,9 @@ L["MODULE_SKIN"]        = "皮肤"
 L["MODULE_DEPLOY"]      = "配置"
 
 L["MODULE_EXTEND"]      = "扩展"
+L["MODULE_SEARCH_NORMAL"]       = "[搜索]"
+L["MODULE_SEARCH_ING"]          = "|c0000FFFF[搜索]|r"
+L["MODULE_SEARCH_DOWN"]         = "|c00FFFF77[搜索]|r"
 
 -- system
 L["MODULE_ROLE"]        = "角色"    -- 声望，PvP，头衔，技能

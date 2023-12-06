@@ -7,7 +7,4 @@
         </Member>
     </FontFamily> -->
     <Script file="entities/_Base/WindaEntity.lua"/>
-
-    <Script file="entities/gui/GuiEntity.lua"/>
-    <Script file="entities/bars/Bars.xml">
 </Ui>
