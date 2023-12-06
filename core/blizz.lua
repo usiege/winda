@@ -1,6 +1,6 @@
 -- blizzard global api
 if DEBUG then
-    print("blizz")
+    wdPrint("blizz")
 end
 
 -- frame

@@ -1,3 +1,3 @@
 if DEBUG then
-    print("extend")
+    wdPrint("extend")
 end

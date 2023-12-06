@@ -1,7 +1,8 @@
+print("|c0000FFFFWelcome to winda !|r")
 -- addon init
-local addonName, wd = ... -- addon name and winda table
--- print(...)
-print("Welcome to "..addonName.."!")
+local addonName, WD = ... -- addon name and winda table
+-- wdPrint(...)
+wdPrint("Welcome to "..addonName.." !")
 
 local tinsert, next = table.insert, next
 
@@ -20,7 +21,7 @@ local DB = {}       -- Databases
 -- module has own entity which is frame 
 local entities, entityQueue = {}, {}
 function Winda:RegisterEntity(name)
-	if entities[name] then print("Module <"..name.."> has been registered.") return end
+	if entities[name] then wdPrint("Module <"..name.."> has been registered.") return end
 	local module = {}
 	module.name = name
 	entities[name] = module
@@ -29,7 +30,7 @@ function Winda:RegisterEntity(name)
 	return module
 end
 function Winda:GetEntity(name)
-	if not entities[name] then print("Module <"..name.."> does not exist.") return end
+	if not entities[name] then wdPrint("Module <"..name.."> does not exist.") return end
 
 	return entities[name]
 end
@@ -44,7 +45,7 @@ function Winda:LoginEvent (args) -- player login
         if entity.OnLogin then
             entity:OnLogin()
         else
-            print("Module <"..entity.name.."> does not loaded.")
+            wdPrint("Module <"..entity.name.."> does not loaded.")
         end
     end
 end
@@ -64,7 +65,7 @@ do
 	handle:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	handle:RegisterEvent("PLAYER_LOGIN", Winda.LoginEvent)
 	handle:SetScript("OnEvent", function(_, event, ...)
-		-- print(CombatLogGetCurrentEventInfo())
+		-- wdPrint(CombatLogGetCurrentEventInfo())
 		if event == "PLAYER_LOGIN" then
 			Winda:LoginEvent()
 		end
@@ -76,9 +77,9 @@ end
 
 ------------------------------------------------------------------------
 -- wd settings
-wd[1] = Winda
-wd[2] = Deploy
-wd[3] = L
-wd[4] = DB
+WD[1] = Winda
+WD[2] = Deploy
+WD[3] = L
+WD[4] = DB
 -- global wd
-_G[addonName] = wd
+_G[addonName] = WD

@@ -1,4 +1,4 @@
-## Interface: 11400
+## Interface: 30400
 ## Title: |TInterface/Addons/winda/theme/base/textures/winda-small:32:64|t 
 #|cffffedbawinda|r - |cFF888888wlk|r
 ## Notes: tingfeng ui
@@ -19,7 +19,6 @@
 
 # prepare
 # core/taintLess.xml
-core/debug.lua
 
 # entry
 winda.lua

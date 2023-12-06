@@ -1,5 +1,5 @@
 if DEBUG then
-    print("action bar")
+    wdPrint("action bar")
 end
 
 local _, wd = ...
@@ -11,7 +11,7 @@ local CreateFrame = CreateFrame
 
 
 -- load
-local ActionBar     = Winda:Regist8erEntity("ActionBar")
+local ActionBar     = Winda:RegisterEntity("ActionBar")
 local WDActionBar   = WindaEntity:new({})
 
 -- build module and entity relationship with winda property

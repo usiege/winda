@@ -1,5 +1,5 @@
 if DEBUG then
-    print("_Base")
+    wdPrint("_Base")
 end
 
 local _, wd = ...

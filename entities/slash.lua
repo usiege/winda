@@ -1,5 +1,5 @@
 if DEBUG then
-    print("slash")
+    wdPrint("slash")
 end
 
 local openGUI = wdGUI.openGUI

@@ -22,10 +22,10 @@ GuiEntity = {
 setmetatable(GuiEntity, {__index = BaseEntity})
 
 
-function GuiEntity: print()
-    print(self.name)
+function GuiEntity: wdPrint()
+    wdPrint(self.name)
     if self.entity ~= nil then
-        print("entity name is: "..self.entity.name)
+        wdPrint("entity name is: "..self.entity.name)
     end
 end
 
@@ -58,7 +58,7 @@ function GuiEntity: createGuiIndex(index, parent)
     local texture = frame: CreateTexture(nil, "BACKGROUND")
     texture:SetTexture(L["GUI_BUTTON_BG"])
     texture:SetAllPoints()
-    -- print(self.index_referto_point)
+    -- wdPrint(self.index_referto_point)
 
     self.index = index
     self.index_frame = frame

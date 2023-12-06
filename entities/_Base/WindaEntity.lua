@@ -18,8 +18,8 @@ function WindaEntity: new(o, name)
     return o    
 end
 
-function WindaEntity: print()
-    print(self.name)
+function WindaEntity: wdPrint()
+    wdPrint(self.name)
 end
 
 function WindaEntity: createButton(args)

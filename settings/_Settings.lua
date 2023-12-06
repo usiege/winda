@@ -1,5 +1,5 @@
 if DEBUG then
-    print("_Settings")
+    wdPrint("_Settings")
 end
 local _, wd = ...
 local Winda, Deploy , L = unpack(wd)
@@ -18,7 +18,7 @@ end
 
 local function loadPanel(name)
     -- body
-    if DEBUG then print(name) end
+    if DEBUG then wdPrint(name) end
     
     if name == "Modules" then
         do

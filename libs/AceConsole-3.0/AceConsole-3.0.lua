@@ -34,7 +34,7 @@ local _G = _G
 -- GLOBALS: DEFAULT_CHAT_FRAME, SlashCmdList, hash_SlashCmdList
 
 local tmp={}
-local function Print(self,frame,...)
+local function wdPrint(self,frame,...)
 	local n=0
 	if self ~= AceConsole then
 		n=n+1
@@ -51,12 +51,12 @@ end
 -- @paramsig [chatframe ,] ...
 -- @param chatframe Custom ChatFrame to print to (or any frame with an .AddMessage function)
 -- @param ... List of any values to be printed
-function AceConsole:Print(...)
+function AceConsole:wdPrint(...)
 	local frame = ...
 	if type(frame) == "table" and frame.AddMessage then	-- Is first argument something with an .AddMessage member?
-		return Print(self, frame, select(2,...))
+		return wdPrint(self, frame, select(2,...))
 	else
-		return Print(self, DEFAULT_CHAT_FRAME, ...)
+		return wdPrint(self, DEFAULT_CHAT_FRAME, ...)
 	end
 end
 
@@ -69,9 +69,9 @@ end
 function AceConsole:Printf(...)
 	local frame = ...
 	if type(frame) == "table" and frame.AddMessage then	-- Is first argument something with an .AddMessage member?
-		return Print(self, frame, format(select(2,...)))
+		return wdPrint(self, frame, format(select(2,...)))
 	else
-		return Print(self, DEFAULT_CHAT_FRAME, format(...))
+		return wdPrint(self, DEFAULT_CHAT_FRAME, format(...))
 	end
 end
 

@@ -1,3 +1,3 @@
 if DEBUG then
-    print("_Config")
+    wdPrint("_Config")
 end

@@ -2,19 +2,19 @@
 DEBUG = true
 wdebug = {}
 
--- debug testing
-if DEBUG then
-    print("debug is open...")
-end
-
 -- function 
 function wdPrint(...)
     if DEBUG then
         print(...)
     end
+        -- do nothing ...
     do end
 end
 
+-- debug testing
+if DEBUG then
+    wdPrint("debug is open...")
+end
 
 -- functions 
 wdPrint = wdPrint

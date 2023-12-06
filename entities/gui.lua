@@ -67,7 +67,7 @@ do
     }
 end
 function GUI: CreateCompnent(index, parent, data)
-    print(index, data)
+    wdPrint(index, data)
     local moduleEntity = GuiEntity: new({}, data[2])
     moduleEntity.index_text = data[1] 
     moduleEntity: createGuiIndex(index, parent)
@@ -86,7 +86,7 @@ function GUI: CreateCompnent(index, parent, data)
                 GUI.interaction.last_index = index
             end
         else
-            print(index) 
+            wdPrint(index) 
         end
         
     end)
@@ -229,7 +229,7 @@ end
 local function openGUI (args)
     -- body...
     if DEBUG then
-        print("open or close gui")
+        wdPrint("open or close gui")
     end
     if GuiFrame == nil then
         GuiFrame = init()
@@ -247,7 +247,7 @@ end
 
 local function menuWinda () -- esc menu
     if DEBUG then
-        print("winda menu on load")
+        wdPrint("winda menu on load")
     end
     -- body...
     local gui = CreateFrame("Button", "GameMenuFrameWinda", GameMenuFrame, "GameMenuButtonTemplate,BackdropTemplate")

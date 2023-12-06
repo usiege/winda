@@ -19,6 +19,6 @@ local Constants = {
 
 wdConstants = Constants
 if DEBUG then
-    print(wdConstants.name)
+    wdPrint(wdConstants.name)
 end
 return wdConstants

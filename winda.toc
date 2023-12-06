@@ -19,6 +19,7 @@
 
 # prepare
 # core/taintLess.xml
+# core/debug.lua
 
 # entry
 winda.lua
