@@ -1,6 +1,4 @@
-if DEBUG then
-    wdPrint("action bar")
-end
+wdPrint("action bar")
 
 local _, wd = ...
 local Winda, Deploy , L, DB = unpack(wd)
@@ -8,6 +6,7 @@ local Winda, Deploy , L, DB = unpack(wd)
 local UIParent = UIParent
 local CreateFrame = CreateFrame
 
+local WindaEntity = WindaEntity
 
 
 -- load
@@ -27,9 +26,10 @@ function WDActionBar: disableBlizzard()
     
 end
 
+
+-- entry
 do
     
-   
 end
 
 
