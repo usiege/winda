@@ -47,10 +47,12 @@ GameMenuFrame           = GameMenuFrame
 GameMenuButtonAddons    = GameMenuButtonAddons
 GameMenuButtonLogout    = GameMenuButtonLogout
 
-
 InterfaceOptionsActionBarsPanelBottomLeft   = InterfaceOptionsActionBarsPanelBottomLeft
 InterfaceOptionsActionBarsPanelBottomRight  = InterfaceOptionsActionBarsPanelBottomRight
 InterfaceOptionsActionBarsPanelRight        = InterfaceOptionsActionBarsPanelRight
 InterfaceOptionsActionBarsPanelRightTwo     = InterfaceOptionsActionBarsPanelRightTwo
+
+InterfaceOptions_AddCategory                = InterfaceOptions_AddCategory
+InterfaceOptionsFrame_OpenToCategory        = InterfaceOptionsFrame_OpenToCategory
 
 -- event 
