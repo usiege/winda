@@ -1,4 +1,4 @@
-## Interface: 11400
+## Interface: 11500
 ## Title: |TInterface/Addons/winda/theme/base/textures/winda-small:32:64|t 
 #|cffffedbawinda|r - |cFF888888wlk|r
 ## Notes: tingfeng ui
@@ -14,7 +14,7 @@
 ## Author: usiege # deadend06, Nils89, nezroy
 
 ## SavedVariables: WINDA_DB
-## SavedVariablesPerCharacter: winda_db
+## SavedVariablesPerCharacter: winda_db_personal
 
 
 # prepare
