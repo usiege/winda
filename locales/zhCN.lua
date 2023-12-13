@@ -69,6 +69,9 @@ L["GUI_BUTTON_BG"]      = L["RES_ROOT_PATH"].."/textures/gui-button-bg"
 L["GUI_SETTING_BG"]     = L["RES_ROOT_PATH"].."/textures/gui-setting-bg"
 L["WINDA_LOGO"]         = L["RES_ROOT_PATH"].."/textures/winda"
 L["WINDA_LOGO_SMALL"]   = L["RES_ROOT_PATH"].."/textures/winda-small"
+L["GUI_BUTTON_ARROW"]   = L["RES_ROOT_PATH"].."/textures/arrow.png"
+
+-- TODO: path suffix dispose
 
 -- icons
 L["GUI_MINIMAP_ICON"]        = L["RES_ROOT_PATH"].."/icons/logo_minimap.png"

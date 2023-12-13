@@ -6,18 +6,10 @@ local Winda, Deploy , L = unpack(wd)
 GuiEntity = {
     index = 0, -- gui index
 
-    index_frame = nil,  -- gui button frame 
-    setting_frame = nil, -- gui settings frame
+    index_frame = nil,    -- gui button frame 
+    setting_frame = nil,  -- gui settings frame
 
     index_text = "",
-    index_referto_point     = {10, -88},
-    index_padding_height    = 8,
-    index_button_width      = 180,
-    index_button_height     = 32,
-
-    setting_item_width      = 800,
-    setting_item_height     = 750,
-    setting_topright_point  = {0, 0},
 }
 setmetatable(GuiEntity, {__index = BaseEntity})
 
@@ -37,11 +29,14 @@ function GuiEntity: new(o, name)
     return o    
 end
 
+-- init gui item buttons
 function GuiEntity: createGuiIndex(index, parent)
     local frame = CreateFrame("Button", nil, parent)
-    frame:SetPoint("TOPLEFT",  self.index_referto_point[1], 
-    self.index_referto_point[2] - (self.index_button_height + self.index_padding_height) * (index - 1))
-    frame:SetSize(self.index_button_width, self.index_button_height)
+    frame:SetPoint("TOPLEFT",  
+    WDC.gui_entity.index_referto_point[1], 
+    WDC.gui_entity.index_referto_point[2] - (WDC.gui_entity.index_button_height + WDC.gui_entity.index_padding_height) * (index - 1))
+    frame:SetSize(WDC.gui_entity.index_button_width, 
+                  WDC.gui_entity.index_button_height)
     frame:SetFrameStrata("HIGH")
 
     -- button text
@@ -64,12 +59,15 @@ function GuiEntity: createGuiIndex(index, parent)
     self.index_frame = frame
 end
 
+-- init item setting frame 
 function GuiEntity: createGuiSettingItem(index, parent)
     -- setting
     local frame = CreateFrame("Frame", "", parent, "BackdropTemplate")
-    local x,y = -self.setting_topright_point[1], -self.setting_topright_point[2]
+    local x,y = -WDC.gui_entity.setting_topright_point[1], 
+                -WDC.gui_entity.setting_topright_point[2]
     frame:SetPoint("TOPRIGHT", parent, "TOPRIGHT", x, y)
-    frame:SetSize(self.setting_item_width, self.setting_item_height)
+    frame:SetSize(WDC.gui_entity.setting_item_width, 
+                  WDC.gui_entity.setting_item_height)
     frame:SetFrameStrata("HIGH")
     frame:SetBackdrop({
         -- bgFile = L["GUI_SETTING_BG"], --L["GUI_BG_ITEM"]

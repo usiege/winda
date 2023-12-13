@@ -54,12 +54,12 @@ do
     -- body
     GUI.entity = nil   
     GUI.minimap = nil
-    GUI.options = nil             -- init entity 
+    GUI.options = nil               -- init entity 
     GUI.compenents = {}             -- gui entitys  
     GUI.interaction = {             -- gui interaction refer to 
         last_index       = 1,
         current_index    = 1,
-
+        buttonArrow      = nil,     -- arrow show current item
     }
 end
 
@@ -67,8 +67,8 @@ function GUI:CreateCompnent(index, parent, data)
     wdPrint(index, data)
     local moduleEntity = GuiEntity: new({}, data[2])
     moduleEntity.index_text = data[1] 
-    moduleEntity: createGuiIndex(index, parent)
-    moduleEntity: createGuiSettingItem(index, parent:GetParent())
+    moduleEntity:createGuiIndex(index, parent)
+    moduleEntity:createGuiSettingItem(index, parent:GetParent())
 
     -- event
     moduleEntity.index_frame: RegisterForClicks("AnyUp", "AnyDown")
@@ -78,9 +78,17 @@ function GUI:CreateCompnent(index, parent, data)
             if(GUI.interaction.last_index == index) then 
                 return
             else
-                GUI.compenents[GUI.interaction.last_index].setting_frame:Hide()
-                moduleEntity.setting_frame: Show()
+                -- hide last item and show current item
+                local lastItem = GUI.compenents[GUI.interaction.last_index]
+                lastItem.setting_frame:Hide()
+                moduleEntity.setting_frame:Show()
                 GUI.interaction.last_index = index
+
+                -- update arrow for item
+                local arrow_y = WDC.gui_entity.index_referto_point[2]
+                -(index-1)*(WDC.gui_entity.index_button_height+WDC.gui_entity.index_padding_height)
+                GUI.interaction.buttonArrow:SetPoint("TOP", 0, arrow_y)
+                wdPrint("arrow test")
             end
         else
             wdPrint(index) 
@@ -166,16 +174,27 @@ function GUI:initItems(parent)
     itembg:SetPoint("TOPLEFT", parent, "TOPLEFT", pad, -pad)
     itembg:SetSize(width, height)
     itembg:SetFrameLevel(wdConstants.gui_window_level)
-    itembg:SetFrameStrata("HIGH")
+    itembg:SetFrameStrata("MEDIUM")
     itembg:SetBackdrop({
         bgFile = L["BG_GRAY_NORMAL"], --L["GUI_BG_ITEM"]
     })
 
     -- items index
     for i,v in ipairs(GuiItemDatas) do
-        GUI: CreateCompnent(i, itembg, v)
+        GUI:CreateCompnent(i, itembg, v)
     end
-    GUI.compenents[1].setting_frame:Show()
+
+    local firstItem = GUI.compenents[1]
+    firstItem.setting_frame:Show()
+    -- item arrow
+    local arrow_y = WDC.gui_entity.index_referto_point[2]-0*(WDC.gui_entity.index_button_height+WDC.gui_entity.index_padding_height)
+    local arrow = firstItem:createImage(itembg,
+    {WDC.gui_entity.arrow_width, WDC.gui_entity.arrow_height},
+    {"TOP", itembg, "TOP", 0, arrow_y},
+    L["GUI_BUTTON_ARROW"], "HIGH")
+    arrow:Show()
+    -- store arrow frame
+    self.interaction.buttonArrow = arrow
 
     return itembg
 end
@@ -368,7 +387,6 @@ local function openOpions()
     InterfaceOptionsFrame_OpenToCategory(GUI.options)
     
 end
-
 
 
 -- winda frame on global
