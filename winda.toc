@@ -17,33 +17,3 @@
 ## SavedVariablesPerCharacter: winda_db
 
 
-# prepare
-# core/taintLess.xml
-# core/debug.lua
-
-# entry
-winda.lua
-
-# libs
-libs/libs.xml
-libs/tool.lua
-
-# locales
-locales/locales.xml
-
-# core
-core/core.xml
-core/init.lua
-
-# settings
-settings/settings.xml
-
-# entities
-entities/entities.xml
-
-# gui 
-entities/gui.lua
-entities/slash.lua
-
-# extend
-extend/extend.xml

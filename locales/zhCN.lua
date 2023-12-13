@@ -7,7 +7,7 @@ if GetLocale() ~= "zhCN" then return end
 local wdGetThemeResRootPath = wdGetThemeResRootPath
 
 -- prompt
-L["Winda Console"] = "winda"
+L["Winda Console"] = "winda 控制台"
 
 L["WELCOME"]            = "Welcome to winda ui, please enjoy it."
 L["MODULE_ENABLE_DESC"] = "开启或关闭模块功能"
@@ -15,6 +15,7 @@ L["MODULE_ENABLE_DESC"] = "开启或关闭模块功能"
 
 -- module
 L["MODULE_ABOUT"]       = "关于"
+L["MODULE_COCREATE"]    = "|cFFFFCC22温达共创|r"
 L["MODULE_ENABLE"]      = "模块开关"
 L["MODULE_BAGS"]        = "背包"
 L["MODULE_BARS"]        = "动作条"
@@ -70,6 +71,7 @@ L["WINDA_LOGO"]         = L["RES_ROOT_PATH"].."/textures/winda"
 L["WINDA_LOGO_SMALL"]   = L["RES_ROOT_PATH"].."/textures/winda-small"
 
 -- icons
+L["GUI_MINIMAP_ICON"]        = L["RES_ROOT_PATH"].."/icons/logo_minimap.png"
 L["MODULE_BAGS_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-bag"
 L["MODULE_BARS_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-bar"
 L["MODULE_BUFF_ICON"]        = L["RES_ROOT_PATH"].."/icons/Module-buff"

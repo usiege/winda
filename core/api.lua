@@ -21,8 +21,6 @@ function wdStrsplit(delimiter, subject)
 end
 
 
-
-
 --[[
     blizzard global api
 ]]--
@@ -43,7 +41,7 @@ GetAddOnMetadata    = GetAddOnMetadata
 
 -- ui
 UISpecialFrames         = UISpecialFrames
-GameMenuFrame           = GameMenuFrame
+-- GameMenuFrame           = GameMenuFrame
 GameMenuButtonAddons    = GameMenuButtonAddons
 GameMenuButtonLogout    = GameMenuButtonLogout
 
