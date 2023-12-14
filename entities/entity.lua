@@ -11,8 +11,8 @@ BaseEntity.__index = BaseEntity
 
 
 -- BaseEntity: createButton
-function BaseEntity:createImage(parent, size, position, imgPath, frameStrata)
-    local frame = CreateFrame("Button")
+function BaseEntity:createImage(parent, size, position, imgPath, frameStrata, name)
+    local frame = CreateFrame("Button", (name==nil and name or ""))
     frame:SetParent(parent)
     frame:SetPoint(position[1], parent, position[3], position[4], position[5])
     -- frame:SetSize(size[1], size[2])

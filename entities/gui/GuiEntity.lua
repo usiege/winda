@@ -65,28 +65,28 @@ function GuiEntity: createGuiSettingItem(index, parent)
     local frame = CreateFrame("Frame", "", parent, "BackdropTemplate")
     local x,y = -WDC.gui_entity.setting_topright_point[1], 
                 -WDC.gui_entity.setting_topright_point[2]
-    frame:SetPoint("TOPRIGHT", parent, "TOPRIGHT", x, y)
+    frame:SetPoint("TOP", parent, "TOP", x, y)
     frame:SetSize(WDC.gui_entity.setting_item_width, 
                   WDC.gui_entity.setting_item_height)
     frame:SetFrameStrata("HIGH")
     frame:SetBackdrop({
-        -- bgFile = L["GUI_SETTING_BG"], --L["GUI_BG_ITEM"]
+        bgFile = L["GUI_SETTING_BG_GREEN"], --L["GUI_BG_ITEM"]
     })
     frame:Hide()
 
-    -- title
-    local tf = CreateFrame("Button", nil, frame)
-    tf:SetPoint("TOP",  0, -12)
-    tf:SetSize(200, 64)
-    tf:SetFrameStrata("HIGH")
-    local fs = tf:CreateFontString(nil, 'OVERLAY')
-	fs:SetFont(L["FONT_LANTY"], 24, "OUTLINE")
-	fs:SetPoint('CENTER')
-	fs:SetText(self.index_text)
-	fs:SetJustifyH('CENTER')
-	fs:SetTextColor(1, 1, 1, 1)
-	tf:SetFontString(fs)
-    frame.title = tf -- outside useful
+    -- -- title
+    -- local tf = CreateFrame("Button", nil, frame)
+    -- tf:SetPoint("TOP",  0, -12)
+    -- tf:SetSize(200, 64)
+    -- tf:SetFrameStrata("HIGH")
+    -- local fs = tf:CreateFontString(nil, 'OVERLAY')
+	-- fs:SetFont(L["FONT_LANTY"], 24, "OUTLINE")
+	-- fs:SetPoint('CENTER')
+	-- fs:SetText(self.index_text)
+	-- fs:SetJustifyH('CENTER')
+	-- fs:SetTextColor(1, 1, 1, 1)
+	-- tf:SetFontString(fs)
+    -- frame.title = tf -- outside useful
 
     -- store
     self.setting_frame = frame

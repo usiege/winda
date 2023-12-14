@@ -56,18 +56,25 @@ L["FONT_CHINESE"]       = L["RES_ROOT_PATH"].."/fonts/chinese-font.ttf"
 
 
 -- textures
+L["EDGE_NORMAL"]        = "Interface/Tooltips/UI-Tooltip-Border"
+
 L["CANCEL_CLEAR"]       = L["RES_ROOT_PATH"].."/textures/cancel-clear"
 L["CANCEL_NORMAL"]      = L["RES_ROOT_PATH"].."/textures/cancel-normal"
 L["BG_FILE_NORMAL"]     = L["RES_ROOT_PATH"].."/textures/bg-black-normal"
-L["BG_GRAY_NORMAL"]     = L["RES_ROOT_PATH"].."/textures/bg-gray-normal"
+
 L["BG_GRAY_SQUARE"]     = L["RES_ROOT_PATH"].."/textures/bg-gray-square"
 L["GUI_BACK_IMAGE"]     = L["RES_ROOT_PATH"].."/textures/UI-Tooltip-Background"
 L["GUI_BG_FILE"]        = L["RES_ROOT_PATH"].."/textures/UI-Gui-BgFile"
-L["GUI_BG_ITEM"]        = L["RES_ROOT_PATH"].."/textures/gui-item-bg"
 L["GUI_EDGE_FILE"]      = L["RES_ROOT_PATH"].."/textures/UI-Gui-EdgeFile"
+
+L["GUI_BG_ITEM"]        = L["RES_ROOT_PATH"].."/textures/gui-item-bg"
 L["GUI_BUTTON_BG"]      = L["RES_ROOT_PATH"].."/textures/gui-button-bg"
-L["GUI_SETTING_BG"]     = L["RES_ROOT_PATH"].."/textures/gui-setting-bg"
+
+L["GUI_SETTING_BG_GREEN"]     = L["RES_ROOT_PATH"].."/textures/gui-setting-bg-green"
+L["GUI_SETTING_BG_BLACK"]     = L["RES_ROOT_PATH"].."/textures/gui-setting-bg-black"
+
 L["WINDA_LOGO"]         = L["RES_ROOT_PATH"].."/textures/winda"
+L["WINDA_LOGO_LARGE"]   = L["RES_ROOT_PATH"].."/textures/winda-large"
 L["WINDA_LOGO_SMALL"]   = L["RES_ROOT_PATH"].."/textures/winda-small"
 L["GUI_BUTTON_ARROW"]   = L["RES_ROOT_PATH"].."/textures/arrow.png"
 

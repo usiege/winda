@@ -55,7 +55,9 @@ do
     GUI.entity = nil   
     GUI.minimap = nil
     GUI.options = nil               -- init entity 
-    GUI.compenents = {}             -- gui entitys  
+    GUI.compenents = {}             -- gui entity foritems
+    GUI.titleEntities = {}          -- gui title entities
+    GUI.utilityEntity = nil         -- gui bottom entity 
     GUI.interaction = {             -- gui interaction refer to 
         last_index       = 1,
         current_index    = 1,
@@ -63,12 +65,15 @@ do
     }
 end
 
-function GUI:CreateCompnent(index, parent, data)
+
+function GUI:CreateCompnent(index, indexParent, settingItemParent, data)
     wdPrint(index, data)
     local moduleEntity = GuiEntity: new({}, data[2])
     moduleEntity.index_text = data[1] 
-    moduleEntity:createGuiIndex(index, parent)
-    moduleEntity:createGuiSettingItem(index, parent:GetParent())
+    -- left setup 
+    moduleEntity:createGuiIndex(index, indexParent)
+    -- right setup 
+    moduleEntity:createGuiSettingItem(index, settingItemParent)
 
     -- event
     moduleEntity.index_frame: RegisterForClicks("AnyUp", "AnyDown")
@@ -113,8 +118,8 @@ function GUI:initGui()
     local pad = wdConstants.gui_border_pad
     -- bg image blizz api move to
     f:SetBackdrop({
-        bgFile = L["BG_FILE_NORMAL"], -- L["GUI_BG_FILE"], -- 
-        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+        bgFile = "", -- L["BG_FILE_NORMAL"], -- L["GUI_BG_FILE"], -- 
+        edgeFile = L["EDGE_NORMAL"],
         tile = false,
         tileEdge = false,
         tileSize = 0,
@@ -139,7 +144,7 @@ function GUI:initGui()
     local cf = CreateFrame("Button", nil, f)
     cf:SetPoint("TOPRIGHT",  -5, -5)
     cf:SetSize(20, 20)
-    cf:SetFrameStrata("HIGH")
+    cf:SetFrameStrata("DIALOG")
     cf:SetFrameLevel(wdConstants.gui_window_level + 5)
     local texture = cf: CreateTexture(nil, "BACKGROUND")
     texture:SetTexture(L["CANCEL_CLEAR"])
@@ -165,38 +170,63 @@ end
 
 function GUI:initItems(parent)
     -- body
-    local itembg = CreateFrame("Frame", "GUIItemBg", parent, "BackdropTemplate")
-    local width = wdConstants.gui_list_width
-    local pad = wdConstants.gui_border_pad
-    local height = wdConstants.gui_list_height - 2 * pad
-    wdPrint(width, height)
+    -- left entity bg frame
+    local listbg = CreateFrame("Frame", "GUIEntityBg", parent, "BackdropTemplate")
+    local lwidth = WDC.gui_list_width
+    local lheight = WDC.gui_list_height
+    local pad = WDC.gui_border_pad
+    wdPrint(lwidth, lheight)
     
-    itembg:SetPoint("TOPLEFT", parent, "TOPLEFT", pad, -pad)
-    itembg:SetSize(width, height)
-    itembg:SetFrameLevel(wdConstants.gui_window_level)
-    itembg:SetFrameStrata("MEDIUM")
-    itembg:SetBackdrop({
-        bgFile = L["BG_GRAY_NORMAL"], --L["GUI_BG_ITEM"]
+    listbg:SetPoint("TOPLEFT", parent, "TOPLEFT", pad, -pad)
+    listbg:SetSize(lwidth, lheight)
+    listbg:SetFrameLevel(wdConstants.gui_window_level)
+    listbg:SetFrameStrata("HIGH")
+    listbg:SetBackdrop({
+        bgFile = L["GUI_BG_ITEM"] --L["GUI_SETTING_BG_BLACK"] --L["BG_GRAY_NORMAL"],
     })
 
-    -- items index
-    for i,v in ipairs(GuiItemDatas) do
-        GUI:CreateCompnent(i, itembg, v)
-    end
+    -- right entity bg frame 
+    local entitybg = CreateFrame("Frame", "GUIEntityBg", parent, "BackdropTemplate")
+    local ewidth = WDC.gui_right_bg_width
+    local eheight = WDC.gui_list_height
+    wdPrint(ewidth, eheight)
+    
+    local ex = WDC.gui_border_pad * 2 + WDC.gui_list_width
+    entitybg:SetPoint("TOPLEFT", parent, "TOPLEFT", ex, -pad)
+    entitybg:SetSize(ewidth, eheight)
+    entitybg:SetFrameLevel(wdConstants.gui_window_level)
+    entitybg:SetFrameStrata("HIGH")
+    entitybg:SetBackdrop({
+        bgFile = L["GUI_SETTING_BG_BLACK"], -- L["GUI_SETTING_BG_GREEN"] --L["BG_GRAY_NORMAL"],
+    })
 
+    -- items index compenents
+    for i,v in ipairs(GuiItemDatas) do
+        GUI:CreateCompnent(i, listbg, entitybg, v)
+    end
     local firstItem = GUI.compenents[1]
     firstItem.setting_frame:Show()
+
     -- item arrow
     local arrow_y = WDC.gui_entity.index_referto_point[2]-0*(WDC.gui_entity.index_button_height+WDC.gui_entity.index_padding_height)
-    local arrow = firstItem:createImage(itembg,
-    {WDC.gui_entity.arrow_width, WDC.gui_entity.arrow_height},
-    {"TOP", itembg, "TOP", 0, arrow_y},
-    L["GUI_BUTTON_ARROW"], "HIGH")
+    local arrowParent = listbg
+    local arrow = firstItem:createImage(arrowParent,
+                            {WDC.gui_entity.arrow_width, WDC.gui_entity.arrow_height},
+                            {"TOP", arrowParent, "TOP", 0, arrow_y},
+                            L["GUI_BUTTON_ARROW"], "DIALOG", "WDItemArrow")
     arrow:Show()
     -- store arrow frame
     self.interaction.buttonArrow = arrow
 
-    return itembg
+    -- title frame
+    
+    -- search frame
+
+    -- bottom frame
+
+    
+
+    return parent, listbg, entitybg
 end
 
 function GUI: CreateLogo(parent)
@@ -210,7 +240,7 @@ function GUI: CreateLogo(parent)
     frame:SetFrameStrata("HIGH")
     -- -- adding a texture
     local texture = frame:CreateTexture(nil, "BACKGROUND")
-    texture:SetTexture(L["WINDA_LOGO"])
+    texture:SetTexture(L["WINDA_LOGO_LARGE"])
     texture:SetAllPoints()
     -- mouse event
     frame:SetMouseClickEnabled(true)
@@ -255,10 +285,10 @@ local function init(args)
 
     GUI.entity = GUI:initGui()
 
-    -- item list frame
-    local lframe = GUI:initItems(GUI.entity)
+    -- items frame
+    local guibg, lfbg, rfbg = GUI:initItems(GUI.entity)
     -- logo
-    local logo = GUI:CreateLogo(lframe)
+    local logo = GUI:CreateLogo(lfbg)
     -- version
     local size = { ["width"] = wdConstants.gui_version_width, ["height"] = wdConstants.gui_version_height}
     local point = { ["x"] = wdConstants.gui_version_point[1], ["y"] = wdConstants.gui_version_point[2]}
