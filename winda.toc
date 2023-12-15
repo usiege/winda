@@ -11,7 +11,7 @@
 ## X-Curse-Project-ID: 94310
 ## DefaultState: Enabled
 
-## Author: usiege # deadend06, Nils89, nezroy
+## Author: 温达共创
 
 ## SavedVariables: WINDA_DB
 ## SavedVariablesPerCharacter: winda_db

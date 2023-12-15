@@ -262,16 +262,16 @@ end
 
 function GUI: CreateVersionText(parent, size, point)
     local frame = CreateFrame("Frame", "GUIVersion", parent)
-    frame:SetFrameLevel(wdConstants.gui_window_level+1)
+    frame:SetFrameLevel(WDC.gui_window_level+1)
     frame:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 0, 0)
     frame:SetSize(size.width, size.height)
     frame:SetFrameStrata("HIGH")
 
     local text = frame:CreateFontString("Version", "OVERLAY", "GameFontWhite")
-    text:SetFont(L["FONT_CHINESE"], wdConstants.gui_version_text_size)
-    text:SetPoint("BOTTOMRIGHT", 0, 0)
+    text:SetFont(L["FONT_CHINESE"], WDC.gui_version_text_size, "OUTLINE")
+    text:SetPoint("BOTTOMLEFT", 10, 10)
     text:SetWidth(size.width)
-    text:SetJustifyH("RIGHT")
+    text:SetJustifyH("CENTER")
 
     return frame, text
 end
@@ -292,7 +292,7 @@ local function init(args)
     -- version
     local size = { ["width"] = wdConstants.gui_version_width, ["height"] = wdConstants.gui_version_height}
     local point = { ["x"] = wdConstants.gui_version_point[1], ["y"] = wdConstants.gui_version_point[2]}
-    local _, version = GUI:CreateVersionText(logo, size, point)
+    local _, version = GUI:CreateVersionText(lfbg, size, point)
     version:SetText("v" .. wd.version.string)
 
 end

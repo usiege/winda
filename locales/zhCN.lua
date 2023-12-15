@@ -6,10 +6,12 @@ if GetLocale() ~= "zhCN" then return end
 
 local wdGetThemeResRootPath = wdGetThemeResRootPath
 
+
 -- prompt
 L["Winda Console"] = "winda 控制台"
 
 L["WELCOME"]            = "Welcome to winda ui, please enjoy it."
+L["CLOSE"]				= "关闭"
 L["MODULE_ENABLE_DESC"] = "开启或关闭模块功能"
 
 
@@ -46,6 +48,17 @@ L["MODULE_MOUNT"]       = "座骑"
 L["MODULE_PET"]         = "宠物"
 L["MODULE_COIN"]        = "货币"
 
+
+--------
+
+L["URL_COCREATE_REQUIRE"]	= "飞书链接：https://kxxblqyumrm.feishu.cn/sheets/BeMjsw2JRhaLVIty2sCcwuVWnJf 密码：6Z75#899"
+L["URL_COCREATE_DESIGN"]	= "https://www.figma.com/file/mDJJYea7WDsNhEVgAmkYk5/%E6%B8%A9%E8%BE%BE%E5%85%B1%E5%88%9B?type=design&node-id=0%3A1&mode=design&t=oEQqV3BnnAmFvNkq-1"
+L["URL_COCREATE_SCHEME"]	= "飞书链接：https://kxxblqyumrm.feishu.cn/docx/VWOTd6GaooSa1vxNyFpcpnw6nbg   密码：1k65956#"	
+L["URL_COCREATE_CODE"]		= "https://github.com/usiege/winda"
+L["URL_COCREATE_BUG"]		= "飞书链接：https://kxxblqyumrm.feishu.cn/sheets/I9NLsCaGVhHUL4tl6OBcCA61nJg 密码：d9732@31"	
+
+
+------------------------------ THEME PATH -------------------------
 -- base (user custom setting)
 L["THEME_NAME"]         = "base"
 L["RES_ROOT_PATH"]      = wdGetThemeResRootPath(L["THEME_NAME"])
@@ -76,7 +89,13 @@ L["GUI_SETTING_BG_BLACK"]     = L["RES_ROOT_PATH"].."/textures/gui-setting-bg-bl
 L["WINDA_LOGO"]         = L["RES_ROOT_PATH"].."/textures/winda"
 L["WINDA_LOGO_LARGE"]   = L["RES_ROOT_PATH"].."/textures/winda-large"
 L["WINDA_LOGO_SMALL"]   = L["RES_ROOT_PATH"].."/textures/winda-small"
-L["GUI_BUTTON_ARROW"]   = L["RES_ROOT_PATH"].."/textures/arrow.png"
+
+L["GUI_BUTTON_ARROW"]       = L["RES_ROOT_PATH"].."/textures/arrow.png"
+L["GUI_COCREATE_REQUIRE"]   = L["RES_ROOT_PATH"].."/textures/cocreate_require.png"
+L["GUI_COCREATE_DESIGN"]    = L["RES_ROOT_PATH"].."/textures/cocreate_design.png"
+L["GUI_COCREATE_SCHEME"]    = L["RES_ROOT_PATH"].."/textures/cocreate_scheme.png"
+L["GUI_COCREATE_CODE"]      = L["RES_ROOT_PATH"].."/textures/cocreate_code.png"
+L["GUI_COCREATE_BUG"]       = L["RES_ROOT_PATH"].."/textures/cocreate_bug.png"
 
 -- TODO: path suffix dispose
 

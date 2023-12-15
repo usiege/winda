@@ -23,7 +23,8 @@ local Constants = {
     gui_version_width   = 100,
     gui_version_height  = 30,
     gui_version_point   = {10, 10},
-    gui_version_text_size = 12,
+
+    gui_version_text_size = 15,
 
     -- gui refer 
     gui_entity = {
@@ -41,6 +42,20 @@ local Constants = {
         setting_item_height     = 600,
         setting_topright_point  = {0, 80},
     },
+
+    -- gui cocreate
+    gui_cocreate = {
+        logo_width              = 378,
+        logo_height             = 90,
+        logo_point              = {0, 10},
+
+        button_width            = 512,
+        button_height           = 64,
+
+        button_padding_y        = 15,
+        button_referto_point    = {0, 150},
+
+    }
     
 }
 local ActionBarContants = {

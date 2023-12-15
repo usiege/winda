@@ -29,6 +29,44 @@ function GuiEntity: new(o, name)
     return o    
 end
 
+-- init cocreate frame
+function GuiEntity: createGuiCocreate(parent)
+    local frame = CreateFrame("Frame", "GUILogo", parent)
+    frame:SetFrameLevel(WDC.gui_window_level+2)
+    local width, height = WDC.gui_cocreate.logo_width, 
+                          WDC.gui_cocreate.logo_height
+    local x, y = WDC.gui_cocreate.logo_point[1], 
+                 WDC.gui_cocreate.logo_point[2]
+    wdPrint(width, height)
+    frame:SetPoint("TOP", parent, "TOP", 0, -y)
+    frame:SetSize(width, height)
+    frame:SetFrameStrata("HIGH")
+    -- -- adding a texture
+    local texture = frame:CreateTexture(nil, "BACKGROUND")
+    texture:SetTexture(L["WINDA_LOGO_LARGE"])
+    texture:SetAllPoints()
+
+    -- -- mouse event
+    -- frame:SetMouseClickEnabled(true)
+    -- frame:SetScript("OnEnter", function(self, motion) 
+    --     wdPrint("OnEnter", motion) 
+    -- end)
+    -- frame:SetScript("OnLeave", function(self, motion) 
+    --     wdPrint("OnLeave", motion) 
+    -- end)
+    -- frame:SetScript("OnMouseDown", function(self, button) 
+    --     wdPrint("OnMouseDown", button) 
+    -- end)
+    -- frame:SetScript("OnMouseUp", function(self, button) 
+    --     wdPrint("OnMouseUp", button) 
+    -- end)
+
+    return frame
+end
+
+
+
+
 -- init gui item buttons
 function GuiEntity: createGuiIndex(index, parent)
     local frame = CreateFrame("Button", nil, parent)
@@ -74,6 +112,47 @@ function GuiEntity: createGuiSettingItem(index, parent)
     })
     frame:Hide()
 
+    -- winda cocreate add sub compenents
+    if self.index_text == L["MODULE_COCREATE"] then
+        self:createGuiCocreate(frame)
+        local paths = {
+            L["GUI_COCREATE_REQUIRE"],
+            L["GUI_COCREATE_DESIGN"],
+            L["GUI_COCREATE_SCHEME"],
+            L["GUI_COCREATE_CODE"],
+            L["GUI_COCREATE_BUG"]
+        }
+        local urls = {
+            L["URL_COCREATE_REQUIRE"],
+            L["URL_COCREATE_DESIGN"],
+            L["URL_COCREATE_SCHEME"],
+            L["URL_COCREATE_CODE"],
+            L["URL_COCREATE_BUG"]
+        }
+        for index, value in ipairs(paths) do
+            -- create exitbox
+            local urlcopy = self:createURLCopy()
+        
+            -- setup cocreate buttons
+            local button = CreateFrame("Button", nil, frame)
+            local eachY = -(WDC.gui_cocreate.button_referto_point[2]+
+                        (WDC.gui_cocreate.button_height+WDC.gui_cocreate.button_padding_y)*(index-1))
+            button:SetPoint("TOP", 0, eachY)
+            button:SetWidth(WDC.gui_cocreate.button_width)
+            button:SetHeight(WDC.gui_cocreate.button_height)
+            local texture = button:CreateTexture(nil, "BACKGROUND")
+            texture:SetTexture(value)
+            texture:SetAllPoints()
+            button:SetScript("OnClick", function (self, button, down) 
+                wdPrint(value)
+                wdPrint(urls[index])
+                urlcopy.CopyText(urls[index])
+            end)
+            
+        end
+    end
+
+
     -- -- title
     -- local tf = CreateFrame("Button", nil, frame)
     -- tf:SetPoint("TOP",  0, -12)
@@ -90,4 +169,9 @@ function GuiEntity: createGuiSettingItem(index, parent)
 
     -- store
     self.setting_frame = frame
+end
+
+-- create exit box for cocreate button
+function GuiEntity:createExitBox(parent)
+    
 end
