@@ -16,9 +16,9 @@ local Constants = {
     gui_right_bg_height = 800-5*2,
 
     -- logo
-    gui_logo_width      = 200,
-    gui_logo_height     = 50,
-    gui_logo_point      = {36, 20},
+    gui_logo_width      = 160,
+    gui_logo_height     = 80,
+    gui_logo_point      = {36, 5},
     -- version
     gui_version_width   = 100,
     gui_version_height  = 30,
@@ -45,8 +45,8 @@ local Constants = {
 
     -- gui cocreate
     gui_cocreate = {
-        logo_width              = 378,
-        logo_height             = 90,
+        logo_width              = 300,
+        logo_height             = 150,
         logo_point              = {0, 10},
 
         button_width            = 512,

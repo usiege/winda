@@ -1,5 +1,5 @@
 ## Interface: 11500
-## Title: |TInterface/Addons/winda/theme/base/textures/winda-small:32:64|t 
+## Title: |TInterface/Addons/winda/theme/base/textures/winda-small:25:64|t 
 #|cffffedbawinda|r - |cFF888888wlk|r
 ## Notes: tingfeng ui
 ## Notes-zhCN: Entities should not be multiplied unnecessarily.

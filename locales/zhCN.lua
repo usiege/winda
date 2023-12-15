@@ -73,9 +73,10 @@ L["EDGE_NORMAL"]        = "Interface/Tooltips/UI-Tooltip-Border"
 
 L["CANCEL_CLEAR"]       = L["RES_ROOT_PATH"].."/textures/cancel-clear"
 L["CANCEL_NORMAL"]      = L["RES_ROOT_PATH"].."/textures/cancel-normal"
-L["BG_FILE_NORMAL"]     = L["RES_ROOT_PATH"].."/textures/bg-black-normal"
 
+L["BG_FILE_NORMAL"]     = L["RES_ROOT_PATH"].."/textures/bg-black-normal"
 L["BG_GRAY_SQUARE"]     = L["RES_ROOT_PATH"].."/textures/bg-gray-square"
+
 L["GUI_BACK_IMAGE"]     = L["RES_ROOT_PATH"].."/textures/UI-Tooltip-Background"
 L["GUI_BG_FILE"]        = L["RES_ROOT_PATH"].."/textures/UI-Gui-BgFile"
 L["GUI_EDGE_FILE"]      = L["RES_ROOT_PATH"].."/textures/UI-Gui-EdgeFile"
