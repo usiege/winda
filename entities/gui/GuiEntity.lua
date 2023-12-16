@@ -161,19 +161,32 @@ function GuiEntity:createURLCopy(arg)
                             WDC.url_copy.close_point[1], WDC.url_copy.close_point[2])
     urlcopy.close:SetText(L["CLOSE"])
 
-
     urlcopy.close:SetScript("OnClick", function()
         urlcopy:Hide()
     end)
 
-    -- urlcopy.SetItemRef = SetItemRef
     urlcopy.CopyText = function(text)
+        urlcopy:Hide()
         urlcopy.text:SetText(text)
         urlcopy:Show()
     end
+
+    
+    -- function _G.SetItemRef(link, text, button)
+    --     if (strsub(link, 1, 3) == "url") then
+    --       if string.len(link) > 4 and string.sub(link,1,4) == "url:" then
+    --         urlcopy.CopyText(string.sub(link,5, string.len(link)))
+    --       end
+    --       return
+    --     end
+    --     urlcopy.SetItemRef(link, text, button)
+    -- end
+    -- urlcopy.SetItemRef = SetItemRef
     
     self.urlcopy_frame = urlcopy
 end
+
+
 
 -- init item setting frame 
 function GuiEntity:createGuiItemDetail(index, parent)
