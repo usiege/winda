@@ -4,18 +4,18 @@ Do not add entities unless necessary.
 
 ![logo_large.png](https://s2.loli.net/2023/12/16/zDYNgrMXfFyHqZc.png)
 
-> English | [中文](README-CN.md)
+> English | [中文](./README-ZH.md)
 
 <!-- TOC -->
 
 - [WINDA](#winda)
     - [Introduce](#introduce)
     - [Co-creation](#co-creation)
-    	- [Demand](#You come up with the needs!)
-    	- [Design](#Design together!)
-    	- [Scheme](#Everyone decides the plan!)
-    	- [Code](#I'll write the code!)
-    	- [Bug](#Report the bugs!)
+    	- [Demand](#You come up with the needs)
+    	- [Design](#Design together)
+    	- [Scheme](#Everyone decides the plan)
+    	- [Code](#I'll write the code)
+    	- [Bug](#Report the bugs)
     - [Document](#document)
     - [Community](#community)
     - [Donate](#donate)
@@ -44,7 +44,7 @@ We want to provide an easy-to-use, powerful, tool plug-in that can meet the need
 
 It's here!
 
-### You come up with the needs!
+### You come up with the needs
 
 > FeiShu link：[https://kxxblqyumrm.feishu.cn/sheets/BeMjsw2JRhaLVIty2sCcwuVWnJf](https://kxxblqyumrm.feishu.cn/sheets/BeMjsw2JRhaLVIty2sCcwuVWnJf)   password：6Z75#899
 
@@ -52,7 +52,7 @@ In the demand stage, use cloud documents provided by Feishu. Submit your project
 
 Each issue of Winda Co-Creation has a targeted functional module.
 
-### Design together!
+### Design together
 
 > [https://www.figma.com/file/mDJJYea7WDsNhEVgAmkYk5/%E6%B8%A9%E8%BE%BE%E5%85%B1%E5%88%9B?type=design&node-id=0%3A1&mode=design&t=oEQqV3BnnAmFvNkq-1](https://www.figma.com/file/mDJJYea7WDsNhEVgAmkYk5/%E6%B8%A9%E8%BE%BE%E5%85%B1%E5%88%9B?type=design&node-id=0%3A1&mode=design&t=oEQqV3BnnAmFvNkq-1)
 
@@ -62,7 +62,7 @@ You can use your design skills, to customize the interface and functions of wind
 
 We provide the concept of "skin" to switch between different styles of winda.
 
-### Everyone decides the plan!
+### Everyone decides the plan
 
 > FeiShu link：[https://kxxblqyumrm.feishu.cn/docx/VWOTd6GaooSa1vxNyFpcpnw6nbg](https://kxxblqyumrm.feishu.cn/docx/VWOTd6GaooSa1vxNyFpcpnw6nbg)  password：1k65956#
 
@@ -70,7 +70,7 @@ When establishing the plan, we sorted out everyone’s needs and finally impleme
 
 You can use the comment function of the document to evaluate the requirements for each version .We will fully consider your proposal, until it is modified to the final version.
 
-### I'll write the code!
+### I'll write the code
 
 > [https://github.com/usiege/winda](https://github.com/usiege/winda)
 
@@ -82,7 +82,7 @@ After completing each small function, submit a Pull Request to me.I will check y
 
 Your ability to contribute to open source projects will be greatly appreciated.
 
-### Report the bugs!
+### Report the bugs
 
 > FeiShu Link：[https://kxxblqyumrm.feishu.cn/sheets/I9NLsCaGVhHUL4tl6OBcCA61nJg](https://kxxblqyumrm.feishu.cn/sheets/I9NLsCaGVhHUL4tl6OBcCA61nJg)   password：d9732@31
 
