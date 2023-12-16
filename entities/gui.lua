@@ -17,7 +17,7 @@ local InterfaceOptionsFrame_OpenToCategory  = InterfaceOptionsFrame_OpenToCatego
 
 -- winda constant
 local DEBUG = DEBUG
-local wdConstants = wdConstants
+local WDC = WDC
 
 -- Gui refer 
 -- show anme icon
@@ -52,12 +52,15 @@ local GUI = Winda:RegisterEntity("GUI")
 -- global GUI
 do
     -- body
-    GUI.entity = nil   
+    GUI.frame = nil   
     GUI.minimap = nil
     GUI.options = nil               -- init entity 
+
     GUI.compenents = {}             -- gui entity foritems
     GUI.titleEntities = {}          -- gui title entities
     GUI.utilityEntity = nil         -- gui bottom entity 
+    GUI.copyBoxEntity = nil         -- gui copyBox entity 
+
     GUI.interaction = {             -- gui interaction refer to 
         last_index       = 1,
         current_index    = 1,
@@ -66,56 +69,55 @@ do
 end
 
 
-function GUI:CreateCompnent(index, indexParent, settingItemParent, data)
+function GUI:setupCompnent(index, indexParent, settingItemParent, data)
     wdPrint(index, data)
-    local moduleEntity = GuiEntity: new({}, data[2])
+    local moduleEntity = GuiEntity:new({}, data[2])
     moduleEntity.index_text = data[1] 
     -- left setup 
-    moduleEntity:createGuiIndex(index, indexParent)
+    moduleEntity:createGuiItem(index, indexParent)
     -- right setup 
-    moduleEntity:createGuiSettingItem(index, settingItemParent)
+    moduleEntity:createGuiItemDetail(index, settingItemParent)
 
     -- event
     moduleEntity.index_frame: RegisterForClicks("AnyUp", "AnyDown")
     moduleEntity.index_frame: SetScript("OnClick", function (self, button, down)
-        if down then
-            GUI.interaction.current_index = index
-            if(GUI.interaction.last_index == index) then 
-                return
-            else
-                -- hide last item and show current item
-                local lastItem = GUI.compenents[GUI.interaction.last_index]
-                lastItem.setting_frame:Hide()
-                moduleEntity.setting_frame:Show()
-                GUI.interaction.last_index = index
-
-                -- update arrow for item
-                local arrow_y = WDC.gui_entity.index_referto_point[2]
-                -(index-1)*(WDC.gui_entity.index_button_height+WDC.gui_entity.index_padding_height)
-                GUI.interaction.buttonArrow:SetPoint("TOP", 0, arrow_y)
-                wdPrint("arrow test")
-            end
-        else
+        if not down then
             wdPrint(index) 
+            return
         end
+        GUI.interaction.current_index = index
+        if(GUI.interaction.last_index == index) then 
+            return
+        end
+        -- hide last item and show current item
+        local lastItem = GUI.compenents[GUI.interaction.last_index]
+        lastItem.setting_frame:Hide()
+        moduleEntity.setting_frame:Show()
+        GUI.interaction.last_index = index
+
+        -- update arrow for item
+        local arrow_y = WDC.gui_entity.index_referto_point[2]
+        -(index-1)*(WDC.gui_entity.index_button_height+WDC.gui_entity.index_padding_height)
+        GUI.interaction.buttonArrow:SetPoint("TOP", 0, arrow_y)
+        wdPrint("arrow test")
         
     end)
     self.compenents[index] = moduleEntity
 end
 -- main frame
 function GUI:initGui() 
-    local width = wdConstants.gui_window_width
-    local height = wdConstants.gui_window_height
+    local width = WDC.gui_window_width
+    local height = WDC.gui_window_height
     wdPrint(width, height)
 
     local f = CreateFrame("Frame", "WindaGUI", UIParent, "BackdropTemplate")
     -- tinsert(UISpecialFrames, "WindaGUI")
     f:SetSize(width, height)
-    f:SetFrameLevel(wdConstants.gui_window_level)
+    f:SetFrameLevel(WDC.gui_window_level)
     f:SetPoint("CENTER")
     f:SetFrameStrata("HIGH")
 
-    local pad = wdConstants.gui_border_pad
+    local pad = WDC.gui_border_pad
     -- bg image blizz api move to
     f:SetBackdrop({
         bgFile = "", -- L["BG_FILE_NORMAL"], -- L["GUI_BG_FILE"], -- 
@@ -139,6 +141,7 @@ function GUI:initGui()
     f:SetScript("OnDragStop", function (self)
         self:StopMovingOrSizing()
     end)
+    -- TESTING
 
     -- cancel
     local cf = CreateFrame("Button", nil, f)
@@ -202,7 +205,7 @@ function GUI:initItems(parent)
 
     -- items index compenents
     for i,v in ipairs(GuiItemDatas) do
-        GUI:CreateCompnent(i, listbg, entitybg, v)
+        GUI:setupCompnent(i, listbg, entitybg, v)
     end
     local firstItem = GUI.compenents[1]
     firstItem.setting_frame:Show()
@@ -218,18 +221,11 @@ function GUI:initItems(parent)
     -- store arrow frame
     self.interaction.buttonArrow = arrow
 
-    -- title frame
-    
-    -- search frame
-
-    -- bottom frame
-
-    
-
     return parent, listbg, entitybg
 end
 
-function GUI: CreateLogo(parent)
+
+function GUI: createLogo(parent)
     local frame = CreateFrame("Frame", "GUILogo", parent)
     frame:SetFrameLevel(wdConstants.gui_window_level+1)
     local width, height = wdConstants.gui_logo_width, wdConstants.gui_logo_height
@@ -260,7 +256,7 @@ function GUI: CreateLogo(parent)
     return frame
 end
 
-function GUI: CreateVersionText(parent, size, point)
+function GUI: createVersionText(parent, size, point)
     local frame = CreateFrame("Frame", "GUIVersion", parent)
     frame:SetFrameLevel(WDC.gui_window_level+1)
     frame:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 0, 0)
@@ -279,21 +275,33 @@ end
 -- gui init
 local function init(args)
     -- body...
-    if GUI.entity then 
+    if GUI.frame then 
         return 
     end
 
-    GUI.entity = GUI:initGui()
+    GUI.frame = GUI:initGui()
 
     -- items frame
-    local guibg, lfbg, rfbg = GUI:initItems(GUI.entity)
+    local guibg, lfbg, rfbg = GUI:initItems(GUI.frame)
     -- logo
-    local logo = GUI:CreateLogo(lfbg)
+    local logo = GUI:createLogo(lfbg)
     -- version
     local size = { ["width"] = wdConstants.gui_version_width, ["height"] = wdConstants.gui_version_height}
     local point = { ["x"] = wdConstants.gui_version_point[1], ["y"] = wdConstants.gui_version_point[2]}
-    local _, version = GUI:CreateVersionText(lfbg, size, point)
+    local _, version = GUI:createVersionText(lfbg, size, point)
     version:SetText("v" .. wd.version.string)
+
+    -- copy box 
+    local copyboxEntity = GuiEntity:new({}, "CopyBoxEntity")
+    -- copyboxEntity:createURLCopy()
+
+    -- title 
+    
+    -- search 
+
+    -- bottom 
+
+    
 
 end
 
@@ -302,14 +310,14 @@ local function openGUI(args)
     -- body...
     wdPrint("open or close gui")
 
-    if GUI.entity then
-        GUI.entity:Show()
+    if GUI.frame then
+        GUI.frame:Show()
         return
     end
 
     init()
 
-    GUI.entity:Show()
+    GUI.frame:Show()
 end
 
 -- esc menu
@@ -332,7 +340,7 @@ local function menuWinda()
         --     -- UIErrorsFrame:AddMessage(DB.InfoColor..ERR_NOT_IN_COMBAT)
         --     return
         -- end
-        if not GUI.entity:IsVisible() then
+        if not GUI.frame:IsVisible() then
             openGUI() -- open gui for winda
             HideUIPanel(GameMenuFrame)
         end
@@ -372,11 +380,11 @@ local function minimapWinda()
 
     -- 按钮点击
     mf:SetScript("OnClick", function()
-        if GUI.entity:IsShown() then
-            GUI.entity:Hide()
+        if GUI.frame:IsShown() then
+            GUI.frame:Hide()
             wdPrint("窗口消失")
         else
-            GUI.entity:Show()
+            GUI.frame:Show()
             wdPrint("窗口出现")
         end
     end)
@@ -421,16 +429,17 @@ end
 
 -- winda frame on global
 -- local WEF = Winda.entity
+-- Notice: frame diffenent between entity
 function GUI:OnLogin()
     wdPrint("GUI on load")
 
-    if self.entity then 
-        self.entity:Hide()
+    if self.frame then 
+        self.frame:Hide()
         return
     end
 
     init()
-    self.entity:Hide()
+    self.frame:Hide()
 
     -- 1
     menuWinda()

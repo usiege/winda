@@ -6,10 +6,11 @@ local Winda, Deploy , L = unpack(wd)
 GuiEntity = {
     index = 0, -- gui index
 
-    index_frame = nil,    -- gui button frame 
-    setting_frame = nil,  -- gui settings frame
+    index_frame     = nil,      -- gui button frame 
+    setting_frame   = nil,      -- gui settings frame
+    urlcopy_frame   = nil,
 
-    index_text = "",
+    index_text      = "",
 }
 setmetatable(GuiEntity, {__index = BaseEntity})
 
@@ -68,7 +69,7 @@ end
 
 
 -- init gui item buttons
-function GuiEntity: createGuiIndex(index, parent)
+function GuiEntity:createGuiItem(index, parent)
     local frame = CreateFrame("Button", nil, parent)
     frame:SetPoint("TOPLEFT",  
     WDC.gui_entity.index_referto_point[1], 
@@ -97,8 +98,85 @@ function GuiEntity: createGuiIndex(index, parent)
     self.index_frame = frame
 end
 
+-- init url copy frame
+function GuiEntity:createURLCopy(arg)
+    local urlcopy = CreateFrame("Frame", "GUIURLCopyWD", UIParent, "BackdropTemplate")
+    urlcopy:Hide()
+    -- urlcopy:SetWidth(WDC.url_copy.bg_width)
+    -- urlcopy:SetHeight(WDC.url_copy.bg_height)
+    wdPrint(urlcopy)
+    urlcopy:SetSize(WDC.url_copy.bg_width, WDC.url_copy.bg_height)
+    urlcopy:SetFrameLevel(100)
+    urlcopy:SetPoint("CENTER", 0, 0)
+    urlcopy:SetFrameStrata("HIGH")
+
+    local pad = 5
+    urlcopy:SetBackdrop({
+        bgFile = L["BG_BLACK_NORMAL"], --L["BG_FILE_NORMAL"],
+        edgeFile = L["EDGE_NORMAL"],
+        tile = false,
+        tileEdge = false,
+        tileSize = 0,
+        edgeSize = pad,
+        insets = { left = pad, right = pad, top = pad, bottom = pad }
+    })
+    urlcopy:SetBackdropBorderColor(0, 0, 0, 1)
+    
+    urlcopy:SetMovable(true)
+    urlcopy:EnableMouse(true)
+    urlcopy:RegisterForDrag("LeftButton")
+    urlcopy:SetScript("OnDragStart",function(self)
+        self:StartMoving()
+    end)
+
+    urlcopy:SetScript("OnDragStop",function(self)
+        self:StopMovingOrSizing()
+    end)
+
+    urlcopy:SetScript("OnShow", function(self)
+        self.text:HighlightText()
+    end)
+
+
+    urlcopy.text = CreateFrame("EditBox", "URLCopyEditBoxWD", urlcopy)
+    urlcopy.text:SetTextColor(.2,1,.8,1)
+    urlcopy.text:SetJustifyH("CENTER")
+    urlcopy.text:SetWidth(WDC.url_copy.text_width)
+    urlcopy.text:SetHeight(WDC.url_copy.text_height)
+    urlcopy.text:SetPoint("TOP", urlcopy, "TOP", 
+                         WDC.url_copy.text_point[1], WDC.url_copy.text_point[2])
+    urlcopy.text:SetFontObject(GameFontNormal)
+
+    urlcopy.text:SetScript("OnEscapePressed", function(self)
+        urlcopy:Hide()
+    end)
+    urlcopy.text:SetScript("OnEditFocusLost", function(self)
+        urlcopy:Hide()
+    end)
+
+    urlcopy.close = CreateFrame("Button", "GUIURLCopyCloseWD", urlcopy, "UIPanelButtonTemplate")
+    urlcopy.close:SetWidth(WDC.url_copy.close_width)
+    urlcopy.close:SetHeight(WDC.url_copy.close_height)
+    urlcopy.close:SetPoint("BOTTOMRIGHT", urlcopy, "BOTTOMRIGHT", 
+                            WDC.url_copy.close_point[1], WDC.url_copy.close_point[2])
+    urlcopy.close:SetText(L["CLOSE"])
+
+
+    urlcopy.close:SetScript("OnClick", function()
+        urlcopy:Hide()
+    end)
+
+    -- urlcopy.SetItemRef = SetItemRef
+    urlcopy.CopyText = function(text)
+        urlcopy.text:SetText(text)
+        urlcopy:Show()
+    end
+    
+    self.urlcopy_frame = urlcopy
+end
+
 -- init item setting frame 
-function GuiEntity: createGuiSettingItem(index, parent)
+function GuiEntity:createGuiItemDetail(index, parent)
     -- setting
     local frame = CreateFrame("Frame", "", parent, "BackdropTemplate")
     local x,y = -WDC.gui_entity.setting_topright_point[1], 
@@ -108,7 +186,8 @@ function GuiEntity: createGuiSettingItem(index, parent)
                   WDC.gui_entity.setting_item_height)
     frame:SetFrameStrata("HIGH")
     frame:SetBackdrop({
-        bgFile = L["GUI_SETTING_BG_GREEN"], --L["GUI_BG_ITEM"]
+        bgFile = "",
+        -- bgFile = L["GUI_SETTING_BG_GREEN"], --L["GUI_BG_ITEM"]
     })
     frame:Hide()
 
@@ -129,10 +208,14 @@ function GuiEntity: createGuiSettingItem(index, parent)
             L["URL_COCREATE_CODE"],
             L["URL_COCREATE_BUG"]
         }
+
+        -- create exitbox
+        self:createURLCopy()
+        local this = self
+        -- self.urlcopy_frame = urlcopy
+
+        -- setup cocreate buttons 
         for index, value in ipairs(paths) do
-            -- create exitbox
-            local urlcopy = self:createURLCopy()
-        
             -- setup cocreate buttons
             local button = CreateFrame("Button", nil, frame)
             local eachY = -(WDC.gui_cocreate.button_referto_point[2]+
@@ -145,8 +228,11 @@ function GuiEntity: createGuiSettingItem(index, parent)
             texture:SetAllPoints()
             button:SetScript("OnClick", function (self, button, down) 
                 wdPrint(value)
-                wdPrint(urls[index])
-                urlcopy.CopyText(urls[index])
+                wdPrint(this.urlcopy_frame)
+                if this.urlcopy_frame then 
+                    wdPrint(urls[index])
+                    this.urlcopy_frame.CopyText(urls[index])
+                end
             end)
             
         end

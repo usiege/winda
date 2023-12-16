@@ -54,8 +54,21 @@ local Constants = {
 
         button_padding_y        = 15,
         button_referto_point    = {0, 150},
+    },
 
-    }
+    -- url copy
+    url_copy = {
+        bg_width            = 400,
+        bg_height           = 60,
+
+        text_width          = 380,
+        text_height         = 20,
+        text_point          = {0, -10},
+
+        close_width         = 70,
+        close_height        = 18,
+        close_point         = {-10, 10},
+    },
     
 }
 local ActionBarContants = {
