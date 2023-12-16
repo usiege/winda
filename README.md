@@ -9,28 +9,29 @@ Do not add entities unless necessary.
 <!-- TOC -->
 
 - [WINDA](#winda)
-    - [Introduce](#introduce)
-    - [Co-creation](#co-creation)
-    	- [Demand](#You come up with the needs)
-    	- [Design](#Design together)
-    	- [Scheme](#Everyone decides the plan)
-    	- [Code](#I'll write the code)
-    	- [Bug](#Report the bugs)
-    - [Document](#document)
-    - [Community](#community)
-    - [Donate](#donate)
+  - [Introduce](#introduce)
+  - [Co-creation](#co-creation)
+    - [You come up with the needs](#you-come-up-with-the-needs)
+    - [Design together](#design-together)
+    - [Everyone decides the plan](#everyone-decides-the-plan)
+    - [I'll write the code](#ill-write-the-code)
+    - [Report the bugs](#report-the-bugs)
+  - [Document](#document)
+  - [Community](#community)
+  - [Donate](#donate)
 
 <!-- /TOC -->
 
 ## Introduce
 
-Winda is a minimalist World of Warcraft integration plugin, eliminating complex plugin settings in favor of providing players with a convenient interface for configuration. 
+Winda is a minimalist World of Warcraft integration plugin, eliminating complex plugin settings in favor of providing players with a convenient interface for configuration.
 
 ```
 Remember: the key to using this plugin is simplicity!
 ```
 
 ## Co-creation
+>
 > <center>  Your first
 > <center> Internet crowd-creation software project
 
@@ -86,7 +87,7 @@ Your ability to contribute to open source projects will be greatly appreciated.
 
 > FeiShu Link：[https://kxxblqyumrm.feishu.cn/sheets/I9NLsCaGVhHUL4tl6OBcCA61nJg](https://kxxblqyumrm.feishu.cn/sheets/I9NLsCaGVhHUL4tl6OBcCA61nJg)   password：d9732@31
 
-Finally, this Winda co-creation project is a software project solely initiated by netizens and completed by netizens for use by netizens. The final use rights of the software belong to all game players. 
+Finally, this Winda co-creation project is a software project solely initiated by netizens and completed by netizens for use by netizens. The final use rights of the software belong to all game players.
 
 All bugs encountered during use can be submitted to developers through our Feishu documentation.
 
@@ -104,10 +105,9 @@ This section describes the usage of each component of the plugin. The documentat
 
 [**Discord Communication Community**](https://discord.gg/udyzz9hj)
 
-
-|QQ Data Group|Wechat Official account|
-|:-:|:-:|
-|![](https://s2.loli.net/2023/12/16/pFWr9GdoH6ZRLej.png)|![公众号.jpg](https://s2.loli.net/2023/12/16/xqgcvB6dew389RC.jpg)|
+|                      QQ Data Group                      |                      Wechat Official account                      |
+| :-----------------------------------------------------: | :---------------------------------------------------------------: |
+| ![](https://s2.loli.net/2023/12/16/pFWr9GdoH6ZRLej.png) | ![公众号.jpg](https://s2.loli.net/2023/12/16/xqgcvB6dew389RC.jpg) |
 
 ## Donate
 
