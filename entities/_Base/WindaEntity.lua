@@ -1,12 +1,13 @@
 -- winda base frame
 -- create winda entity frame 
+local BaseEntity = BaseEntity
 
 WindaEntity = {
     name = "WindaFrame",
     entity = nil,
 
 }
-setmetatable(WindaEntity, {__index = WindaEntity})
+setmetatable(WindaEntity, {__index = BaseEntity})
 WindaEntity.__index = WindaEntity
 
 
@@ -18,8 +19,8 @@ function WindaEntity: new(o, name)
     return o    
 end
 
-function WindaEntity: print()
-    print(self.name)
+function WindaEntity: wdPrint()
+    wdPrint(self.name)
 end
 
 function WindaEntity: createButton(args)

@@ -1,5 +1,5 @@
 if DEBUG then
-    print("Deploy")
+    wdPrint("Deploy")
 end
 local _, wd = ...
 local Winda, Deploy , L = unpack(wd)

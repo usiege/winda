@@ -5,111 +5,123 @@ local tonumber, pairs, ipairs, next, type, tinsert = tonumber, pairs, ipairs, ne
 local Winda, Deploy , L, DB = unpack(wd)
 local addonName = DB.addonName
 -- 
-local GameMenuFrame         = GameMenuFrame
+local Minimap               = Minimap
+-- local GameMenuFrame         = GameMenuFrame
 local GameMenuButtonAddons  = GameMenuButtonAddons
 local GameMenuButtonLogout  = GameMenuButtonLogout
 local InCombatLockdown      = InCombatLockdown
 local HideUIPanel           = HideUIPanel
+local InterfaceOptions_AddCategory          = InterfaceOptions_AddCategory
+local InterfaceOptionsFramePanelContainer   = InterfaceOptionsFramePanelContainer
+local InterfaceOptionsFrame_OpenToCategory  = InterfaceOptionsFrame_OpenToCategory
 
 -- winda constant
 local DEBUG = DEBUG
-local wdConstants = wdConstants
+local WDC = WDC
 
 -- Gui refer 
+-- show anme icon
 local GuiItemDatas = {
-    { L["MODULE_ENABLE"], "Switch"},            --          模块开关
-    { L["MODULE_BAGS"],  "Bag"},                --        = "背包"
-    { L["MODULE_BARS"],  "Bar"},                --        = "动作条"
-    { L["MODULE_BUFF"],  "Buff"},               --        = "增/减益"
-    { L["MODULE_CHAT"],  "Chat"},               --        = "聊天框"
-    { L["MODULE_COMBAT"], "Combat"},            --          = "战斗"
-    { L["MODULE_MAPS"], "Map"},                 --          = "地图"
-    { L["MODULE_NAMEPLATE"], "Nameplate"},      --          = "姓名版"
-    { L["MODULE_TASK"], "Task"},                --      = "任务"
-    { L["MODULE_TOOLTIP"], "Tooltip"},          --      = "提示"
-    { L["MODULE_UNITFRAME"], "Unitframe"},      --      = "头像"
-    { L["MODULE_SKIN"], "Skin"},                --      = "皮肤"
-    { L["MODULE_DEPLOY"], "Deploy"},             --      = "配置"  
-    { L["MODULE_EXTEND"], "Extend"},             --      = "扩展"  
+    { L["MODULE_ABOUT"], "About", ""},    -- 简介
+    
+    { L["MODULE_BAGS"],  "Bag", L["MODULE_BAGS_ICON"]},--        = "背包"
+    { L["MODULE_BARS"],  "Bar", L["MODULE_BARS_ICON"]}, --        = "动作条"
+    { L["MODULE_BUFF"],  "Buff", L["MODULE_BUFF_ICON"]}, --        = "增/减益"
+    { L["MODULE_CHAT"],  "Chat", L["MODULE_CHAT_ICON"]}, --        = "聊天框"
+    { L["MODULE_NAMEPLATE"], "Nameplate", L["MODULE_NAMEPLATE_ICON"]}, -- "姓名版"
+    { L["MODULE_TASK"], "Task", L["MODULE_TASK_ICON"]}, --  "任务"
+    { L["MODULE_TOOLTIP"], "Tooltip", L["MODULE_TOOLTIP_ICON"]}, --  "提示"
+    { L["MODULE_UNITFRAME"], "Unitframe", L["MODULE_UNITFRAME_ICON"]},      --      = "头像"
+    { L["MODULE_SKIN"], "Skin", L["MODULE_SKIN_ICON"]},                --      = "皮肤"
+
+    { L["MODULE_ENABLE"], "Switch", ""},            --          模块开关
+
+    { L["MODULE_DEPLOY"], "Deploy", L["MODULE_DEPLOY_ICON"]}, --      = "配置"  
+    { L["MODULE_EXTEND"], "Extend", L["MODULE_DXTEND_ICON"]}, --      = "扩展"  
+
+    { L["MODULE_SEARCH_ING"], "Search", ""}, -- 搜索
+    { L["MODULE_COCREATE"], "Cocreate", ""}, -- "温达共创"
 }
 
-local GuiItemIcons = {
-    L["MODULE_BAGS_ICON"],
-    L["MODULE_BARS_ICON"],
-    L["MODULE_BUFF_ICON"], 
-    L["MODULE_CHAT_ICON"],
-    L["MODULE_COMBAT_ICON"],
-    L["MODULE_MAPS_ICON"],
-    L["MODULE_NAMEPLATE_ICON"],
-    L["MODULE_TASK_ICON"],
-    L["MODULE_TOOLTIP_ICON"],
-    L["MODULE_UNITFRAME_ICON"],
-    L["MODULE_SKIN_ICON"],
-    L["MODULE_DEPLOY_ICON"],
-    L["MODULE_DXTEND_ICON"]
-}
-
+local GuiItemIcons = {}
 
 -- load
 -- winda settings gui
 local GUI = Winda:RegisterEntity("GUI")
-local GuiFrame      = nil -- gui frame entity
--- local GuiListFrame  = nil -- gui list frame 
 
 -- global GUI
 do
     -- body
-    GUI.compenents = {}             -- gui entitys  
+    GUI.frame = nil   
+    GUI.minimap = nil
+    GUI.options = nil               -- init entity 
+
+    GUI.compenents = {}             -- gui entity foritems
+    GUI.titleEntities = {}          -- gui title entities
+    GUI.utilityEntity = nil         -- gui bottom entity 
+    GUI.copyBoxEntity = nil         -- gui copyBox entity 
+
     GUI.interaction = {             -- gui interaction refer to 
         last_index       = 1,
         current_index    = 1,
-
+        buttonArrow      = nil,     -- arrow show current item
     }
 end
-function GUI: CreateCompnent(index, parent, data)
-    print(index, data)
-    local moduleEntity = GuiEntity: new({}, data[2])
+
+
+function GUI:setupCompnent(index, indexParent, settingItemParent, data)
+    wdPrint(index, data)
+    local moduleEntity = GuiEntity:new({}, data[2])
     moduleEntity.index_text = data[1] 
-    moduleEntity: createGuiIndex(index, parent)
-    moduleEntity: createGuiSettingItem(index, parent:GetParent())
+    -- left setup 
+    moduleEntity:createGuiItem(index, indexParent)
+    -- right setup 
+    moduleEntity:createGuiItemDetail(index, settingItemParent)
 
     -- event
     moduleEntity.index_frame: RegisterForClicks("AnyUp", "AnyDown")
     moduleEntity.index_frame: SetScript("OnClick", function (self, button, down)
-        if down then
-            GUI.interaction.current_index = index
-            if(GUI.interaction.last_index == index) then 
-                return
-            else
-                GUI.compenents[GUI.interaction.last_index].setting_frame:Hide()
-                moduleEntity.setting_frame: Show()
-                GUI.interaction.last_index = index
-            end
-        else
-            print(index) 
+        if not down then
+            wdPrint(index) 
+            return
         end
+        GUI.interaction.current_index = index
+        if(GUI.interaction.last_index == index) then 
+            return
+        end
+        -- hide last item and show current item
+        local lastItem = GUI.compenents[GUI.interaction.last_index]
+        lastItem.setting_frame:Hide()
+        moduleEntity.setting_frame:Show()
+        GUI.interaction.last_index = index
+
+        -- update arrow for item
+        local arrow_y = WDC.gui_entity.index_referto_point[2]
+        -(index-1)*(WDC.gui_entity.index_button_height+WDC.gui_entity.index_padding_height)
+        GUI.interaction.buttonArrow:SetPoint("TOP", 0, arrow_y)
+        wdPrint("arrow test")
         
     end)
     self.compenents[index] = moduleEntity
 end
 -- main frame
-function GUI: initGui() 
-    local width = wdConstants.gui_window_width
-    local height = wdConstants.gui_window_height
+function GUI:initGui() 
+    local width = WDC.gui_window_width
+    local height = WDC.gui_window_height
     wdPrint(width, height)
 
     local f = CreateFrame("Frame", "WindaGUI", UIParent, "BackdropTemplate")
     -- tinsert(UISpecialFrames, "WindaGUI")
     f:SetSize(width, height)
-    f:SetFrameLevel(wdConstants.gui_window_level)
+    f:SetFrameLevel(WDC.gui_window_level)
     f:SetPoint("CENTER")
     f:SetFrameStrata("HIGH")
 
-    local pad = wdConstants.gui_border_pad
+    local pad = WDC.gui_border_pad
     -- bg image blizz api move to
     f:SetBackdrop({
-        bgFile = L["BG_FILE_NORMAL"], -- L["GUI_BG_FILE"], -- 
-        edgeFile = "Interface/Tooltips/UI-Tooltip-Border",
+        bgFile = "", -- L["BG_FILE_NORMAL"], -- L["GUI_BG_FILE"], -- 
+        edgeFile = L["EDGE_NORMAL"],
         tile = false,
         tileEdge = false,
         tileSize = 0,
@@ -129,25 +141,29 @@ function GUI: initGui()
     f:SetScript("OnDragStop", function (self)
         self:StopMovingOrSizing()
     end)
+    -- TESTING
 
     -- cancel
     local cf = CreateFrame("Button", nil, f)
     cf:SetPoint("TOPRIGHT",  -5, -5)
     cf:SetSize(20, 20)
-    cf:SetFrameStrata("HIGH")
+    cf:SetFrameStrata("DIALOG")
     cf:SetFrameLevel(wdConstants.gui_window_level + 5)
     local texture = cf: CreateTexture(nil, "BACKGROUND")
     texture:SetTexture(L["CANCEL_CLEAR"])
     texture:SetAllPoints()
     cf:RegisterForClicks("AnyUp", "AnyDown")
+
     cf:SetScript("OnClick", function (self, button, down) 
         if down then
             f:Hide()
         end
     end)
     f.cancel = cf -- outside useful
+
+    -- keys event
     f:SetScript("OnKeyDown", function (self, key)
-        if key == "ESCAPE" then
+        if key == "ESCAPE" and self:IsVisible() then
             self:Hide()
         end
     end)
@@ -155,43 +171,72 @@ function GUI: initGui()
     return f
 end
 
-function GUI: initItems(parent)
+function GUI:initItems(parent)
     -- body
-    local itembg = CreateFrame("Frame", "GUIItemBg", parent, "BackdropTemplate")
-    local width = wdConstants.gui_list_width
-    local pad = wdConstants.gui_border_pad
-    local height = wdConstants.gui_list_height - 2 * pad
-    wdPrint(width, height)
+    -- left entity bg frame
+    local listbg = CreateFrame("Frame", "GUIEntityBg", parent, "BackdropTemplate")
+    local lwidth = WDC.gui_list_width
+    local lheight = WDC.gui_list_height
+    local pad = WDC.gui_border_pad
+    wdPrint(lwidth, lheight)
     
-    itembg:SetPoint("TOPLEFT", parent, "TOPLEFT", pad, -pad)
-    itembg:SetSize(width, height)
-    itembg:SetFrameLevel(wdConstants.gui_window_level)
-    itembg:SetFrameStrata("HIGH")
-    itembg:SetBackdrop({
-        bgFile = L["BG_GRAY_NORMAL"], --L["GUI_BG_ITEM"]
+    listbg:SetPoint("TOPLEFT", parent, "TOPLEFT", pad, -pad)
+    listbg:SetSize(lwidth, lheight)
+    listbg:SetFrameLevel(wdConstants.gui_window_level)
+    listbg:SetFrameStrata("HIGH")
+    listbg:SetBackdrop({
+        bgFile = L["GUI_BG_ITEM"] --L["GUI_SETTING_BG_BLACK"] --L["BG_GRAY_NORMAL"],
     })
 
-    -- items index
-    for i,v in ipairs(GuiItemDatas) do
-        GUI: CreateCompnent(i, itembg, v)
-    end
-    GUI.compenents[1].setting_frame:Show()
-
+    -- right entity bg frame 
+    local entitybg = CreateFrame("Frame", "GUIEntityBg", parent, "BackdropTemplate")
+    local ewidth = WDC.gui_right_bg_width
+    local eheight = WDC.gui_list_height
+    wdPrint(ewidth, eheight)
     
+    local ex = WDC.gui_border_pad * 2 + WDC.gui_list_width
+    entitybg:SetPoint("TOPLEFT", parent, "TOPLEFT", ex, -pad)
+    entitybg:SetSize(ewidth, eheight)
+    entitybg:SetFrameLevel(wdConstants.gui_window_level)
+    entitybg:SetFrameStrata("HIGH")
+    entitybg:SetBackdrop({
+        bgFile = L["GUI_SETTING_BG_BLACK"], -- L["GUI_SETTING_BG_GREEN"] --L["BG_GRAY_NORMAL"],
+    })
+
+    -- items index compenents
+    for i,v in ipairs(GuiItemDatas) do
+        GUI:setupCompnent(i, listbg, entitybg, v)
+    end
+    local firstItem = GUI.compenents[1]
+    firstItem.setting_frame:Show()
+
+    -- item arrow
+    local arrow_y = WDC.gui_entity.index_referto_point[2]-0*(WDC.gui_entity.index_button_height+WDC.gui_entity.index_padding_height)
+    local arrowParent = listbg
+    local arrow = firstItem:createImage(arrowParent,
+                            {WDC.gui_entity.arrow_width, WDC.gui_entity.arrow_height},
+                            {"TOP", arrowParent, "TOP", 0, arrow_y},
+                            L["GUI_BUTTON_ARROW"], "DIALOG", "WDItemArrow")
+    arrow:Show()
+    -- store arrow frame
+    self.interaction.buttonArrow = arrow
+
+    return parent, listbg, entitybg
 end
 
-function GUI: CreateLogo(parent)
+
+function GUI: createLogo(parent)
     local frame = CreateFrame("Frame", "GUILogo", parent)
     frame:SetFrameLevel(wdConstants.gui_window_level+1)
     local width, height = wdConstants.gui_logo_width, wdConstants.gui_logo_height
     local x, y = wdConstants.gui_logo_point[1], wdConstants.gui_logo_point[2]
     wdPrint(width, height)
-    frame:SetPoint("TOPLEFT", parent, "TOPLEFT", x, -y)
+    frame:SetPoint("TOP", parent, "TOP", 0, -y)
     frame:SetSize(width, height)
     frame:SetFrameStrata("HIGH")
     -- -- adding a texture
     local texture = frame:CreateTexture(nil, "BACKGROUND")
-    texture:SetTexture(L["WINDA_LOGO"])
+    texture:SetTexture(L["WINDA_LOGO_LARGE"])
     texture:SetAllPoints()
     -- mouse event
     frame:SetMouseClickEnabled(true)
@@ -211,86 +256,199 @@ function GUI: CreateLogo(parent)
     return frame
 end
 
-local function init (args)
-    -- body...
-    if GuiFrame then return GuiFrame end
+function GUI: createVersionText(parent, size, point)
+    local frame = CreateFrame("Frame", "GUIVersion", parent)
+    frame:SetFrameLevel(WDC.gui_window_level+1)
+    frame:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 0, 0)
+    frame:SetSize(size.width, size.height)
+    frame:SetFrameStrata("HIGH")
 
-    GuiFrame = GUI: initGui()
+    local text = frame:CreateFontString("Version", "OVERLAY", "GameFontWhite")
+    text:SetFont(L["FONT_CHINESE"], WDC.gui_version_text_size, "OUTLINE")
+    text:SetPoint("BOTTOMLEFT", 10, 10)
+    text:SetWidth(size.width)
+    text:SetJustifyH("CENTER")
 
-    -- item list frame
-    GUI: initItems(GuiFrame)
-    GUI: CreateLogo(GuiFrame)
-
-
-    return GuiFrame
+    return frame, text
 end
 
-
-local function openGUI (args)
+-- gui init
+local function init(args)
     -- body...
-    if DEBUG then
-        print("open or close gui")
+    if GUI.frame then 
+        return 
     end
-    if GuiFrame == nil then
-        GuiFrame = init()
-        GuiFrame:Show()
+
+    GUI.frame = GUI:initGui()
+
+    -- items frame
+    local guibg, lfbg, rfbg = GUI:initItems(GUI.frame)
+    -- logo
+    local logo = GUI:createLogo(lfbg)
+    -- version
+    local size = { ["width"] = wdConstants.gui_version_width, ["height"] = wdConstants.gui_version_height}
+    local point = { ["x"] = wdConstants.gui_version_point[1], ["y"] = wdConstants.gui_version_point[2]}
+    local _, version = GUI:createVersionText(lfbg, size, point)
+    version:SetText("v" .. wd.version.string)
+
+    -- copy box 
+    local copyboxEntity = GuiEntity:new({}, "CopyBoxEntity")
+    -- copyboxEntity:createURLCopy()
+
+    -- title 
+    
+    -- search 
+
+    -- bottom 
+
+    
+
+end
+
+-- open for gui
+local function openGUI(args)
+    -- body...
+    wdPrint("open or close gui")
+
+    if GUI.frame then
+        GUI.frame:Show()
         return
     end
-    if GuiFrame:IsVisible() then
-        GuiFrame:Hide()
-    else
-        GuiFrame:Show()
-    end
-    -- ShowUIPanel(GuiFrame)
-    -- UIFrameFadeIn(GuiFrame, 0.2, 0, 1)
+
+    init()
+
+    GUI.frame:Show()
 end
 
-local function menuWinda () -- esc menu
+-- esc menu
+local function menuWinda() 
     if DEBUG then
-        print("winda menu on load")
+        wdPrint("winda menu on load")
     end
     -- body...
-    local gui = CreateFrame("Button", "GameMenuFrameWinda", GameMenuFrame, "GameMenuButtonTemplate,BackdropTemplate")
-	gui:SetText(L["Winda Console"])
-	gui:SetPoint("TOP", GameMenuButtonAddons, "BOTTOM", 0, -21)
+    local guimenu = CreateFrame("Button", "GameMenuFrameWinda", GameMenuFrame, 
+    "GameMenuButtonTemplate, BackdropTemplate")
+	guimenu:SetText(L["Winda Console"])
+	guimenu:SetPoint("TOP", GameMenuFrame, "TOP", 0, -35)
 	GameMenuFrame:HookScript("OnShow", function(self)
-		GameMenuButtonLogout:SetPoint("TOP", gui, "BOTTOM", 0, -21)
-		self:SetHeight(self:GetHeight() + gui:GetHeight() + 22)
+		GameMenuButtonHelp:SetPoint("TOP", guimenu, "BOTTOM", 0, -5)
+		self:SetHeight(self:GetHeight() + guimenu:GetHeight() + 15)
 	end)
-    GameMenuFrame[addonName] = gui
-	gui:SetScript("OnClick", function()
-		if InCombatLockdown() then
-            -- UIErrorsFrame:AddMessage(DB.InfoColor..ERR_NOT_IN_COMBAT)
-            return
+    GameMenuFrame[addonName] = guimenu
+	guimenu:SetScript("OnClick", function()
+		-- if InCombatLockdown() then
+        --     -- UIErrorsFrame:AddMessage(DB.InfoColor..ERR_NOT_IN_COMBAT)
+        --     return
+        -- end
+        if not GUI.frame:IsVisible() then
+            openGUI() -- open gui for winda
+            HideUIPanel(GameMenuFrame)
         end
-		openGUI() -- open gui for winda
-		HideUIPanel(GameMenuFrame)
 	end)
+end
 
+-- minimap button icon
+local function minimapWinda()
+    
+    -- 小地图按钮
+    local mf = CreateFrame("Button", "MiniMapButtonWinda", Minimap)
+    mf:SetWidth(32)
+    mf:SetHeight(32)
+    mf:SetFrameStrata("LOW")
+    mf:Raise()
+    mf:SetPoint("TOPLEFT", Minimap, "BOTTOMLEFT", 0, 0)
+    mf:SetNormalTexture("Interface\\BUTTONS\\UI-Quickslot-Depress")
+    mf:SetHighlightTexture("Interface\\buttons\\iconborder-glowring")
+
+    -- 创建小地图上的图标
+    local icon = mf:CreateTexture(nil, "BACKGROUND")
+    icon:SetWidth(32)
+    icon:SetHeight(32)
+    icon:SetPoint("CENTER", mf, "CENTER", 0, 0)
+    icon:SetTexture(L["GUI_MINIMAP_ICON"])
+    mf.icon = icon
+
+    -- 按钮上的提示
+    mf:SetScript("OnEnter", function()
+        GameTooltip:SetOwner(mf, "ANCHOR_LEFT")
+        GameTooltip:AddLine("|cff1eff00左键:|r 隐藏/显示控制台")
+        GameTooltip:Show()
+    end)
+    mf:SetScript("OnLeave", function()
+        GameTooltip:Hide()
+    end)
+
+    -- 按钮点击
+    mf:SetScript("OnClick", function()
+        if GUI.frame:IsShown() then
+            GUI.frame:Hide()
+            wdPrint("窗口消失")
+        else
+            GUI.frame:Show()
+            wdPrint("窗口出现")
+        end
+    end)
+
+    GUI.minimap = mf
+end
+
+-- system options 
+local function optionWinda(args)
+    local sf = CreateFrame("Frame", nil, InterfaceOptionsFramePanelContainer)
+    sf:SetScript("OnEvent", function (self, event, loadedAddon)
+        if loadedAddon ~= "winda" then return end
+    end)
+    sf:RegisterEvent("ADDON_LOADED")
+    sf:SetScript("OnShow", function (sf)
+        -- 显示标题
+        local title = sf:CreateFontString(nil, "ARTWORK", "GameFontNormalLarge")
+        title:SetPoint("TOPLEFT", 16, -16)
+        title:SetText("winda".." v"..tostring(GetAddOnMetadata("winda", "Version")))
+        
+        -- 只在显示时加载
+        sf:SetScript("OnShow", nil)
+    end)
+    sf.name = "winda"
+    sf:Hide()
+    InterfaceOptions_AddCategory(sf)
+
+    GUI.options = sf
+end
+
+local function openOpions()
+    if GUI.options then
+        InterfaceOptionsFrame_OpenToCategory(GUI.options)
+        return
+    end
+
+    optionWinda()
+    InterfaceOptionsFrame_OpenToCategory(GUI.options)
+    
 end
 
 
 -- winda frame on global
 -- local WEF = Winda.entity
-
-
-
-do 
-    GUI.openGUI = openGUI
-
-end
-
-
-
+-- Notice: frame diffenent between entity
 function GUI:OnLogin()
     wdPrint("GUI on load")
-    if self.entity == nil then
-        self.entity = init()
-    else
-        self.entity = GuiFrame
+
+    if self.frame then 
+        self.frame:Hide()
+        return
     end
-    self.entity:Hide()
+
+    init()
+    self.frame:Hide()
+
+    -- 1
     menuWinda()
+
+    -- 2 
+    minimapWinda()
+
+    -- 3
+    optionWinda()
 end
 
 
@@ -300,7 +458,11 @@ end
 -- else
 --     _G[_REQUIREDNAME] = GUI
 -- end
-wdGUI = GUI
 
+do 
+    GUI.openGUI     = openGUI
+    GUI.openOptions = openOpions
+    wdGUI = GUI
+end
 -- package name
 return wdGUI

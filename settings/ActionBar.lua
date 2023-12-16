@@ -5,7 +5,7 @@ local GuiEntity = GuiEntity
 
 local function loadPanel(name)
     -- body
-    if DEBUG then print(name) end
+    if DEBUG then wdPrint(name) end
     
 
 end

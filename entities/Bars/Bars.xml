@@ -1,4 +1,4 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-  <Script file="entities/Bars/ActionBar.lua"/>
+  <Script file="entities/bars/ActionBar.lua"/>
   
 </Ui>
