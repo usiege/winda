@@ -69,8 +69,8 @@ L["FONT_CHINESE"]       = L["RES_ROOT_PATH"].."/fonts/chinese-font.ttf"
 
 
 -- textures
-L["EDGE_NORMAL"]        = "Interface/Tooltips/UI-Tooltip-Border"
-
+L["EDGE_NORMAL"]        = L["RES_ROOT_PATH"].."/textures/UI-Tooltip-Border"
+L["BACKGROUND_NORMAL"]	= L["RES_ROOT_PATH"].."/textures/UI-Tooltip-Background"
 
 L["CANCEL_CLEAR"]       = L["RES_ROOT_PATH"].."/textures/cancel-clear"
 L["CANCEL_NORMAL"]      = L["RES_ROOT_PATH"].."/textures/cancel-normal"
