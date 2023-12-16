@@ -9,16 +9,16 @@ Do not add entities unless necessary.
 <!-- TOC -->
 
 - [WINDA](#winda)
-  - [Introduce](#introduce)
-  - [Co-creation](#co-creation)
-    - [You come up with the needs](#you-come-up-with-the-needs)
-    - [Design together](#design-together)
-    - [Everyone decides the plan](#everyone-decides-the-plan)
-    - [I'll write the code](#ill-write-the-code)
-    - [Report the bugs](#report-the-bugs)
-  - [Document](#document)
-  - [Community](#community)
-  - [Donate](#donate)
+  - [📄 Introduce](#introduce)
+  - [🎭 Co-creation](#co-creation)
+    - [📗 You come up with the needs](#you-come-up-with-the-needs)
+    - [♾️ Design together](#️design-together)
+    - [📚 Everyone decides the plan](#everyone-decides-the-plan)
+    - [🖥️ I'll write the code](#️ill-write-the-code)
+    - [❌ Report the bugs](#report-the-bugs)
+  - [📖 Document](#document)
+  - [🤝 Community](#community)
+  - [💰 Donate](#donate)
 
 <!-- /TOC -->
 
