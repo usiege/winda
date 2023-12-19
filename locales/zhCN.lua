@@ -8,7 +8,7 @@ local wdGetThemeResRootPath = wdGetThemeResRootPath
 
 
 -- prompt
-L["Winda Console"] = "winda 控制台"
+L["Winda Console"]      = "winda 控制台"
 
 L["WELCOME"]            = "Welcome to winda ui, please enjoy it."
 L["CLOSE"]				= "关闭"
