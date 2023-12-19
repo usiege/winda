@@ -1,6 +1,9 @@
-local Constants = {}
+local UIConstants = {
+    scale = 1,
 
--- contant settings
+}
+
+-- contant settings for gui
 local GUIConstants = {
     name = "constant";
     -- gui
@@ -79,12 +82,14 @@ local GUIConstants = {
     },
     
 }
+
+-- for actionbar 
 local ActionBarContants = {
     name = "action constant"
 }
 
 
-WDC = Constants
+WDC = UIConstants
 wdPrint(WDC.name)
 
 WDC.GUI = GUIConstants
