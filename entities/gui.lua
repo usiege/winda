@@ -96,8 +96,8 @@ function GUI:setupCompnent(index, indexParent, settingItemParent, data)
         GUI.interaction.last_index = index
 
         -- update arrow for item
-        local arrow_y = WDC.gui_entity.index_referto_point[2]
-        -(index-1)*(WDC.gui_entity.index_button_height+WDC.gui_entity.index_padding_height)
+        local arrow_y = WDC.GUI.entity.index_referto_point[2]
+        -(index-1)*(WDC.GUI.entity.index_button_height+WDC.GUI.entity.index_padding_height)
         GUI.interaction.buttonArrow:SetPoint("TOP", 0, arrow_y)
         wdPrint("arrow test")
         
@@ -106,18 +106,19 @@ function GUI:setupCompnent(index, indexParent, settingItemParent, data)
 end
 -- main frame
 function GUI:initGui() 
-    local width = WDC.gui_window_width
-    local height = WDC.gui_window_height
+    local width = WDC.GUI.window_width
+    local height = WDC.GUI.window_height
     wdPrint(width, height)
 
-    local f = CreateFrame("Frame", "WindaGUI", UIParent, "BackdropTemplate")
+    local f = CreateFrame("Frame", "WindaGUI", UIParent, 
+    "BackdropTemplate")
     -- tinsert(UISpecialFrames, "WindaGUI")
     f:SetSize(width, height)
-    f:SetFrameLevel(WDC.gui_window_level)
+    f:SetFrameLevel(WDC.GUI.window_level)
     f:SetPoint("CENTER")
     f:SetFrameStrata("HIGH")
 
-    local pad = WDC.gui_border_pad
+    local pad = WDC.GUI.border_pad
     -- bg image blizz api move to
     f:SetBackdrop({
         bgFile = "", -- L["BG_FILE_NORMAL"], -- L["GUI_BG_FILE"], -- 
@@ -141,6 +142,12 @@ function GUI:initGui()
     f:SetScript("OnDragStop", function (self)
         self:StopMovingOrSizing()
     end)
+    -- f:SetResizable(true)
+    -- -- f:SetMinResize(100, 100)
+    -- -- f:SetMaxResize(400, 400)
+    -- f:SetScript("OnSizeChanged", function(self, width, height)
+    --     self:SetSize(800, 600)
+    -- end)
     -- TESTING
 
     -- cancel
@@ -148,7 +155,7 @@ function GUI:initGui()
     cf:SetPoint("TOPRIGHT",  -5, -5)
     cf:SetSize(20, 20)
     cf:SetFrameStrata("DIALOG")
-    cf:SetFrameLevel(wdConstants.gui_window_level + 5)
+    cf:SetFrameLevel(WDC.GUI.window_level + 5)
     local texture = cf: CreateTexture(nil, "BACKGROUND")
     texture:SetTexture(L["CANCEL_CLEAR"])
     texture:SetAllPoints()
@@ -175,14 +182,14 @@ function GUI:initItems(parent)
     -- body
     -- left entity bg frame
     local listbg = CreateFrame("Frame", "GUIEntityBg", parent, "BackdropTemplate")
-    local lwidth = WDC.gui_list_width
-    local lheight = WDC.gui_list_height
-    local pad = WDC.gui_border_pad
+    local lwidth = WDC.GUI.list_width
+    local lheight = WDC.GUI.list_height
+    local pad = WDC.GUI.border_pad
     wdPrint(lwidth, lheight)
     
     listbg:SetPoint("TOPLEFT", parent, "TOPLEFT", pad, -pad)
     listbg:SetSize(lwidth, lheight)
-    listbg:SetFrameLevel(wdConstants.gui_window_level)
+    listbg:SetFrameLevel(WDC.GUI.window_level)
     listbg:SetFrameStrata("HIGH")
     listbg:SetBackdrop({
         bgFile = L["GUI_BG_ITEM"] --L["GUI_SETTING_BG_BLACK"] --L["BG_GRAY_NORMAL"],
@@ -190,14 +197,14 @@ function GUI:initItems(parent)
 
     -- right entity bg frame 
     local entitybg = CreateFrame("Frame", "GUIEntityBg", parent, "BackdropTemplate")
-    local ewidth = WDC.gui_right_bg_width
-    local eheight = WDC.gui_list_height
+    local ewidth = WDC.GUI.right_bg_width
+    local eheight = WDC.GUI.list_height
     wdPrint(ewidth, eheight)
     
-    local ex = WDC.gui_border_pad * 2 + WDC.gui_list_width
+    local ex = WDC.GUI.border_pad * 2 + WDC.GUI.list_width
     entitybg:SetPoint("TOPLEFT", parent, "TOPLEFT", ex, -pad)
     entitybg:SetSize(ewidth, eheight)
-    entitybg:SetFrameLevel(wdConstants.gui_window_level)
+    entitybg:SetFrameLevel(WDC.GUI.window_level)
     entitybg:SetFrameStrata("HIGH")
     entitybg:SetBackdrop({
         bgFile = L["GUI_SETTING_BG_BLACK"], -- L["GUI_SETTING_BG_GREEN"] --L["BG_GRAY_NORMAL"],
@@ -211,10 +218,10 @@ function GUI:initItems(parent)
     firstItem.setting_frame:Show()
 
     -- item arrow
-    local arrow_y = WDC.gui_entity.index_referto_point[2]-0*(WDC.gui_entity.index_button_height+WDC.gui_entity.index_padding_height)
+    local arrow_y = WDC.GUI.entity.index_referto_point[2]-0*(WDC.GUI.entity.index_button_height+WDC.GUI.entity.index_padding_height)
     local arrowParent = listbg
     local arrow = firstItem:createImage(arrowParent,
-                            {WDC.gui_entity.arrow_width, WDC.gui_entity.arrow_height},
+                            {WDC.GUI.entity.arrow_width, WDC.GUI.entity.arrow_height},
                             {"TOP", arrowParent, "TOP", 0, arrow_y},
                             L["GUI_BUTTON_ARROW"], "DIALOG", "WDItemArrow")
     arrow:Show()
@@ -227,9 +234,9 @@ end
 
 function GUI: createLogo(parent)
     local frame = CreateFrame("Frame", "GUILogo", parent)
-    frame:SetFrameLevel(wdConstants.gui_window_level+1)
-    local width, height = wdConstants.gui_logo_width, wdConstants.gui_logo_height
-    local x, y = wdConstants.gui_logo_point[1], wdConstants.gui_logo_point[2]
+    frame:SetFrameLevel(WDC.GUI.window_level+1)
+    local width, height = WDC.GUI.logo_width, WDC.GUI.logo_height
+    local x, y = WDC.GUI.logo_point[1], WDC.GUI.logo_point[2]
     wdPrint(width, height)
     frame:SetPoint("TOP", parent, "TOP", 0, -y)
     frame:SetSize(width, height)
@@ -258,13 +265,13 @@ end
 
 function GUI: createVersionText(parent, size, point)
     local frame = CreateFrame("Frame", "GUIVersion", parent)
-    frame:SetFrameLevel(WDC.gui_window_level+1)
+    frame:SetFrameLevel(WDC.GUI.window_level+1)
     frame:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 0, 0)
     frame:SetSize(size.width, size.height)
     frame:SetFrameStrata("HIGH")
 
     local text = frame:CreateFontString("Version", "OVERLAY", "GameFontWhite")
-    text:SetFont(L["FONT_CHINESE"], WDC.gui_version_text_size, "OUTLINE")
+    text:SetFont(L["FONT_CHINESE"], WDC.GUI.version_text_size, "OUTLINE")
     text:SetPoint("BOTTOMLEFT", 10, 10)
     text:SetWidth(size.width)
     text:SetJustifyH("CENTER")
@@ -286,8 +293,8 @@ local function init(args)
     -- logo
     local logo = GUI:createLogo(lfbg)
     -- version
-    local size = { ["width"] = wdConstants.gui_version_width, ["height"] = wdConstants.gui_version_height}
-    local point = { ["x"] = wdConstants.gui_version_point[1], ["y"] = wdConstants.gui_version_point[2]}
+    local size = { ["width"] = WDC.GUI.version_width, ["height"] = WDC.GUI.version_height}
+    local point = { ["x"] = WDC.GUI.version_point[1], ["y"] = WDC.GUI.version_point[2]}
     local _, version = GUI:createVersionText(lfbg, size, point)
     version:SetText("v" .. wd.version.string)
 

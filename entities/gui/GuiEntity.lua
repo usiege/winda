@@ -33,11 +33,11 @@ end
 -- init cocreate frame
 function GuiEntity: createGuiCocreate(parent)
     local frame = CreateFrame("Frame", "GUILogo", parent)
-    frame:SetFrameLevel(WDC.gui_window_level+2)
-    local width, height = WDC.gui_cocreate.logo_width, 
-                          WDC.gui_cocreate.logo_height
-    local x, y = WDC.gui_cocreate.logo_point[1], 
-                 WDC.gui_cocreate.logo_point[2]
+    frame:SetFrameLevel(WDC.GUI.window_level+2)
+    local width, height = WDC.GUI.cocreate.logo_width, 
+                          WDC.GUI.cocreate.logo_height
+    local x, y = WDC.GUI.cocreate.logo_point[1], 
+                 WDC.GUI.cocreate.logo_point[2]
     wdPrint(width, height)
     frame:SetPoint("TOP", parent, "TOP", 0, -y)
     frame:SetSize(width, height)
@@ -72,10 +72,10 @@ end
 function GuiEntity:createGuiItem(index, parent)
     local frame = CreateFrame("Button", nil, parent)
     frame:SetPoint("TOPLEFT",  
-    WDC.gui_entity.index_referto_point[1], 
-    WDC.gui_entity.index_referto_point[2] - (WDC.gui_entity.index_button_height + WDC.gui_entity.index_padding_height) * (index - 1))
-    frame:SetSize(WDC.gui_entity.index_button_width, 
-                  WDC.gui_entity.index_button_height)
+    WDC.GUI.entity.index_referto_point[1], 
+    WDC.GUI.entity.index_referto_point[2] - (WDC.GUI.entity.index_button_height + WDC.GUI.entity.index_padding_height) * (index - 1))
+    frame:SetSize(WDC.GUI.entity.index_button_width, 
+                  WDC.GUI.entity.index_button_height)
     frame:SetFrameStrata("HIGH")
 
     -- button text
@@ -102,10 +102,10 @@ end
 function GuiEntity:createURLCopy(arg)
     local urlcopy = CreateFrame("Frame", "GUIURLCopyWD", UIParent, "BackdropTemplate")
     urlcopy:Hide()
-    -- urlcopy:SetWidth(WDC.url_copy.bg_width)
-    -- urlcopy:SetHeight(WDC.url_copy.bg_height)
+    -- urlcopy:SetWidth(WDC.GUI.url_copy.bg_width)
+    -- urlcopy:SetHeight(WDC.GUI.url_copy.bg_height)
     wdPrint(urlcopy)
-    urlcopy:SetSize(WDC.url_copy.bg_width, WDC.url_copy.bg_height)
+    urlcopy:SetSize(WDC.GUI.url_copy.bg_width, WDC.GUI.url_copy.bg_height)
     urlcopy:SetFrameLevel(100)
     urlcopy:SetPoint("CENTER", 0, 0)
     urlcopy:SetFrameStrata("HIGH")
@@ -141,10 +141,10 @@ function GuiEntity:createURLCopy(arg)
     urlcopy.text = CreateFrame("EditBox", "URLCopyEditBoxWD", urlcopy)
     urlcopy.text:SetTextColor(.2,1,.8,1)
     urlcopy.text:SetJustifyH("CENTER")
-    urlcopy.text:SetWidth(WDC.url_copy.text_width)
-    urlcopy.text:SetHeight(WDC.url_copy.text_height)
+    urlcopy.text:SetWidth(WDC.GUI.url_copy.text_width)
+    urlcopy.text:SetHeight(WDC.GUI.url_copy.text_height)
     urlcopy.text:SetPoint("TOP", urlcopy, "TOP", 
-                         WDC.url_copy.text_point[1], WDC.url_copy.text_point[2])
+                         WDC.GUI.url_copy.text_point[1], WDC.GUI.url_copy.text_point[2])
     urlcopy.text:SetFontObject(GameFontNormal)
 
     urlcopy.text:SetScript("OnEscapePressed", function(self)
@@ -155,10 +155,10 @@ function GuiEntity:createURLCopy(arg)
     end)
 
     urlcopy.close = CreateFrame("Button", "GUIURLCopyCloseWD", urlcopy, "UIPanelButtonTemplate")
-    urlcopy.close:SetWidth(WDC.url_copy.close_width)
-    urlcopy.close:SetHeight(WDC.url_copy.close_height)
+    urlcopy.close:SetWidth(WDC.GUI.url_copy.close_width)
+    urlcopy.close:SetHeight(WDC.GUI.url_copy.close_height)
     urlcopy.close:SetPoint("BOTTOMRIGHT", urlcopy, "BOTTOMRIGHT", 
-                            WDC.url_copy.close_point[1], WDC.url_copy.close_point[2])
+                            WDC.GUI.url_copy.close_point[1], WDC.GUI.url_copy.close_point[2])
     urlcopy.close:SetText(L["CLOSE"])
 
     urlcopy.close:SetScript("OnClick", function()
@@ -192,15 +192,15 @@ end
 function GuiEntity:createGuiItemDetail(index, parent)
     -- setting
     local frame = CreateFrame("Frame", "", parent, "BackdropTemplate")
-    local x,y = -WDC.gui_entity.setting_topright_point[1], 
-                -WDC.gui_entity.setting_topright_point[2]
+    local x,y = -WDC.GUI.entity.setting_topright_point[1], 
+                -WDC.GUI.entity.setting_topright_point[2]
     frame:SetPoint("TOP", parent, "TOP", x, y)
-    frame:SetSize(WDC.gui_entity.setting_item_width, 
-                  WDC.gui_entity.setting_item_height)
+    frame:SetSize(WDC.GUI.entity.setting_item_width, 
+                  WDC.GUI.entity.setting_item_height)
     frame:SetFrameStrata("HIGH")
     frame:SetBackdrop({
         bgFile = "",
-        -- bgFile = L["GUI_SETTING_BG_GREEN"], --L["GUI_BG_ITEM"]
+        -- bgFile = L["GUI.SETTING_BG_GREEN"], --L["GUI.BG_ITEM"]
     })
     frame:Hide()
 
@@ -231,11 +231,11 @@ function GuiEntity:createGuiItemDetail(index, parent)
         for index, value in ipairs(paths) do
             -- setup cocreate buttons
             local button = CreateFrame("Button", nil, frame)
-            local eachY = -(WDC.gui_cocreate.button_referto_point[2]+
-                        (WDC.gui_cocreate.button_height+WDC.gui_cocreate.button_padding_y)*(index-1))
+            local eachY = -(WDC.GUI.cocreate.button_referto_point[2]+
+                        (WDC.GUI.cocreate.button_height+WDC.GUI.cocreate.button_padding_y)*(index-1))
             button:SetPoint("TOP", 0, eachY)
-            button:SetWidth(WDC.gui_cocreate.button_width)
-            button:SetHeight(WDC.gui_cocreate.button_height)
+            button:SetWidth(WDC.GUI.cocreate.button_width)
+            button:SetHeight(WDC.GUI.cocreate.button_height)
             local texture = button:CreateTexture(nil, "BACKGROUND")
             texture:SetTexture(value)
             texture:SetAllPoints()

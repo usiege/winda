@@ -1,59 +1,67 @@
+local Constants = {}
+
 -- contant settings
-local Constants = {
+local GUIConstants = {
     name = "constant";
     -- gui
-    gui_window_width    = 1000,
-    gui_window_height   = 800,
-    gui_window_level    = 10,
-    gui_border_pad      = 5,
+    window_width    = 800,
+    window_height   = 600,
+    window_min_resize = {400, 300},
+    window_max_resize = {1000, 800},
+    window_level    = 10,
+    border_pad      = 5,
+
     -- list and item
-    gui_list_width      = 200,
-    gui_list_height     = 800-5*2, 
+    list_width      = 160,
+    list_height     = 600-5*2, 
     -- gui_item_width      = 180,
     -- gui_item_height     = 33,
     -- gui_item_padding    = 7,
-    gui_right_bg_width = 1000-200-5*3,
-    gui_right_bg_height = 800-5*2,
+    right_bg_width = 800-160-5*3,
+    right_bg_height = 600-5*2,
 
     -- logo
-    gui_logo_width      = 160,
-    gui_logo_height     = 80,
-    gui_logo_point      = {36, 5},
+    logo_width      = 105,
+    logo_height     = 50,
+    logo_point      = {28, 5},
+
     -- version
-    gui_version_width   = 100,
-    gui_version_height  = 30,
-    gui_version_point   = {10, 10},
+    version_width   = 100,
+    version_height  = 30,
+    version_point   = {10, 10},
+    version_text_size = 15,
 
-    gui_version_text_size = 15,
-
-    -- gui refer 
-    gui_entity = {
-        index_referto_point     = {10, -88}, -- first item button position
+    -- gui entity 
+    entity = {
+        -- left sub
+        index_referto_point     = {8, -58}, -- first item button position
         
         index_padding_width     = 0,
         index_padding_height    = 8,
-        index_button_width      = 180,
-        index_button_height     = 32,
+        index_button_width      = 142,
+        index_button_height     = 24,
 
-        arrow_width             = 128,
-        arrow_height            = 32,
+        -- arrow
+        arrow_width             = 120,
+        arrow_height            = 24,
 
+        -- right sub
         setting_item_width      = 600,
-        setting_item_height     = 600,
-        setting_topright_point  = {0, 80},
+        setting_item_height     = 480,
+        setting_topright_point  = {0, 57},
     },
 
     -- gui cocreate
-    gui_cocreate = {
-        logo_width              = 300,
-        logo_height             = 150,
+    cocreate = {
+        logo_width              = 230,
+        logo_height             = 85,
         logo_point              = {0, 10},
 
-        button_width            = 512,
-        button_height           = 64,
+        button_width            = 360,
+        button_height           = 45,
 
         button_padding_y        = 15,
-        button_referto_point    = {0, 150},
+        button_referto_point    = {0, 138},
     },
 
     -- url copy
@@ -76,10 +84,10 @@ local ActionBarContants = {
 }
 
 
-wdConstants = Constants
-wdPrint(wdConstants.name)
+WDC = Constants
+wdPrint(WDC.name)
 
-WDC = wdConstants
+WDC.GUI = GUIConstants
 WDC.ABC = ActionBarContants
 
-return wdConstants
+return WDC

@@ -5,8 +5,10 @@
 <!-- TOC -->
 
 - [winda documents](#winda-documents)
-    - [组织结构](#组织结构)
-    - [配置说明](#配置说明)
+  - [组织结构](#组织结构)
+    - [插件实体说明](#插件实体说明)
+    - [库说明](#库说明)
+  - [配置说明](#配置说明)
 
 <!-- /TOC -->
 
@@ -67,6 +69,30 @@
 |:-:|:-:|:-:|
 |_Base|基类||
 ||||
+
+### 插件实体说明
+
+|Path|Name|Note|
+|:-:|:-:|:-:|
+|Bars|动作条||
+|Bags|背包||
+|Buffs|Buff & DeBuff||
+|Chat|聊天||
+|Maps|地图||
+|Nameplate|姓名板||
+|UnitFrame|头像||
+|Raid|团队||
+|Tooltip|指示说明||
+
+### 库说明
+
+`libs.xml`用于加载库脚本；
+
+- LibStub
+
+- AceLocale-3.0
+
+
 
 
 ## 配置说明

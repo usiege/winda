@@ -6,5 +6,4 @@
             <Font font="Interface/AddOns/winda/theme/base/fonts/lanty.ttf" height="14"/>
         </Member>
     </FontFamily> -->
-    <Script file="entities/_Base/WindaEntity.lua"/>
 </Ui>

@@ -1,4 +1,4 @@
-## Interface: 11500
+## Interface: 100000
 ## Title: |TInterface/Addons/winda/theme/base/textures/winda-small:25:64|t 
 #|cffffedbawinda|r - |cFF888888wlk|r
 ## Notes: tingfeng ui
@@ -6,10 +6,7 @@
 ## OptionalDeps:  # MoveAnything, Questie, TitanClassic, Clique, _DebugLog, BugSack, !Stragglers, ACU
 ## Version: 0.1.0
 # @project-version@
-
-## X-Github: https://github.com/usiege/winda
 ## X-Website: https://www.curseforge.com/wow/addons/winda
-
 ## X-Documents: https://usiege.github.io/winda
 ## X-Curse-Project-ID: 94310
 ## DefaultState: Enabled

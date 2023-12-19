@@ -6,31 +6,31 @@ local Winda, Deploy , L, DB = unpack(wd)
 local UIParent = UIParent
 local CreateFrame = CreateFrame
 
-local WindaEntity = WindaEntity
+-- local WindaEntity = WindaEntity
 
 
--- load
-local ActionBar     = Winda:RegisterEntity("ActionBar")
-local WDActionBar   = WindaEntity:new({})
+-- -- load
+-- local ActionBar     = Winda:RegisterEntity("ActionBar")
+-- local WDActionBar   = WindaEntity:new({})
 
--- build module and entity relationship with winda property
-ActionBar.winda = WDActionBar
+-- -- build module and entity relationship with winda property
+-- ActionBar.winda = WDActionBar
 
--- hidden parent entity
-local hiddenParent = CreateFrame('Frame', nil, UIParent)
-hiddenParent:SetAllPoints()
-hiddenParent:Hide()
-WDActionBar.entity = hiddenParent
+-- -- hidden parent entity
+-- local hiddenParent = CreateFrame('Frame', nil, UIParent)
+-- hiddenParent:SetAllPoints()
+-- hiddenParent:Hide()
+-- WDActionBar.entity = hiddenParent
 
-function WDActionBar: disableBlizzard() 
+-- function WDActionBar: disableBlizzard() 
     
-end
+-- end
 
 
--- entry
-do
+-- -- entry
+-- do
     
-end
+-- end
 
 
-WDActionBar = WDActionBar
+-- WDActionBar = WDActionBar
