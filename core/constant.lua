@@ -37,11 +37,11 @@ local GUIConstants = {
     -- gui entity 
     entity = {
         -- left sub
-        index_referto_point     = {8, -58}, -- first item button position
+        index_referto_point     = {0, 58}, -- first item button position
         
         index_padding_width     = 0,
         index_padding_height    = 8,
-        index_button_width      = 142,
+        index_button_width      = 130,
         index_button_height     = 24,
 
         -- arrow
@@ -60,11 +60,15 @@ local GUIConstants = {
         logo_height             = 85,
         logo_point              = {0, 10},
 
+        text_width              = 400,
+        text_height             = 60,
+        text_point              = {0, 100},
+
         button_width            = 360,
         button_height           = 45,
 
         button_padding_y        = 15,
-        button_referto_point    = {0, 138},
+        button_referto_point    = {0, 150},
     },
 
     -- url copy
@@ -74,11 +78,11 @@ local GUIConstants = {
 
         text_width          = 380,
         text_height         = 20,
-        text_point          = {0, -10},
+        text_point          = {0, 10},
 
         close_width         = 70,
         close_height        = 18,
-        close_point         = {-10, 10},
+        close_point         = {10, 10},
     },
     
 }

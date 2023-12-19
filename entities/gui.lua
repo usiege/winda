@@ -97,8 +97,8 @@ function GUI:setupCompnent(index, indexParent, settingItemParent, data)
 
         -- update arrow for item
         local arrow_y = WDC.GUI.entity.index_referto_point[2]
-        -(index-1)*(WDC.GUI.entity.index_button_height+WDC.GUI.entity.index_padding_height)
-        GUI.interaction.buttonArrow:SetPoint("TOP", 0, arrow_y)
+        +(index-1)*(WDC.GUI.entity.index_button_height+WDC.GUI.entity.index_padding_height)
+        GUI.interaction.buttonArrow:SetPoint("TOP", 0, -arrow_y)
         wdPrint("arrow test")
         
     end)
@@ -218,11 +218,12 @@ function GUI:initItems(parent)
     firstItem.setting_frame:Show()
 
     -- item arrow
-    local arrow_y = WDC.GUI.entity.index_referto_point[2]-0*(WDC.GUI.entity.index_button_height+WDC.GUI.entity.index_padding_height)
+    local arrow_y = (WDC.GUI.entity.index_referto_point[2]
+    +0*(WDC.GUI.entity.index_button_height+WDC.GUI.entity.index_padding_height))
     local arrowParent = listbg
     local arrow = firstItem:createImage(arrowParent,
                             {WDC.GUI.entity.arrow_width, WDC.GUI.entity.arrow_height},
-                            {"TOP", arrowParent, "TOP", 0, arrow_y},
+                            {"TOP", arrowParent, "TOP", 0, -arrow_y},
                             L["GUI_BUTTON_ARROW"], "DIALOG", "WDItemArrow")
     arrow:Show()
     -- store arrow frame
@@ -299,7 +300,7 @@ local function init(args)
     version:SetText("v" .. wd.version.string)
 
     -- copy box 
-    local copyboxEntity = GuiEntity:new({}, "CopyBoxEntity")
+    -- local copyboxEntity = GuiEntity:new({}, "CopyBoxEntity")
     -- copyboxEntity:createURLCopy()
 
     -- title 

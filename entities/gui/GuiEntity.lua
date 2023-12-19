@@ -30,50 +30,16 @@ function GuiEntity: new(o, name)
     return o    
 end
 
--- init cocreate frame
-function GuiEntity: createGuiCocreate(parent)
-    local frame = CreateFrame("Frame", "GUILogo", parent)
-    frame:SetFrameLevel(WDC.GUI.window_level+2)
-    local width, height = WDC.GUI.cocreate.logo_width, 
-                          WDC.GUI.cocreate.logo_height
-    local x, y = WDC.GUI.cocreate.logo_point[1], 
-                 WDC.GUI.cocreate.logo_point[2]
-    wdPrint(width, height)
-    frame:SetPoint("TOP", parent, "TOP", 0, -y)
-    frame:SetSize(width, height)
-    frame:SetFrameStrata("HIGH")
-    -- -- adding a texture
-    local texture = frame:CreateTexture(nil, "BACKGROUND")
-    texture:SetTexture(L["WINDA_LOGO_LARGE"])
-    texture:SetAllPoints()
-
-    -- -- mouse event
-    -- frame:SetMouseClickEnabled(true)
-    -- frame:SetScript("OnEnter", function(self, motion) 
-    --     wdPrint("OnEnter", motion) 
-    -- end)
-    -- frame:SetScript("OnLeave", function(self, motion) 
-    --     wdPrint("OnLeave", motion) 
-    -- end)
-    -- frame:SetScript("OnMouseDown", function(self, button) 
-    --     wdPrint("OnMouseDown", button) 
-    -- end)
-    -- frame:SetScript("OnMouseUp", function(self, button) 
-    --     wdPrint("OnMouseUp", button) 
-    -- end)
-
-    return frame
-end
-
 
 
 
 -- init gui item buttons
 function GuiEntity:createGuiItem(index, parent)
     local frame = CreateFrame("Button", nil, parent)
-    frame:SetPoint("TOPLEFT",  
+    frame:SetPoint("TOP",  
     WDC.GUI.entity.index_referto_point[1], 
-    WDC.GUI.entity.index_referto_point[2] - (WDC.GUI.entity.index_button_height + WDC.GUI.entity.index_padding_height) * (index - 1))
+    (-WDC.GUI.entity.index_referto_point[2] - 
+    (WDC.GUI.entity.index_button_height + WDC.GUI.entity.index_padding_height) * (index - 1)))
     frame:SetSize(WDC.GUI.entity.index_button_width, 
                   WDC.GUI.entity.index_button_height)
     frame:SetFrameStrata("HIGH")
@@ -144,7 +110,7 @@ function GuiEntity:createURLCopy(arg)
     urlcopy.text:SetWidth(WDC.GUI.url_copy.text_width)
     urlcopy.text:SetHeight(WDC.GUI.url_copy.text_height)
     urlcopy.text:SetPoint("TOP", urlcopy, "TOP", 
-                         WDC.GUI.url_copy.text_point[1], WDC.GUI.url_copy.text_point[2])
+                         WDC.GUI.url_copy.text_point[1], -WDC.GUI.url_copy.text_point[2])
     urlcopy.text:SetFontObject(GameFontNormal)
 
     urlcopy.text:SetScript("OnEscapePressed", function(self)
@@ -158,7 +124,7 @@ function GuiEntity:createURLCopy(arg)
     urlcopy.close:SetWidth(WDC.GUI.url_copy.close_width)
     urlcopy.close:SetHeight(WDC.GUI.url_copy.close_height)
     urlcopy.close:SetPoint("BOTTOMRIGHT", urlcopy, "BOTTOMRIGHT", 
-                            WDC.GUI.url_copy.close_point[1], WDC.GUI.url_copy.close_point[2])
+                            -WDC.GUI.url_copy.close_point[1], WDC.GUI.url_copy.close_point[2])
     urlcopy.close:SetText(L["CLOSE"])
 
     urlcopy.close:SetScript("OnClick", function()
@@ -207,48 +173,7 @@ function GuiEntity:createGuiItemDetail(index, parent)
     -- winda cocreate add sub compenents
     if self.index_text == L["MODULE_COCREATE"] then
         self:createGuiCocreate(frame)
-        local paths = {
-            L["GUI_COCREATE_REQUIRE"],
-            L["GUI_COCREATE_DESIGN"],
-            L["GUI_COCREATE_SCHEME"],
-            L["GUI_COCREATE_CODE"],
-            L["GUI_COCREATE_BUG"]
-        }
-        local urls = {
-            L["URL_COCREATE_REQUIRE"],
-            L["URL_COCREATE_DESIGN"],
-            L["URL_COCREATE_SCHEME"],
-            L["URL_COCREATE_CODE"],
-            L["URL_COCREATE_BUG"]
-        }
-
-        -- create exitbox
-        self:createURLCopy()
-        local this = self
-        -- self.urlcopy_frame = urlcopy
-
-        -- setup cocreate buttons 
-        for index, value in ipairs(paths) do
-            -- setup cocreate buttons
-            local button = CreateFrame("Button", nil, frame)
-            local eachY = -(WDC.GUI.cocreate.button_referto_point[2]+
-                        (WDC.GUI.cocreate.button_height+WDC.GUI.cocreate.button_padding_y)*(index-1))
-            button:SetPoint("TOP", 0, eachY)
-            button:SetWidth(WDC.GUI.cocreate.button_width)
-            button:SetHeight(WDC.GUI.cocreate.button_height)
-            local texture = button:CreateTexture(nil, "BACKGROUND")
-            texture:SetTexture(value)
-            texture:SetAllPoints()
-            button:SetScript("OnClick", function (self, button, down) 
-                wdPrint(value)
-                wdPrint(this.urlcopy_frame)
-                if this.urlcopy_frame then 
-                    wdPrint(urls[index])
-                    this.urlcopy_frame.CopyText(urls[index])
-                end
-            end)
-            
-        end
+        
     end
 
 
@@ -268,6 +193,99 @@ function GuiEntity:createGuiItemDetail(index, parent)
 
     -- store
     self.setting_frame = frame
+end
+
+-- init cocreate frame
+function GuiEntity: createGuiCocreate(parent)
+    -- logo 
+    local logo = CreateFrame("Frame", "GUICocreateLogo", parent)
+    logo:SetFrameLevel(WDC.GUI.window_level+2)
+    local width, height = WDC.GUI.cocreate.logo_width, 
+                          WDC.GUI.cocreate.logo_height
+    local x, y = WDC.GUI.cocreate.logo_point[1], 
+                 WDC.GUI.cocreate.logo_point[2]
+    wdPrint(width, height)
+    logo:SetPoint("TOP", parent, "TOP", 0, -y)
+    logo:SetSize(width, height)
+    logo:SetFrameStrata("HIGH")
+    -- -- adding a texture
+    local texture = logo:CreateTexture(nil, "BACKGROUND")
+    texture:SetTexture(L["WINDA_LOGO_LARGE"])
+    texture:SetAllPoints()
+
+    -- -- mouse event
+    -- frame:SetMouseClickEnabled(true)
+    -- frame:SetScript("OnEnter", function(self, motion) 
+    --     wdPrint("OnEnter", motion) 
+    -- end)
+    -- frame:SetScript("OnLeave", function(self, motion) 
+    --     wdPrint("OnLeave", motion) 
+    -- end)
+    -- frame:SetScript("OnMouseDown", function(self, button) 
+    --     wdPrint("OnMouseDown", button) 
+    -- end)
+    -- frame:SetScript("OnMouseUp", function(self, button) 
+    --     wdPrint("OnMouseUp", button) 
+    -- end)
+
+    -- text
+    local textFrame = CreateFrame("Frame", "GUICocreateText", parent)
+    textFrame:SetFrameLevel(WDC.GUI.window_level+1)
+    textFrame:SetPoint("TOP", parent, "TOP", 0, -WDC.GUI.cocreate.text_point[2])
+    textFrame:SetSize(WDC.GUI.cocreate.text_width, WDC.GUI.cocreate.text_height)
+    textFrame:SetFrameStrata("HIGH")
+
+    local text = textFrame:CreateFontString("Version", "OVERLAY", "GameFontWhite")
+    text:SetFont(L["FONT_CHINESE"], WDC.GUI.version_text_size, "OUTLINE")
+    text:SetPoint("TOPLEFT", 0, 10)
+    text:SetWidth(WDC.GUI.cocreate.text_width)
+    text:SetJustifyH("CENTER")
+    text:SetText(L["GUI_COCREATE_TEXT"])
+
+    -- buttons and urlcopy
+    local paths = {
+        L["GUI_COCREATE_REQUIRE"],
+        L["GUI_COCREATE_DESIGN"],
+        L["GUI_COCREATE_SCHEME"],
+        L["GUI_COCREATE_CODE"],
+        L["GUI_COCREATE_BUG"]
+    }
+    local urls = {
+        L["URL_COCREATE_REQUIRE"],
+        L["URL_COCREATE_DESIGN"],
+        L["URL_COCREATE_SCHEME"],
+        L["URL_COCREATE_CODE"],
+        L["URL_COCREATE_BUG"]
+    }
+    -- create exitbox
+    self:createURLCopy()
+    local this = self
+    -- self.urlcopy_frame = urlcopy
+
+    -- setup cocreate buttons 
+    for index, value in ipairs(paths) do
+        -- setup cocreate buttons
+        local button = CreateFrame("Button", nil, parent)
+        local eachY = -(WDC.GUI.cocreate.button_referto_point[2]+
+                    (WDC.GUI.cocreate.button_height+WDC.GUI.cocreate.button_padding_y)*(index-1))
+        button:SetPoint("TOP", 0, eachY)
+        button:SetWidth(WDC.GUI.cocreate.button_width)
+        button:SetHeight(WDC.GUI.cocreate.button_height)
+        local texture = button:CreateTexture(nil, "BACKGROUND")
+        texture:SetTexture(value)
+        texture:SetAllPoints()
+        button:SetScript("OnClick", function (self, button, down) 
+            wdPrint(value)
+            wdPrint(this.urlcopy_frame)
+            if this.urlcopy_frame then 
+                wdPrint(urls[index])
+                this.urlcopy_frame.CopyText(urls[index])
+            end
+        end)
+        
+    end
+
+    return parent
 end
 
 -- create exit box for cocreate button

@@ -48,6 +48,7 @@ L["MODULE_MOUNT"]       = "座骑"
 L["MODULE_PET"]         = "宠物"
 L["MODULE_COIN"]        = "货币"
 
+L["GUI_COCREATE_TEXT"]  = "点击按钮ctrl+c复制链接即刻参与共创，你已经是winda的创作者之一啦~"
 
 --------
 
