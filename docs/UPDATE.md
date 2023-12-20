@@ -2,12 +2,13 @@
 
 > winda ui插件更新日志
 
+## 2023.12.20 v0.1.1
 
+Join us and make a better version.
 
 ## 2023.12.16 v0.1.0 
 
 Add a winda co-creation version.
-
 
 ## 2023.12.08 v0.0.5
 
@@ -21,7 +22,6 @@ Add a winda co-creation version.
 |ESC菜单|设置选项插件标签|
 |:-:|:-:|
 |![QQ截图20231208044209.png](https://s2.loli.net/2023/12/08/9FMcqyGTmfSQtC5.png)|![QQ截图20231208044232.png](https://s2.loli.net/2023/12/08/cOuTeXHgZQyVPjY.png)|
-
 
 
 ## 2023.12.03 v0.0.4
