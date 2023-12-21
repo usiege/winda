@@ -1,0 +1,10 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Include file="base/blizzard.lua"/>
+    <Include file="base/object.lua"/>
+    <Include file="base/rect.lua"/>
+
+    
+    <Include file="base/WDObject.lua"/>
+
+
+</Ui>

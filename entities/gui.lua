@@ -22,25 +22,26 @@ local WDC = WDC
 -- Gui refer 
 -- show anme icon
 local GuiItemDatas = {
-    { L["MODULE_ABOUT"], "About", ""},    -- 简介
+    { L["MODULE_ABOUT"],        "About",        ""},    -- 简介
     
-    { L["MODULE_BAGS"],  "Bag", L["MODULE_BAGS_ICON"]},--        = "背包"
-    { L["MODULE_BARS"],  "Bar", L["MODULE_BARS_ICON"]}, --        = "动作条"
-    { L["MODULE_BUFF"],  "Buff", L["MODULE_BUFF_ICON"]}, --        = "增/减益"
-    { L["MODULE_CHAT"],  "Chat", L["MODULE_CHAT_ICON"]}, --        = "聊天框"
-    { L["MODULE_NAMEPLATE"], "Nameplate", L["MODULE_NAMEPLATE_ICON"]}, -- "姓名版"
-    { L["MODULE_TASK"], "Task", L["MODULE_TASK_ICON"]}, --  "任务"
-    { L["MODULE_TOOLTIP"], "Tooltip", L["MODULE_TOOLTIP_ICON"]}, --  "提示"
-    { L["MODULE_UNITFRAME"], "Unitframe", L["MODULE_UNITFRAME_ICON"]},      --      = "头像"
-    { L["MODULE_SKIN"], "Skin", L["MODULE_SKIN_ICON"]},                --      = "皮肤"
+    { L["MODULE_BAGS"],         "Bag",          L["MODULE_BAGS_ICON"]},         -- "背包"
+    { L["MODULE_BARS"],         "Bar",          L["MODULE_BARS_ICON"]},         -- "动作条"
+    { L["MODULE_BUFF"],         "Buff",         L["MODULE_BUFF_ICON"]},         -- "光环"
+    { L["MODULE_CHAT"],         "Chat",         L["MODULE_CHAT_ICON"]},         -- "聊天框"
+    { L["MODULE_NAMEPLATE"],    "Nameplate",    L["MODULE_NAMEPLATE_ICON"]},    -- "姓名版"
+    { L["MODULE_TASK"],         "Task",         L["MODULE_TASK_ICON"]},         -- "任务"
+    { L["MODULE_TOOLTIP"],      "Tooltip",      L["MODULE_TOOLTIP_ICON"]},      -- "提示"
+    { L["MODULE_UNITFRAME"],    "Unitframe",    L["MODULE_UNITFRAME_ICON"]},    -- "头像"
+    -- { L["MODULE_ENABLE"], "Switch", ""},            --          模块开关
+    -- custom --
+    { L["MODULE_SKIN"],         "Skin",         L["MODULE_SKIN_ICON"]},         -- "皮肤"
+    -- general -- 
+    { L["MODULE_DEPLOY"],       "Deploy",       L["MODULE_DEPLOY_ICON"]},       -- "配置"  
+    { L["MODULE_EXTEND"],       "Extend",       L["MODULE_DXTEND_ICON"]},       -- "扩展"  
 
-    { L["MODULE_ENABLE"], "Switch", ""},            --          模块开关
-
-    { L["MODULE_DEPLOY"], "Deploy", L["MODULE_DEPLOY_ICON"]}, --      = "配置"  
-    { L["MODULE_EXTEND"], "Extend", L["MODULE_DXTEND_ICON"]}, --      = "扩展"  
-
-    { L["MODULE_SEARCH_ING"], "Search", ""}, -- 搜索
-    { L["MODULE_COCREATE"], "Cocreate", ""}, -- "温达共创"
+    --  activities -- 
+    { L["MODULE_SEARCH_ING"],   "Search",       ""}, -- 搜索
+    { L["MODULE_COCREATE"],     "Cocreate",     ""}, -- "温达共创"
 }
 
 local GuiItemIcons = {}
@@ -168,12 +169,19 @@ function GUI:initGui()
     end)
     f.cancel = cf -- outside useful
 
-    -- keys event
-    f:SetScript("OnKeyDown", function (self, key)
-        if key == "ESCAPE" and self:IsVisible() then
-            self:Hide()
-        end
+    local this = self
+    local originalSetScript = f.SetScript
+    hooksecurefunc(f, "SetScript", function(self, scriptType, handler)
+        originalSetScript(self, scriptType, handler)
     end)
+    -- f:SetScript("OnKeyDown", nil)
+    -- f:SetScript("OnKeyUp", nil)
+    -- keys event
+    -- f:SetScript("OnKeyDown", function (self, key)
+    --     if key == "ESCAPE" and self:IsVisible() then
+    --         self:Hide()
+    --     end
+    -- end)
 
     return f
 end

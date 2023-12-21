@@ -5,9 +5,13 @@ local Object = {
 }
 
 -- 创建一个新的 Object 对象
-function Object:new()
+function Object:new(args)
     local newObj = { __class = Object }
     setmetatable(newObj, { __index = self })
+    for k,v in pairs(args) do
+        self.v = k
+    end
+    
     return newObj
 end
 
@@ -60,5 +64,8 @@ print(subObj:className())  -- 输出: Subclass
 print(subObj:isKindOfClass(Object))  -- 输出: true
 print(subObj:superclassName())  -- 输出: Object
 ]]
+
+_G["Object"]  = Object
+return Object
 
 
