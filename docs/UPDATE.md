@@ -2,6 +2,16 @@
 
 > winda ui插件更新日志
 
+
+
+## 2023.12.21 v0.0.6
+
+> 插件件加载的示例
+
+- 多个插件（A、B、winda、X）加载顺序的问题
+
+<img src="https://s2.loli.net/2023/12/20/T1Oc4stqEn6iYgH.png" alt="screenshot-20231220-223255.png" style="zoom: 50%;" />
+
 ## 2023.12.20 v0.1.1
 
 Join us and make a better version.
@@ -42,7 +52,7 @@ Add a winda co-creation version.
 - 推荐使用图片工具XnView和Figma
 - 推荐使用游戏内插件包（插件包在qq群）
 
-![QQ截图20231201234940.png](https://s2.loli.net/2023/12/08/E6XP1sg5aobuwrf.png)
+<img src="https://s2.loli.net/2023/12/08/E6XP1sg5aobuwrf.png" alt="QQ截图20231201234940.png" style="zoom: 67%;" />
 
 ## 2023.11.21 v0.0.2
 
