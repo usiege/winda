@@ -99,11 +99,11 @@ Remember, here! The future of winda is decided by you!
 
 This section describes the usage of each component of the plugin. The documentation will include updates on the plugin. The documentation should describe the details of the plugin in sufficient detail so that users can clearly understand each aspect.
 
-> To be added.
+[**wiki**](https://github.com/usiege/winda/wiki) | [**docs**](https://github.com/usiege/winda/tree/main/docs)
 
 ## Community
 
-[![](https://img.shields.io/discord/438588126718590996?color=7289DA&label=Discord&logo=discord)](https://discord.gg/udyzz9hj)
+[![](https://img.shields.io/discord/438588126718590996?color=7289DA&label=Discord&logo=discord)](https://discord.gg/udyzz9hj) | [知识星球](https://wx.zsxq.com/dweb2/index/group/28855118214111)
 
 |                      QQ Data Group                      |                      Wechat Official account                      |
 | :-----------------------------------------------------: | :---------------------------------------------------------------: |
@@ -111,4 +111,4 @@ This section describes the usage of each component of the plugin. The documentat
 
 ## Donate
 
-![](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8FDonate-Patreon-orange)[Patreon](https://www.patreon.com/hearwinds) | ![](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8FDonate-%E7%88%B1%E5%8F%91%E7%94%B5-8161db)[爱发电](https://afdian.net/@windwhispered) | ![](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8FDonate-%E7%88%B1%E5%8F%91%E7%94%B5-8161db)[知识星球](https://wx.zsxq.com/dweb2/index/group/28855118214111)
+![](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8FDonate-Patreon-orange)[Patreon](https://www.patreon.com/hearwinds) | ![](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8FDonate-%E7%88%B1%E5%8F%91%E7%94%B5-8161db)[爱发电](https://afdian.net/@windwhispered) 
