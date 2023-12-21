@@ -111,4 +111,4 @@ This section describes the usage of each component of the plugin. The documentat
 
 ## Donate
 
-![](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8FDonate-Patreon-orange)[Patreon](https://www.patreon.com/hearwinds) | ![](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8FDonate-%E7%88%B1%E5%8F%91%E7%94%B5-8161db)[爱发电](https://afdian.net/@windwhispered) 
+[![](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8FDonate-Patreon-orange)](https://www.patreon.com/hearwinds) | [![](https://img.shields.io/badge/%E2%9D%A4%EF%B8%8FDonate-%E7%88%B1%E5%8F%91%E7%94%B5-8161db)](https://afdian.net/@windwhispered) 
