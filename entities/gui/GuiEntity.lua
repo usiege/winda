@@ -1,5 +1,6 @@
 local _, wd = ...
 local Winda, Deploy , L = unpack(wd)
+local WD = winda
 
 -- gui entity
 -- gui base entity
@@ -171,32 +172,71 @@ function GuiEntity:createGuiItemDetail(index, parent)
     -- winda cocreate add sub compenents
     if self.index_text == L["MODULE_COCREATE"] then
         self:createGuiCocreate(frame)
-        
+    elseif self.index_text == L["MODULE_ABOUT"] then
+        self:createGuiAbout(frame) 
     end
-
-
-    -- -- title
-    -- local tf = CreateFrame("Button", nil, frame)
-    -- tf:SetPoint("TOP",  0, -12)
-    -- tf:SetSize(200, 64)
-    -- tf:SetFrameStrata("HIGH")
-    -- local fs = tf:CreateFontString(nil, 'OVERLAY')
-	-- fs:SetFont(L["FONT_LANTY"], 24, "OUTLINE")
-	-- fs:SetPoint('CENTER')
-	-- fs:SetText(self.index_text)
-	-- fs:SetJustifyH('CENTER')
-	-- fs:SetTextColor(1, 1, 1, 1)
-	-- tf:SetFontString(fs)
-    -- frame.title = tf -- outside useful
 
     -- store
     self.setting_frame = frame
 end
 
--- init cocreate frame
-function GuiEntity: createGuiCocreate(parent)
+-- init about frame 
+function GuiEntity:createGuiAbout(parent)
     -- logo 
-    local logo = CreateFrame("Frame", "GUICocreateLogo", parent)
+    local logo = CreateFrame("Frame", "GUIAboutLogoWD", parent)
+    logo:SetFrameLevel(WDC.GUI.window_level+2)
+    local width, height = WDC.GUI.cocreate.logo_width, 
+                          WDC.GUI.cocreate.logo_height
+    local x, y = WDC.GUI.cocreate.logo_point[1], 
+                 WDC.GUI.cocreate.logo_point[2]
+    wdPrint(width, height)
+    logo:SetPoint("TOP", parent, "TOP", 0, -y)
+    logo:SetSize(width, height)
+    logo:SetFrameStrata("HIGH")
+    -- -- adding a texture
+    local texture = logo:CreateTexture(nil, "BACKGROUND")
+    texture:SetTexture(L["WINDA_LOGO_LARGE"])
+    texture:SetAllPoints()
+
+    -- version 
+    local textFrame = CreateFrame("Frame", "GUIAboutVersionText", parent)
+    textFrame:SetFrameLevel(WDC.GUI.window_level+1)
+    textFrame:SetPoint("TOP", parent, "TOP", 0, -WDC.GUI.about.text_point[2])
+    textFrame:SetSize(WDC.GUI.about.text_width, WDC.GUI.about.text_height)
+    textFrame:SetFrameStrata("HIGH")
+    local text = textFrame:CreateFontString("Version", "OVERLAY", "GameFontWhite")
+    text:SetFont(L["FONT_CHINESE"], WDC.GUI.about.text_size, "OUTLINE")
+    text:SetPoint("TOPLEFT", 0, 0)
+    text:SetWidth(WDC.GUI.about.text_width)
+    text:SetJustifyH("CENTER")
+    text:SetText(L["GUI_ABOUT_VERSION"]..WD.version.string)
+    textFrame.text = text
+    
+    -- wow version
+    local wowVersion = CreateFrame("Frame", "GUIAboutWowVersionText", parent)
+    wowVersion:SetFrameLevel(WDC.GUI.window_level+1)
+    wowVersion:SetPoint("TOP", textFrame, "BOTTOM", 
+                        WDC.GUI.about.wow_text_point[1], 
+                        -WDC.GUI.about.wow_text_point[2])
+    wowVersion:SetSize(WDC.GUI.about.text_width, WDC.GUI.about.text_height)
+    wowVersion:SetFrameStrata("HIGH")
+    local wtext = wowVersion:CreateFontString("Version", "OVERLAY", "GameFontWhite")
+    wtext:SetFont(L["FONT_CHINESE"], WDC.GUI.about.text_size, "OUTLINE")
+    wtext:SetPoint("TOPLEFT", 0, 0)
+    wtext:SetWidth(WDC.GUI.about.text_width)
+    wtext:SetJustifyH("CENTER")
+    wtext:SetText(L["GUI_ABOUT_WOW_VERSION"]..WD.wowVersion)
+    wowVersion.text = wtext
+    
+    -- bottom link button
+
+
+
+end
+-- init cocreate frame
+function GuiEntity:createGuiCocreate(parent)
+    -- logo 
+    local logo = CreateFrame("Frame", "GUICocreateLogoWD", parent)
     logo:SetFrameLevel(WDC.GUI.window_level+2)
     local width, height = WDC.GUI.cocreate.logo_width, 
                           WDC.GUI.cocreate.logo_height

@@ -53,6 +53,11 @@ function Winda:LoginEvent (args) -- player login
 	version.string = vstr
 	WD.version = version
 
+	-- wow client version
+	local buildInfo = { GetBuildInfo() } 
+	local wVersion = buildInfo[1]
+	WD.wowVersion = wVersion
+
 	-- entities
     for _, entity in next, entityQueue do
         if entity.OnLogin then

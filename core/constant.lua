@@ -54,23 +54,6 @@ local GUIConstants = {
         setting_topright_point  = {0, 57},
     },
 
-    -- gui cocreate
-    cocreate = {
-        logo_width              = 230,
-        logo_height             = 85,
-        logo_point              = {0, 10},
-
-        text_width              = 400,
-        text_height             = 60,
-        text_point              = {0, 100},
-
-        button_width            = 360,
-        button_height           = 45,
-
-        button_padding_y        = 15,
-        button_referto_point    = {0, 150},
-    },
-
     -- url copy
     url_copy = {
         bg_width            = 400,
@@ -92,6 +75,35 @@ local GUIConstants = {
         point               = {0, 0},
         text_size           = 20,
     },
+
+    -- gui cocreate
+    cocreate = {
+        logo_width              = 230,
+        logo_height             = 85,
+        logo_point              = {0, 10},
+
+        text_width              = 400,
+        text_height             = 60,
+        text_point              = {0, 100},
+        text_size               = 20,
+
+        button_width            = 360,
+        button_height           = 45,
+
+        button_padding_y        = 15,
+        button_referto_point    = {0, 150},
+    },
+    -- gui about
+    about = {
+        text_width              = 200,
+        text_height             = 30,
+        text_point              = {0, 130},
+        text_size               = 20,
+
+        wow_text_point          = {0, 20},
+    }, 
+
+    
     
 }
 
