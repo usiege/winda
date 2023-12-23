@@ -58,9 +58,9 @@ do
     GUI.options = nil               -- init entity 
 
     GUI.compenents = {}             -- gui entity foritems
-    GUI.titleEntities = {}          -- gui title entities
-    GUI.utilityEntity = nil         -- gui bottom entity 
-    GUI.copyBoxEntity = nil         -- gui copyBox entity 
+    GUI.titleFrame    = nil         -- gui title entities
+    -- GUI.utilityFrame  = nil         -- gui bottom entity 
+    -- GUI.copyBoxEntity = nil         -- gui copyBox entity 
 
     GUI.interaction = {             -- gui interaction refer to 
         last_index       = 1,
@@ -69,42 +69,6 @@ do
     }
 end
 
-
-function GUI:setupCompnent(index, indexParent, settingItemParent, data)
-    wdPrint(index, data)
-    local moduleEntity = GuiEntity:new({}, data[2])
-    moduleEntity.index_text = data[1] 
-    -- left setup 
-    moduleEntity:createGuiItem(index, indexParent)
-    -- right setup 
-    moduleEntity:createGuiItemDetail(index, settingItemParent)
-
-    -- event
-    moduleEntity.index_frame: RegisterForClicks("AnyUp", "AnyDown")
-    moduleEntity.index_frame: SetScript("OnClick", function (self, button, down)
-        if not down then
-            wdPrint(index) 
-            return
-        end
-        GUI.interaction.current_index = index
-        if(GUI.interaction.last_index == index) then 
-            return
-        end
-        -- hide last item and show current item
-        local lastItem = GUI.compenents[GUI.interaction.last_index]
-        lastItem.setting_frame:Hide()
-        moduleEntity.setting_frame:Show()
-        GUI.interaction.last_index = index
-
-        -- update arrow for item
-        local arrow_y = WDC.GUI.entity.index_referto_point[2]
-        +(index-1)*(WDC.GUI.entity.index_button_height+WDC.GUI.entity.index_padding_height)
-        GUI.interaction.buttonArrow:SetPoint("TOP", 0, -arrow_y)
-        wdPrint("arrow test")
-        
-    end)
-    self.compenents[index] = moduleEntity
-end
 -- main frame
 function GUI:initGui() 
     local width = WDC.GUI.window_width
@@ -186,6 +150,55 @@ function GUI:initGui()
     return f
 end
 
+-- init entity for gui 
+function GUI:setupCompnent(index, indexParent, settingItemParent, data)
+    wdPrint(index, data)
+    -- title entity 
+    local titleFrame = self.titleFrame
+
+    -- gui entity
+    local moduleEntity = GuiEntity:new({}, data[2])
+    moduleEntity.index_text = data[1] 
+    -- left setup 
+    moduleEntity:createGuiItem(index, indexParent)
+    -- right setup 
+    moduleEntity:createGuiItemDetail(index, settingItemParent)
+
+    local this = self
+    -- event
+    moduleEntity.index_frame:RegisterForClicks("AnyUp", "AnyDown")
+    moduleEntity.index_frame:SetScript("OnClick", function (self, button, down)
+        if not down then
+            wdPrint(index) 
+            return
+        end
+        GUI.interaction.current_index = index
+        if(GUI.interaction.last_index == index) then 
+            return
+        end
+        -- hide last item and show current item
+        local lastItem = GUI.compenents[GUI.interaction.last_index]
+        lastItem.setting_frame:Hide()
+        moduleEntity.setting_frame:Show()
+        GUI.interaction.last_index = index
+
+        -- update arrow for item
+        local arrow_y = WDC.GUI.entity.index_referto_point[2]
+        +(index-1)*(WDC.GUI.entity.index_button_height+WDC.GUI.entity.index_padding_height)
+        GUI.interaction.buttonArrow:SetPoint("TOP", 0, -arrow_y)
+        wdPrint("arrow test")
+
+        -- update title 
+        if not titleFrame then return end
+        wdPrint(moduleEntity.index_text)
+        titleFrame.text:SetText(moduleEntity.index_text)
+
+
+    end)
+    self.compenents[index] = moduleEntity
+end
+
+-- init gui item with left and right contents
 function GUI:initItems(parent)
     -- body
     -- left entity bg frame
@@ -218,9 +231,12 @@ function GUI:initItems(parent)
         bgFile = L["GUI_SETTING_BG_BLACK"], -- L["GUI_SETTING_BG_GREEN"] --L["BG_GRAY_NORMAL"],
     })
 
+    -- init title entity
+    self:createTitle(entitybg)
+
     -- items index compenents
     for i,v in ipairs(GuiItemDatas) do
-        GUI:setupCompnent(i, listbg, entitybg, v)
+        self:setupCompnent(i, listbg, entitybg, v)
     end
     local firstItem = GUI.compenents[1]
     firstItem.setting_frame:Show()
@@ -241,8 +257,8 @@ function GUI:initItems(parent)
 end
 
 
-function GUI: createLogo(parent)
-    local frame = CreateFrame("Frame", "GUILogo", parent)
+function GUI:createLogo(parent)
+    local frame = CreateFrame("Frame", "GUILogoWD", parent)
     frame:SetFrameLevel(WDC.GUI.window_level+1)
     local width, height = WDC.GUI.logo_width, WDC.GUI.logo_height
     local x, y = WDC.GUI.logo_point[1], WDC.GUI.logo_point[2]
@@ -272,8 +288,10 @@ function GUI: createLogo(parent)
     return frame
 end
 
-function GUI: createVersionText(parent, size, point)
-    local frame = CreateFrame("Frame", "GUIVersion", parent)
+function GUI:createVersion(parent)
+    local size = { ["width"] = WDC.GUI.version_width, ["height"] = WDC.GUI.version_height}
+    local point = { ["x"] = WDC.GUI.version_point[1], ["y"] = WDC.GUI.version_point[2]}
+    local frame = CreateFrame("Frame", "GUIVersionWD", parent)
     frame:SetFrameLevel(WDC.GUI.window_level+1)
     frame:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", 0, 0)
     frame:SetSize(size.width, size.height)
@@ -288,6 +306,29 @@ function GUI: createVersionText(parent, size, point)
     return frame, text
 end
 
+function GUI:createTitle(parent)
+    local size = { ["width"] = WDC.GUI.title.width, ["height"] = WDC.GUI.title.height}
+    local point = { ["x"] = WDC.GUI.title.point[1], ["y"] = WDC.GUI.title.point[2]}
+    local frame = CreateFrame("Frame", "GUITitleWD", parent)
+    frame:SetFrameLevel(WDC.GUI.window_level+1)
+    frame:SetPoint("TOP", parent, "TOP", point.x, -point.y)
+    frame:SetSize(size.width, size.height)
+    frame:SetFrameStrata("HIGH")
+
+    local text = frame:CreateFontString("Title", "OVERLAY", "GameFontWhite")
+    text:SetFont(L["FONT_CHINESE"], WDC.GUI.title.text_size, "OUTLINE")
+    text:SetPoint("CENTER", 0, 0)
+    text:SetWidth(size.width)
+    text:SetJustifyH("CENTER")
+    text:SetText("关于 winda")
+    frame.text = text
+
+    self.titleFrame = frame
+    return frame    
+end
+
+
+----------------------------------------------------------
 -- gui init
 local function init(args)
     -- body...
@@ -302,17 +343,11 @@ local function init(args)
     -- logo
     local logo = GUI:createLogo(lfbg)
     -- version
-    local size = { ["width"] = WDC.GUI.version_width, ["height"] = WDC.GUI.version_height}
-    local point = { ["x"] = WDC.GUI.version_point[1], ["y"] = WDC.GUI.version_point[2]}
-    local _, version = GUI:createVersionText(lfbg, size, point)
+    local _, version = GUI:createVersion(lfbg)
     version:SetText("v" .. wd.version.string)
+    -- -- title 
+    -- local title = GUI:createTitle(rfbg)
 
-    -- copy box 
-    -- local copyboxEntity = GuiEntity:new({}, "CopyBoxEntity")
-    -- copyboxEntity:createURLCopy()
-
-    -- title 
-    
     -- search 
 
     -- bottom 

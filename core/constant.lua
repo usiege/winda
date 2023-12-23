@@ -84,6 +84,14 @@ local GUIConstants = {
         close_height        = 18,
         close_point         = {10, 10},
     },
+
+    -- title label
+    title = {
+        width               = 200,
+        height              = 60,
+        point               = {0, 0},
+        text_size           = 20,
+    },
     
 }
 

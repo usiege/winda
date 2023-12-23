@@ -31,8 +31,6 @@ function GuiEntity: new(o, name)
 end
 
 
-
-
 -- init gui item buttons
 function GuiEntity:createGuiItem(index, parent)
     local frame = CreateFrame("Button", nil, parent)
@@ -276,6 +274,7 @@ function GuiEntity: createGuiCocreate(parent)
         texture:SetAllPoints()
         button:SetScript("OnClick", function (self, button, down) 
             wdPrint(value)
+            -- url copy event
             wdPrint(this.urlcopy_frame)
             if this.urlcopy_frame then 
                 wdPrint(urls[index])
