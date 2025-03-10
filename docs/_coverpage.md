@@ -6,10 +6,10 @@
 
 > 欢迎来到温达
 
-- 更多内容加入“WC游戏社区”
+- 更多内容加入“WINDA游戏社区”
 
 [『GitHub』](https://github.com/usiege/winda)
-[『WC游戏社区』](https://kook.top/EGosAW)
+[『游戏社区』](https://kook.vip/PYEQ2u)
 [『Get Started』](#docsify)
 
 
